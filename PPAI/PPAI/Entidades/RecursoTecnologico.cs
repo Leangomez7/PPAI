@@ -16,6 +16,5 @@ namespace PPAI.Entidades
         private int FraccionHorarioTurnos;
         private List<CambioEstadoRT> cambioEstadoRT;
         private List<Turno> turnos;
-
     }
 }

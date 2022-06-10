@@ -17,5 +17,11 @@ namespace PPAI.Entidades
         private List<CambioEstadoRT> cambioEstadoRT;
         private List<Turno> turnos;
 
+        
+        /*public bool esActivo()
+        {
+            if (cambioEstadoRT.)
+        }
+        */
     }
 }

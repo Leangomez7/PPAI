@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class Turno
+    internal class Turno
     {
         private DateTime fechaGeneracion;
         private Dia diaSemana;
         private DateTime fechaHoraInicio;
         private DateTime fechaHoraFin;
         private List<CambioEstadoTurno> cambioEstadoTurno;
-
 
         public Turno(Dia dia, DateTime ini, DateTime fin)
         {

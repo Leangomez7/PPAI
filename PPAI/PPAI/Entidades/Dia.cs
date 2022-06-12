@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public enum Dia
+    internal enum Dia
     {
         Lunes,
         Martes,

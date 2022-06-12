@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class RecursoTecnologico
+    internal class RecursoTecnologico
     {
         private int numeroRT;
         private DateTime fechaAlta;
@@ -18,32 +18,6 @@ namespace PPAI.Entidades
         private List<Turno> turnos;
         private TipoRT tipoRT;
         private Modelo modelo;
-        public bool esActivo()
-        {
-            return true;
-        }
-        public RecursoTecnologico mostrarRT()
-        {
-            return this;
-        }
-        public void habilitar()
-        {
-        } 
-        public void conocerCategoria()
-        {
-        } 
-        public void conocerCaracteristicaRecurso()
-        {
-        } 
-        public void MiModeloYMarca()
-        {
-        } 
-        public void nuevoMantenimientoPreventivo()
-        {
-        } 
-        public void misTurnosDisponibles()
-        {
-        } 
         public bool esDeTipoRT(TipoRT tipoRecTec)
         {
             if (tipoRecTec == tipoRT)
@@ -51,21 +25,29 @@ namespace PPAI.Entidades
                 return true;
             }
             return false;
-        } 
-        public int mostrarNroInventario()
+        }
+        public Estado? pedirEstado()
+        {
+            foreach (CambioEstadoRT cambioEstado in cambioEstadoRT)
+            {
+                if (DateTime.Now < cambioEstado.getFechaHoraHasta())
+                {
+                    return cambioEstado.getEstado();
+                }
+            }
+            return null;
+        }
+        public int pedirNroInventario()
         {
             return numeroRT;
-        } 
-        public void mostrarMarcaYmodelo()
+        }
+        public Marca pedirMarca()
         {
-
-        } 
-        public List<Turno> mostrarTurnos()
+            return 
+        }
+        public Modelo pedirModelo()
         {
-            return turnos;
-        } 
-        public void reservarTurno()
-        {
-        } 
+            return modelo;
+        }
     }
 }

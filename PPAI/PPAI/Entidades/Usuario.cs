@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class Usuario
+    internal class Usuario
     {
         private string clave;
         private string nombreUsuario;
         private bool habilitado;
+        private PersonalCientifico? cientifico;
         public bool esHabilitado()
         {
             return habilitado;
@@ -27,9 +28,9 @@ namespace PPAI.Entidades
         {
             this.clave = claveNueva;
         }
-        /*public PersonalCientifico obtenerCientifico()
+        public PersonalCientifico? obtenerCientifico()
         {
+            return cientifico;
         }
-        */
     }
 }

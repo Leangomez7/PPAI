@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class PersonalCientifico
+    internal class PersonalCientifico
     {
         private int legajo;
         private string nombre;
@@ -44,6 +44,14 @@ namespace PPAI.Entidades
         public string tomarCorreoInstitucional()
         {
             return correoInstitucional;
+        }
+        public bool esTuUsuario(Usuario user)
+        {
+            if (usuario == user)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

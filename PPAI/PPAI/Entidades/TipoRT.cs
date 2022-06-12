@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class TipoRT
+    internal class TipoRT
     {
         private string nombre;
         private string descripcion;
@@ -17,9 +17,10 @@ namespace PPAI.Entidades
             nombre = nom;
             descripcion = des;
         }
-        public string MostrarTipoRecurso()
+        public string getNombreTipoRecurso()
         {
             return nombre;
         }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class Caracteristicas
+    internal class Caracteristicas
     {
     }
 }

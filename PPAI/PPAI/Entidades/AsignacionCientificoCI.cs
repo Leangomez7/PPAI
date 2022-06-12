@@ -6,39 +6,32 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class AsignacionCientificoCI
+    internal class AsignacionCientificoCI
     {
         private DateTime fechaDesde = DateTime.Now;
         private DateTime fechaHasta;
         private PersonalCientifico cientifico;
+        private List<Turno> turnos;
 
-        public PersonalCientifico mostrarPersonalCientifico()
+        public bool esCientificoActivo(PersonalCientifico personalCientifico)
         {
-            return cientifico;
-        }
-        public bool esCientificoActivo()
-        {
-            if (fechaHasta < DateTime.Now)
+            if (fechaHasta < DateTime.Now && cientifico == personalCientifico)
             {
                 return true;
             }
             return false;
         }
-        public void setTurno()
+        public void setTurno(Turno turno)
         {
-            //
-        }
-        public void misTurnos()
-        {
-            //
-        }
-        public string obtenerCorreoPersonalCientifico()
-        {
-            return cientifico.tomarCorreoPersonal();
+            turnos.Add(turno);
         }
         public string obtenerCorreoInstitucionalCientifico()
         {
             return cientifico.tomarCorreoInstitucional();
+        }
+        public string obtenerCorreoPersonalCientifico()
+        {
+            return cientifico.tomarCorreoPersonal();
         }
     }
 }

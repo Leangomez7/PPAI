@@ -8,9 +8,9 @@ namespace PPAI.Entidades
 {
     public class AsignacionCientificoCI
     {
-        public DateTime fechaDesde = DateTime.Now;
-        public DateTime fechaHasta;
-        public PersonalCientifico cientifico;
+        private DateTime fechaDesde = DateTime.Now;
+        private DateTime fechaHasta;
+        private PersonalCientifico cientifico;
 
         public PersonalCientifico mostrarPersonalCientifico()
         {
@@ -28,9 +28,17 @@ namespace PPAI.Entidades
         {
             //
         }
-        public string obtenerCorreoCientifico()
+        public void misTurnos()
         {
-            return cientifico.correoPersonal;
+            //
+        }
+        public string obtenerCorreoPersonalCientifico()
+        {
+            return cientifico.tomarCorreoPersonal();
+        }
+        public string obtenerCorreoInstitucionalCientifico()
+        {
+            return cientifico.tomarCorreoInstitucional();
         }
     }
 }

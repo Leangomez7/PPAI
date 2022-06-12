@@ -8,14 +8,14 @@ namespace PPAI.Entidades
 {
     public class PersonalCientifico
     {
-        public int legajo;
-        public string nombre;
-        public string apellido;
-        public int nroDocumento;
-        public string correoInstitucional;
-        public string correoPersonal;
-        public int telefono;
-        public Usuario usuario;
+        private int legajo;
+        private string nombre;
+        private string apellido;
+        private int nroDocumento;
+        private string correoInstitucional;
+        private string correoPersonal;
+        private int telefono;
+        private Usuario usuario;
 
         public PersonalCientifico mostrarPersonalCientifico()
         {
@@ -35,11 +35,15 @@ namespace PPAI.Entidades
         }
         public bool tengoUsuarioHabilitado()
         {
-            return usuario.habilitado;
+            return usuario.esHabilitado();
         }
-        public string tomarCorreo()
+        public string tomarCorreoPersonal()
         {
             return correoPersonal;
+        }
+        public string tomarCorreoInstitucional()
+        {
+            return correoInstitucional;
         }
     }
 }

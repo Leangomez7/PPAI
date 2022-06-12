@@ -8,37 +8,29 @@ namespace PPAI.Entidades
 {
     public class CentroInvestigacion
     {
-        public string nombre;
-        public string sigla;
-        public string direccion;
-        public string edificio;
-        public string piso;
-        public float[] coordenadas;
-        public int telefono;
-        public string correo;
-        public int nroResolucion;
-        public DateTime fechaResolucion;
-        public string reglamento;
-        public string caracteristicas;
-        public DateTime fechaAlta;
-        public DateTime fechaBaja;
-        public int tiempoReserva;
-        public string motivoBaja;
-        //public List<AsignacionDirectorCI> director;
-        public List<AsignacionCientificoCI> cientificos;
-        private List<RecursoTecnologico> recursosTecnologicos;
-
-        /*
-        public RecursoTecnologico(string nom)
-        {
-            nombre = nom;
-            recursosTecnologicos = new List<RecursoTecnologico>();
-        }
-        */
+        private string nombre;
+        private string sigla;
+        private string direccion;
+        private string edificio;
+        private string piso;
+        private float[] coordenadas;
+        private int telefono;
+        private string correo;
+        private int nroResolucion;
+        private DateTime fechaResolucion;
+        private string reglamento;
+        private string caracteristicas;
+        private DateTime fechaAlta;
+        private DateTime fechaBaja;
+        private int tiempoReserva;
+        private string motivoBaja;
+        private List<AsignacionDirectorCI> director;
+        private List<AsignacionCientificoCI> cientificos;
+        private List<RecursoTecnologico> recursosTecnologicos;       
         public CentroInvestigacion mostrarCI()
         {
             return this;
-        }
+        }        
         /*
         public PersonalCientifico miDirectorActual()
         {
@@ -47,7 +39,7 @@ namespace PPAI.Entidades
         public List<PersonalCientifico> misDirectores()
         {
             //
-        }
+        } 
         */
         public bool estoyActivo()
         {
@@ -57,6 +49,16 @@ namespace PPAI.Entidades
             }
             return false;
         }
+        public List<PersonalCientifico> misCientificos()
+        {
+            List<PersonalCientifico> cientificosActivos = new();
+            foreach (AsignacionCientificoCI cientifico in cientificos)
+            {
+                cientificosActivos.Add(cientifico.mostrarPersonalCientifico());
+            }
+            return cientificosActivos;
+
+        }
         public List<PersonalCientifico> misCientificosActivos()
         {
             List<PersonalCientifico> cientificosActivos = new();
@@ -64,14 +66,13 @@ namespace PPAI.Entidades
             {
                 if (cientifico.esCientificoActivo())
                 {
-                    cientificosActivos.Add(cientifico.cientifico);
+                    cientificosActivos.Add(cientifico.mostrarPersonalCientifico());
                 }
             }
             return cientificosActivos;
             
-        }
-        /*
-        public List<RecursoTecnologico> misRecursosActivos()
+        }        
+        public List<RecursoTecnologico> MisRecursosActivos()
         {
             List<RecursoTecnologico> recursosActivos = new();
             foreach (RecursoTecnologico recurso in recursosTecnologicos)
@@ -91,8 +92,7 @@ namespace PPAI.Entidades
                 recursosActivos.Add(recurso);
             }
             return recursosActivos;
-        }
-        */
+        }        
         public string miBaja()
         {
             return motivoBaja;

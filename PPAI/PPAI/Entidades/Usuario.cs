@@ -8,10 +8,13 @@ namespace PPAI.Entidades
 {
     public class Usuario
     {
-        public string clave;
-        public string nombreUsuario;
-        public bool habilitado;
-
+        private string clave;
+        private string nombreUsuario;
+        private bool habilitado;
+        public bool esHabilitado()
+        {
+            return habilitado;
+        }
         public void habilitar()
         {
             this.habilitado = true;
@@ -24,11 +27,8 @@ namespace PPAI.Entidades
         {
             this.clave = claveNueva;
         }
-        /*
         public PersonalCientifico obtenerCientifico()
         {
-            //
         }
-        */
     }
 }

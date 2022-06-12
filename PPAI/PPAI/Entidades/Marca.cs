@@ -16,12 +16,10 @@ namespace PPAI.Entidades
             nombre = nom;
             modelos = new List<Modelo>();
         }
-
         public string MostrarMarca()
         {
             return nombre;
         }
-
         public string[] MostrarMisModelos()
         {
             List<string> listaModelos = new();

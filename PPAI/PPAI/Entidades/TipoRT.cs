@@ -10,13 +10,13 @@ namespace PPAI.Entidades
     {
         private string nombre;
         private string descripcion;
+        private List<Caracteristicas> caracteristicas;
 
         public TipoRT(string nom, string des)
         {
             nombre = nom;
             descripcion = des;
         }
-
         public string MostrarTipoRecurso()
         {
             return nombre;

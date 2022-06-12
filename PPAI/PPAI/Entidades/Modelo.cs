@@ -9,15 +9,17 @@ namespace PPAI.Entidades
     internal class Modelo
     {
         private string nombre;
-
         public Modelo(string nom)
         {
             nombre = nom;
         }
-
         public string MostrarModelo()
         {
             return nombre;
+        }
+        public void mostrarMarcaYModelo()
+        {
+            //
         }
     }
 }

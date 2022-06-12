@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class CambioEstadoRT
+    public class CambioEstadoRT
     {
         private DateTime fechaHoraDesde;
         private DateTime fechaHoraHasta;

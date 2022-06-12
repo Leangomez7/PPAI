@@ -17,7 +17,6 @@ namespace PPAI.Entidades
               ? (T)attributes[0]
               : null;
         }
-
         public static string getAmbito(this Enum value)
         {
             var attribute = value.GetAttribute<AmbitoAttribute>();

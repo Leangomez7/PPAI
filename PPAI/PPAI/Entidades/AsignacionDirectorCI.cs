@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class AsignacionDirectorCI
+    internal class AsignacionDirectorCI
     {
     }
 }

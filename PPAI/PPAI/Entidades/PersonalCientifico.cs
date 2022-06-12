@@ -17,26 +17,6 @@ namespace PPAI.Entidades
         private int telefono;
         private Usuario usuario;
 
-        public PersonalCientifico mostrarPersonalCientifico()
-        {
-            return this;
-        }
-        public void inhabilitarUsuario()
-        {
-            this.usuario.inhabilitar();
-        }
-        public void habilitarUsuario()
-        {
-            this.usuario.habilitar();
-        }
-        public void mostrarMisNovedades()
-        {
-            //
-        }
-        public bool tengoUsuarioHabilitado()
-        {
-            return usuario.esHabilitado();
-        }
         public string tomarCorreoPersonal()
         {
             return correoPersonal;

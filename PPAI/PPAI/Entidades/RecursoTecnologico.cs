@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    public class RecursoTecnologico
+    internal class RecursoTecnologico
     {
         private int numeroRT;
         private DateTime fechaAlta;
@@ -18,32 +18,37 @@ namespace PPAI.Entidades
         private List<Turno> turnos;
         private TipoRT tipoRT;
         private Modelo modelo;
+        private CentroInvestigacion? centroInvestigacion;
         public bool esActivo()
         {
-            return true;
+            foreach (CambioEstadoRT cambioEstado in cambioEstadoRT)
+            {
+                if (cambioEstado.esActual())
+                {
+                    if (cambioEstado.enEstadoActualReservable())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
-        public RecursoTecnologico mostrarRT()
+        public List<object> mostrarRT(CambioEstadoRT cambioEstadoRecurso)
         {
-            return this;
+            List<object> listaAtributosRT = new List<object>();
+            listaAtributosRT.Add(mostrarNroInventario());
+            listaAtributosRT.Add(cambioEstadoRecurso.mostrarEstado());
+            listaAtributosRT.Add(mostrarCentroInvestigacion());
+            listaAtributosRT.Add(mostrarMarcaYModelo());
         }
-        public void habilitar()
+        public string mostrarCentroInvestigacion()
         {
-        } 
-        public void conocerCategoria()
+            return centroInvestigacion.getNombre();
+        }
+        public List<string> mostrarMarcaYModelo()
         {
-        } 
-        public void conocerCaracteristicaRecurso()
-        {
-        } 
-        public void MiModeloYMarca()
-        {
-        } 
-        public void nuevoMantenimientoPreventivo()
-        {
-        } 
-        public void misTurnosDisponibles()
-        {
-        } 
+            return modelo.mostrarMarcaYModelo();
+        }
         public bool esDeTipoRT(TipoRT tipoRecTec)
         {
             if (tipoRecTec == tipoRT)
@@ -56,16 +61,6 @@ namespace PPAI.Entidades
         {
             return numeroRT;
         } 
-        public void mostrarMarcaYmodelo()
-        {
-
-        } 
-        public List<Turno> mostrarTurnos()
-        {
-            return turnos;
-        } 
-        public void reservarTurno()
-        {
         } 
     }
 }

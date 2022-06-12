@@ -11,25 +11,11 @@ namespace PPAI.Entidades
         private string clave;
         private string nombreUsuario;
         private bool habilitado;
-        public bool esHabilitado()
+        private PersonalCientifico personalCientifico;
+        
+        public PersonalCientifico obtenerCientifico()
         {
-            return habilitado;
+            return personalCientifico;
         }
-        public void habilitar()
-        {
-            this.habilitado = true;
-        }
-        public void inhabilitar()
-        {
-            this.habilitado = false;
-        }
-        public void modificarPassword(string claveNueva)
-        {
-            this.clave = claveNueva;
-        }
-        /*public PersonalCientifico obtenerCientifico()
-        {
-        }
-        */
     }
 }

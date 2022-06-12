@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class CentroInvestigacion
+    public class CentroInvestigacion
     {
         private string nombre;
         private string sigla;

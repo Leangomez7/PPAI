@@ -10,7 +10,6 @@ namespace PPAI.Entidades
     internal class Modelo
     {
         private string nombre;
-        private Marca? marca;
         public Modelo(string nom)
         {
             nombre = nom;
@@ -19,9 +18,9 @@ namespace PPAI.Entidades
         {
             return nombre;
         }
-        public Marca? getMarca()
+        public void mostrarMarcaYModelo()
         {
-            return marca;
+            //
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal static class EnumExtensions
+    public static class EnumExtensions
     {
         public static T GetAttribute<T>(this Enum value) where T : Attribute
         {

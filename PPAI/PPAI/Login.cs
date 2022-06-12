@@ -1,4 +1,4 @@
-using PPAI.RegistrarReservaTurnoRT;
+using PPAI.Menu;
 namespace PPAI
 {
     public partial class Login : Form
@@ -13,7 +13,9 @@ namespace PPAI
             {
                 if (validarUsuario())
                 {
-                    PantallaRegistrarReservaRT pantallaRegistrarReservaRT = new PantallaRegistrarReservaRT(txtUsuario.Text);
+                    MenuPrincipal menu = new MenuPrincipal(txtUsuario.Text);
+                    menu.Show();
+                    this.Hide();
                 }
                 else
                 {

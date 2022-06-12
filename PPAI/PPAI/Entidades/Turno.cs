@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class Turno
+    public class Turno
     {
         private DateTime fechaGeneracion;
         private Dia diaSemana;

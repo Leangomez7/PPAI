@@ -27,8 +27,9 @@ namespace PPAI.Entidades
         {
             this.clave = claveNueva;
         }
-        public PersonalCientifico obtenerCientifico()
+        /*public PersonalCientifico obtenerCientifico()
         {
         }
+        */
     }
 }

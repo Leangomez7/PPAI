@@ -1,6 +1,6 @@
-﻿namespace PPAI.RegistrarReservaTurnoRT
+﻿namespace PPAI.ReservaTurnoRT
 {
-    partial class PantallaRegistrarReservaRT
+    partial class PantallaReservaTurnoRT
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaReservaTurnoRT));
+            this.SuspendLayout();
+            // 
+            // PantallaReservaTurnoRT
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "PantallaRegistrarReservaRT";
+            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.Name = "PantallaReservaTurnoRT";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Reservar turno recurso tecnologico";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

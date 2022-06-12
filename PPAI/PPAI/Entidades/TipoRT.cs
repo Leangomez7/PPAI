@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class TipoRT
+    public class TipoRT
     {
         private string nombre;
         private string descripcion;

@@ -16,9 +16,10 @@ namespace PPAI.Entidades
         {
             return this;
         }
-        public PersonalCientifico obtenerCientificoLoggeado()
+        /*public PersonalCientifico obtenerCientificoLoggeado()
         {
             this.usuario.obtenerCientifico();
         }
+        */
     }
 }

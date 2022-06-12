@@ -16,13 +16,15 @@ namespace PPAI.Entidades
         private int FraccionHorarioTurnos;
         private List<CambioEstadoRT> cambioEstadoRT;
         private List<Turno> turnos;
-
+        private TipoRT tipoRT;
+        private Modelo modelo;
         public bool esActivo()
         {
-            //if (cambioEstadoRT)
+            return true;
         }
-        public void mostrarRT()
+        public RecursoTecnologico mostrarRT()
         {
+            return this;
         }
         public void habilitar()
         {
@@ -42,17 +44,25 @@ namespace PPAI.Entidades
         public void misTurnosDisponibles()
         {
         } 
-        public void esDeTipoRT()
+        public bool esDeTipoRT(TipoRT tipoRecTec)
         {
+            if (tipoRecTec == tipoRT)
+            {
+                return true;
+            }
+            return false;
         } 
-        public void mostrarNroInventario()
+        public int mostrarNroInventario()
         {
+            return numeroRT;
         } 
         public void mostrarMarcaYmodelo()
         {
+
         } 
-        public void mostrarTurnos()
+        public List<Turno> mostrarTurnos()
         {
+            return turnos;
         } 
         public void reservarTurno()
         {

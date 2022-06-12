@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PPAI.RegistrarReservaTurnoRT
+namespace PPAI.ReservaTurnoRT
 {
-    public partial class PantallaRegistrarReservaRT : Form
+    public partial class PantallaReservaTurnoRT : Form
     {
-        public PantallaRegistrarReservaRT(string usuario)
+        public PantallaReservaTurnoRT()
         {
             InitializeComponent();
         }

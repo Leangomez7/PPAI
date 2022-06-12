@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PPAI.ReservaTurnoRT
 {
-    partial class PantallaReservaTurnoRT : Form
+    public partial class PantallaReservaTurnoRT : Form
     {
         public PantallaReservaTurnoRT()
         {

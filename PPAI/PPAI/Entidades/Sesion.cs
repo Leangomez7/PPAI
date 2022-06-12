@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class Sesion
+    public class Sesion
     {
         private DateTime fechaDesde = DateTime.Now;
         private DateTime fechaHasta;
@@ -16,10 +16,10 @@ namespace PPAI.Entidades
         {
             return this;
         }
-        public PersonalCientifico? obtenerCientificoLoggeado()
+        /*public PersonalCientifico obtenerCientificoLoggeado()
         {
-            return usuario.obtenerCientifico();
+            this.usuario.obtenerCientifico();
         }
-        
+        */
     }
 }

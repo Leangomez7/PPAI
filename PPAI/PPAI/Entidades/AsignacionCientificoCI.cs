@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class AsignacionCientificoCI
+    public class AsignacionCientificoCI
     {
         private DateTime fechaDesde = DateTime.Now;
         private DateTime fechaHasta;
         private PersonalCientifico cientifico;
-        private List<Turno> turnos;
 
         public PersonalCientifico mostrarPersonalCientifico()
         {
@@ -25,13 +24,13 @@ namespace PPAI.Entidades
             }
             return false;
         }
-        public void setTurno(Turno turno)
+        public void setTurno()
         {
-            turnos.Add(turno);
+            //
         }
-        public List<Turno> misTurnos()
+        public void misTurnos()
         {
-            return turnos;
+            //
         }
         public string obtenerCorreoPersonalCientifico()
         {

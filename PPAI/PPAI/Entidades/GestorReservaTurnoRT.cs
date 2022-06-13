@@ -15,7 +15,6 @@ namespace PPAI.Entidades
         private List<CentroInvestigacion> investigaciones;
         private List<Marca> marcas;
         private List<Modelo> modelos;
-        private Modelo mod1;
         PantallaReservaTurnoRT pantalla;
 
         public void GenerarCentros()

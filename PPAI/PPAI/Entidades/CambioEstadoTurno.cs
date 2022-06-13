@@ -9,8 +9,13 @@ namespace PPAI.Entidades
     internal class CambioEstadoTurno
     {
         private DateTime fechaHoraDesde = DateTime.Now;
-        private DateTime fechaHoraHasta;
+        private DateTime? fechaHoraHasta;
         private Estado estado;
+
+        public CambioEstadoTurno(Estado est)
+        {
+            estado = est;
+        }
 
         public bool esActual()
         {
@@ -20,6 +25,12 @@ namespace PPAI.Entidades
             }
             return false;
         }
+
+        public bool EsReservable()
+        {
+            return estado.getReservable();
+        }
+
         public string mostrarEstado()
         {
             return estado.getNombre();

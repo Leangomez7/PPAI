@@ -23,7 +23,7 @@ namespace PPAI.ReservaTurnoRT
         public void HabilitarPantallaReservaRT(Sesion actual)
         {
             lblUsuario.Text = actual.getNombreUsuario();
-            gestor = new GestorReservaTurnoRT(this);
+            gestor = new GestorReservaTurnoRT(this, actual);
         }
         public void PedirSeleccionTipoRT(DataTable dt)
         {

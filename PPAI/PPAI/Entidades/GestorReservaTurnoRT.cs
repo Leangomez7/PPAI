@@ -15,6 +15,7 @@ namespace PPAI.Entidades
         private List<CentroInvestigacion> investigaciones;
         private List<Marca> marcas;
         private List<Modelo> modelos;
+        private Sesion actual;
         PantallaReservaTurnoRT pantalla;
 
         public void GenerarCentros()
@@ -27,7 +28,9 @@ namespace PPAI.Entidades
                 string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
                 int camp = rnd.Next(0, campos.Count());
                 nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
-                investigaciones.Add(new CentroInvestigacion(nombre, campos[camp].Substring(0, 3)));
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
             }
         }
         public void GenerarMarcas()
@@ -125,7 +128,7 @@ namespace PPAI.Entidades
             dt.Rows.InsertAt(row, 0);
             pantalla.PedirSeleccionTipoRT(dt);
         }
-        public GestorReservaTurnoRT(PantallaReservaTurnoRT pantallaReservaTurnoRT)
+        public GestorReservaTurnoRT(PantallaReservaTurnoRT pantallaReservaTurnoRT, Sesion sesion)
         {
             pantalla = pantallaReservaTurnoRT;
             tiposRT = new List<TipoRT>();
@@ -133,6 +136,7 @@ namespace PPAI.Entidades
             investigaciones = new List<CentroInvestigacion>();
             marcas = new List<Marca>();
             modelos = new List<Modelo>();
+            actual = sesion;
         }
         public DataTable ObtenerTipoRT()
         {
@@ -188,7 +192,24 @@ namespace PPAI.Entidades
 
         public void TomarSeleccionRT(RecursoTecnologico rt)
         {
-            MessageBox.Show(rt.MostrarNroInventario().ToString());
+            bool ver = VerificarCIdeCientificoLoggeado(rt);
+            List<DatosTurno> turnos = obtenerTurnosReservablesRTSeleccionado(rt);
+
+        }
+
+        public List<DatosTurno> obtenerTurnosReservablesRTSeleccionado(RecursoTecnologico rt)
+        {
+            List<DatosTurno> turnos = new List<DatosTurno>();
+            DateTime fecha = DateTime.Now;
+            turnos = rt.MostrarTurnos(fecha);
+            return turnos;
+        }
+
+        public bool VerificarCIdeCientificoLoggeado(RecursoTecnologico rt)
+        {
+            PersonalCientifico cientifico = actual.ObtenerCientificoLoggeado();
+            bool pertenece = rt.EsDeMiCentroInvestigacion(cientifico);
+            return pertenece;
         }
 
         public List<DatosRT> OrdenarYAgruparPorCI(List<DatosRT> datos)

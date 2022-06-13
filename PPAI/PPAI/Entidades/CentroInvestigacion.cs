@@ -10,6 +10,7 @@ namespace PPAI.Entidades
     {
         private string nombre;
         private string sigla;
+        private List<AsignacionCientificoCI> cientificos = new List<AsignacionCientificoCI>();
         /*private string direccion;
         private string edificio;
         private string piso;
@@ -25,7 +26,6 @@ namespace PPAI.Entidades
         private int tiempoReserva;
         private string motivoBaja;
         private List<AsignacionDirectorCI> director;
-        private List<AsignacionCientificoCI> cientificos;
         private List<RecursoTecnologico> recursosTecnologicos;       
 
         */
@@ -39,7 +39,12 @@ namespace PPAI.Entidades
         {
             return nombre;
         }
-        /*
+
+        public void AgregarCientifico(PersonalCientifico per)
+        {
+            cientificos.Add(new AsignacionCientificoCI(per));
+        }
+
         public bool EsTuCientificoActivo(PersonalCientifico cientifico)
         {
             foreach (AsignacionCientificoCI asignacionCientifico in cientificos)
@@ -51,6 +56,5 @@ namespace PPAI.Entidades
             }
             return false;
         }
-        */
     }
 }

@@ -15,9 +15,10 @@ namespace PPAI.Entidades
         {
             nombre = nom;
         }
-        public Modelo(Marca nombre)
+        public Modelo(string nom, Marca mar)
         {
-            marca = nombre;
+            nombre = nom;
+            marca = mar;
         }
         public string MostrarModelo()
         {

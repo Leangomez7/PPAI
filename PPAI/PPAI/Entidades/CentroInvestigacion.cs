@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class CentroInvestigacion
+    public class CentroInvestigacion
     {
         private string nombre;
         private string sigla;
@@ -27,6 +27,7 @@ namespace PPAI.Entidades
         private List<AsignacionDirectorCI> director;
         private List<AsignacionCientificoCI> cientificos;
         private List<RecursoTecnologico> recursosTecnologicos;       
+
         */
 
         public CentroInvestigacion(string nom, string sig)

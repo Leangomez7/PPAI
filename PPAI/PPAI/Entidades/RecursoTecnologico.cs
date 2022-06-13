@@ -13,17 +13,19 @@ namespace PPAI.Entidades
         public string ci;
         public string marca;
         public string modelo;
+        public RecursoTecnologico rt;
 
-        public DatosRT(int nro, string est, string cenIn, string marc, string mod)
+        public DatosRT(int nro, string est, string cenIn, string marc, string mod, RecursoTecnologico rec)
         {
             nroInventario = nro;
             estado = est;
             ci = cenIn;
             marca = marc;
             modelo = mod;
+            rt = rec;
         }
     }
-    internal class RecursoTecnologico
+    public class RecursoTecnologico
     {
         private int numeroRT;
         private DateTime fechaAlta;
@@ -77,7 +79,8 @@ namespace PPAI.Entidades
             string cenIn = MostrarCentroInvestigacion();
             string marc = MostrarMarcaYModelo()[1];
             string mod = MostrarMarcaYModelo()[0];
-            DatosRT datos = new (nro, est, cenIn, marc, mod);
+            RecursoTecnologico rt = this;
+            DatosRT datos = new (nro, est, cenIn, marc, mod, rt);
             return datos;
         }
         public string MostrarCentroInvestigacion()

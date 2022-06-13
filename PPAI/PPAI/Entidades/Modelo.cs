@@ -7,7 +7,7 @@ using PPAI.Entidades;
 
 namespace PPAI.Entidades
 {
-    internal class Modelo
+    public class Modelo
     {
         private string nombre;
         private Marca? marca;

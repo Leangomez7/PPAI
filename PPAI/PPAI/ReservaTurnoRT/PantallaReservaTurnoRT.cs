@@ -18,6 +18,7 @@ namespace PPAI.ReservaTurnoRT
         {
             InitializeComponent();
             HabilitarPantallaReservaRT();
+            gestor.NewReservaRT();
         }
         public void HabilitarPantallaReservaRT()
         {
@@ -26,17 +27,32 @@ namespace PPAI.ReservaTurnoRT
         public void PedirSeleccionTipoRT(DataTable dt)
         {
             cmbTipoRT.DataSource = dt;
-            cmbTipoRT.DisplayMember = "NombreTipoRT";
+            cmbTipoRT.DisplayMember = "NombreTipo";
             cmbTipoRT.ValueMember = "TipoRT";
-            cmbTipoRT.SelectedIndex = -1;
         }
         public void TomarSeleccionTipoRT(object sender, EventArgs e)
         {
-            gestor.TipoRTSeleccionado((TipoRT)cmbTipoRT.SelectedValue);
+            try
+            {
+                gestor.TipoRTSeleccionado((TipoRT)cmbTipoRT.SelectedValue);
+            }
+            catch
+            {
+            }
         }
         public void PedirSeleccionRT(List<DatosRT> datos)
         {
-           tablaRT.DataSource = datos;
+            DataTable dta = new DataTable();
+            dta.Columns.Add("nroInventario", typeof(int));
+            dta.Columns.Add("estado", typeof(string));
+            dta.Columns.Add("ci", typeof(string));
+            dta.Columns.Add("marca", typeof(string));
+            dta.Columns.Add("modelo", typeof(string));
+            foreach (DatosRT rt in datos)
+            {
+                dta.Rows.Add(rt.nroInventario,rt.estado,rt.ci,rt.marca,rt.modelo);
+            }
+            tablaRT.DataSource = dta;
         }
     }
 }

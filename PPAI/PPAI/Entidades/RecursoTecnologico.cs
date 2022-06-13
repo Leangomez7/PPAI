@@ -53,9 +53,9 @@ namespace PPAI.Entidades
             cambioEstadoRT.Add(new CambioEstadoRT(Estado.RTActivo));
         }
 
-        public bool EsDeTipoRT(TipoRT tipoRecTec)
+        public bool EsDeTipoRT(TipoRT? tipoRecTec)
         {
-            if (tipoRecTec == tipoRT)
+            if (tipoRecTec == tipoRT || tipoRecTec is null)
             {
                 return true;
             }
@@ -75,8 +75,8 @@ namespace PPAI.Entidades
             int nro = MostrarNroInventario();
             string est = getEstadoActual().mostrarEstado();
             string cenIn = MostrarCentroInvestigacion();
-            string marc = MostrarMarcaYModelo()[0];
-            string mod = MostrarMarcaYModelo()[1];
+            string marc = MostrarMarcaYModelo()[1];
+            string mod = MostrarMarcaYModelo()[0];
             DatosRT datos = new (nro, est, cenIn, marc, mod);
             return datos;
         }

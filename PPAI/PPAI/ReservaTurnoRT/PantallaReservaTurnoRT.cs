@@ -38,6 +38,7 @@ namespace PPAI.ReservaTurnoRT
             }
             catch
             {
+                gestor.TipoRTSeleccionado(null);
             }
         }
         public void PedirSeleccionRT(List<DatosRT> datos)

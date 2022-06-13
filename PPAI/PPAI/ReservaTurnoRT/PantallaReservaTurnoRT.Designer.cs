@@ -42,6 +42,7 @@
             this.col4Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col5Modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col6Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -159,13 +160,23 @@
             this.col6Estado.HeaderText = "Estado";
             this.col6Estado.Name = "col6Estado";
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(671, 426);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            // 
             // PantallaReservaTurnoRT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -202,5 +213,6 @@
         private DataGridViewTextBoxColumn col4Marca;
         private DataGridViewTextBoxColumn col5Modelo;
         private DataGridViewTextBoxColumn col6Estado;
+        private Button btnCancelar;
     }
 }

@@ -30,13 +30,29 @@ namespace PPAI.Entidades
         private List<string> imagenes;
         private int periodicidadMantenimientoPrev;
         private int duracionMantenimientoPrev;
-        private int FraccionHorarioTurnos;
+        private int fraccionHorarioTurnos;
         private List<CambioEstadoRT> cambioEstadoRT;
         private List<Turno> turnos;
         private TipoRT tipoRT;
         private Modelo modelo;
         private CentroInvestigacion? centroInvestigacion;
-       
+
+        public RecursoTecnologico(int num, DateTime dat, int per, int dur, int fra, TipoRT tip, Modelo mod, CentroInvestigacion cen)
+        {
+            numeroRT = num;
+            fechaAlta = dat;
+            imagenes = new List<string>();
+            periodicidadMantenimientoPrev = per;
+            duracionMantenimientoPrev = dur;
+            fraccionHorarioTurnos = fra;
+            cambioEstadoRT = new List<CambioEstadoRT>();
+            turnos = new List<Turno>();
+            tipoRT = tip;
+            modelo = mod;
+            centroInvestigacion = cen;
+            cambioEstadoRT.Add(new CambioEstadoRT(Estado.RTActivo));
+        }
+
         public bool EsDeTipoRT(TipoRT tipoRecTec)
         {
             if (tipoRecTec == tipoRT)
@@ -76,10 +92,12 @@ namespace PPAI.Entidades
         {
             return numeroRT;
         } 
+        /*
         public bool EsDeMiCentroInvestigacion(PersonalCientifico cientifico)
         {
             return centroInvestigacion.EsTuCientificoActivo(cientifico);
         }
+        */
         public CambioEstadoRT? getEstadoActual()
         {
             foreach (CambioEstadoRT cambioEstado in cambioEstadoRT)

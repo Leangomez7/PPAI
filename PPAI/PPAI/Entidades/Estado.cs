@@ -106,9 +106,11 @@ namespace PPAI.Entidades
     public enum Estado
     {
         [Ambito("Turno"),Nombre("Disponible"),Descripcion("Turno Disponible"),EsReservable(true),EsCancelable(false)]
-        Disponible,
+        TurnoDisponible,
         [Ambito("Turno"), Nombre("Reservado"), Descripcion("Turno Reservado"), EsReservable(false), EsCancelable(true)]
-        Reservado
+        TurnoReservado,
+        [Ambito("RT"), Nombre("Activo"), Descripcion("RT Activo"), EsReservable(true), EsCancelable(false)]
+        RTActivo
     }
     /*
     internal class Estado

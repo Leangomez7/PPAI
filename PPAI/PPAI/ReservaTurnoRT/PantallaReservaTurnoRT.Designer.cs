@@ -184,11 +184,14 @@
             // 
             // tablaRT
             // 
+            this.tablaRT.AllowUserToAddRows = false;
+            this.tablaRT.AllowUserToDeleteRows = false;
             this.tablaRT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaRT.Location = new System.Drawing.Point(12, 41);
             this.tablaRT.Name = "tablaRT";
+            this.tablaRT.ReadOnly = true;
             this.tablaRT.RowTemplate.Height = 25;
-            this.tablaRT.Size = new System.Drawing.Size(240, 150);
+            this.tablaRT.Size = new System.Drawing.Size(608, 315);
             this.tablaRT.TabIndex = 1;
             // 
             // PantallaReservaTurnoRT

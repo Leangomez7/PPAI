@@ -78,6 +78,14 @@ namespace PPAI.Entidades
                             DateTime dtinicio = i.ToDateTime(acrear);
                             DateTime dtfin = dtinicio.AddMinutes(fraccionHorarioTurnos);
                             turnos.Add(new Turno(idt.DayOfWeek, dtinicio, dtfin));
+                            if (acrear.AddMinutes(fraccionHorarioTurnos) > acrear)
+                            {
+                                acrear = acrear.AddMinutes(fraccionHorarioTurnos);
+                            }
+                            else
+                            {
+                                break;
+                            }
                         }
                     }
                 }
@@ -156,10 +164,10 @@ namespace PPAI.Entidades
                 {
                     DatosTurno tur = cadaTurno.MostrarTurno();
                     datos.Add(tur);
+                    System.Diagnostics.Debug.WriteLine(cadaTurno.TurnoToString());
                 }
             }
             return datos;
         }
-        
     }
 }

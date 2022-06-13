@@ -67,7 +67,6 @@ namespace PPAI.ReservaTurnoRT
             }
             catch
             {
-
             }
         }
     }

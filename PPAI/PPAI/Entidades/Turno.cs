@@ -53,7 +53,12 @@ namespace PPAI.Entidades
             }
             return false;
         }
-
+        public string TurnoToString()
+        {
+            string str = "";
+            str += diaSemana.ToString() + " " + fechaHoraInicio.ToString() + " - " + fechaHoraFin.ToString();
+            return str;
+        }
         public string? buscarEstadoActual()
         {
             foreach(CambioEstadoTurno cambioEstado in cambioEstadoTurno)

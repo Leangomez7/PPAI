@@ -19,7 +19,7 @@ namespace PPAI.Entidades
 
         public bool esActual()
         {
-            if (DateTime.Now < fechaHoraHasta)
+            if (fechaHoraHasta is null)
             {
                 return true;
             }

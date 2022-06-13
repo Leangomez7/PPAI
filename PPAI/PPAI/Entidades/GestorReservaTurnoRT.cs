@@ -17,6 +17,17 @@ namespace PPAI.Entidades
         private List<Modelo> modelos;
         private Sesion actual;
         PantallaReservaTurnoRT pantalla;
+        
+        public GestorReservaTurnoRT(PantallaReservaTurnoRT pantallaReservaTurnoRT, Sesion sesion)
+        {
+            pantalla = pantallaReservaTurnoRT;
+            tiposRT = new List<TipoRT>();
+            recursos = new List<RecursoTecnologico>();
+            investigaciones = new List<CentroInvestigacion>();
+            marcas = new List<Marca>();
+            modelos = new List<Modelo>();
+            actual = sesion;
+        }
 
         public void GenerarCentros()
         {
@@ -73,6 +84,7 @@ namespace PPAI.Entidades
         }
         public void GenerarRT()
         {
+            //TODO: volver fraccionamiento a random? Cambiar
             for (int i = 0; i < 40; i++)
             {
                 Random rd = new Random();
@@ -96,7 +108,8 @@ namespace PPAI.Entidades
                 DateTime fec = start.AddDays(rd.Next(range));
                 int per = rd.Next(10, 20);
                 int dur = rd.Next(10, 20);
-                int fra = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
                 int indtip = rd.Next(0, tiposRT.Count());
                 Modelo mod = modelos[rd.Next(0, modelos.Count())];
                 int cen = rd.Next(0, investigaciones.Count());
@@ -128,16 +141,7 @@ namespace PPAI.Entidades
             dt.Rows.InsertAt(row, 0);
             pantalla.PedirSeleccionTipoRT(dt);
         }
-        public GestorReservaTurnoRT(PantallaReservaTurnoRT pantallaReservaTurnoRT, Sesion sesion)
-        {
-            pantalla = pantallaReservaTurnoRT;
-            tiposRT = new List<TipoRT>();
-            recursos = new List<RecursoTecnologico>();
-            investigaciones = new List<CentroInvestigacion>();
-            marcas = new List<Marca>();
-            modelos = new List<Modelo>();
-            actual = sesion;
-        }
+        
         public DataTable ObtenerTipoRT()
         {
             DataTable dataTable = new DataTable();
@@ -197,14 +201,6 @@ namespace PPAI.Entidades
 
         }
 
-        public List<DatosTurno> obtenerTurnosReservablesRTSeleccionado(RecursoTecnologico rt)
-        {
-            List<DatosTurno> turnos = new List<DatosTurno>();
-            DateTime fecha = DateTime.Now;
-            turnos = rt.MostrarTurnos(fecha);
-            return turnos;
-        }
-
         public bool VerificarCIdeCientificoLoggeado(RecursoTecnologico rt)
         {
             PersonalCientifico cientifico = actual.ObtenerCientificoLoggeado();
@@ -216,6 +212,19 @@ namespace PPAI.Entidades
         {
             datos.Sort((s1, s2) => s1.ci.CompareTo(s2.ci));
             return datos;
+        }
+        
+        public List<DatosTurno> obtenerTurnosReservablesRTSeleccionado(RecursoTecnologico rt)
+        {
+            List<DatosTurno> turnos = new List<DatosTurno>();
+            DateTime fecha = DateTime.Now;
+            turnos = rt.MostrarTurnos(fecha);
+            return turnos;
+        }
+
+        public List<DatosTurno> AgruparYOrdenarTurnosPorFecha(List<DatosTurno> turnos)
+        {
+
         }
     }
 }

@@ -33,20 +33,20 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbTipoRT = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Col1CI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col2NombreRecurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tablaRT = new System.Windows.Forms.DataGridView();
             this.Col3NroInventario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col6Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col1CI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col4Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col5Modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col6Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Recurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaRT)).BeginInit();
             this.SuspendLayout();
             // 
             // lblUsuario
@@ -86,25 +86,25 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(-11, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(816, 96);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // comboBox1
+            // cmbTipoRT
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 139);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.TabIndex = 8;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cmbTipoRT.FormattingEnabled = true;
+            this.cmbTipoRT.Location = new System.Drawing.Point(12, 139);
+            this.cmbTipoRT.Name = "cmbTipoRT";
+            this.cmbTipoRT.Size = new System.Drawing.Size(121, 23);
+            this.cmbTipoRT.TabIndex = 8;
+            this.cmbTipoRT.SelectedIndexChanged += new System.EventHandler(this.TomarSeleccionTipoRT);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(12, 112);
             this.label1.Name = "label1";
@@ -112,53 +112,81 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Seleccionar tipo de recurso tecnológico";
             // 
-            // dataGridView1
+            // tablaRT
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Col1CI,
-            this.col2NombreRecurso,
+            this.tablaRT.AllowUserToAddRows = false;
+            this.tablaRT.AllowUserToDeleteRows = false;
+            this.tablaRT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tablaRT.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tablaRT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaRT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Col3NroInventario,
+            this.col6Estado,
+            this.Col1CI,
             this.col4Marca,
             this.col5Modelo,
-            this.col6Estado});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 168);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(638, 251);
-            this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Col1CI
-            // 
-            this.Col1CI.HeaderText = "CI";
-            this.Col1CI.Name = "Col1CI";
-            // 
-            // col2NombreRecurso
-            // 
-            this.col2NombreRecurso.HeaderText = "Nombre";
-            this.col2NombreRecurso.Name = "col2NombreRecurso";
+            this.Recurso});
+            this.tablaRT.Location = new System.Drawing.Point(12, 168);
+            this.tablaRT.Name = "tablaRT";
+            this.tablaRT.ReadOnly = true;
+            this.tablaRT.RowTemplate.Height = 25;
+            this.tablaRT.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tablaRT.Size = new System.Drawing.Size(638, 251);
+            this.tablaRT.TabIndex = 10;
+            this.tablaRT.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TomarSeleccionRT);
             // 
             // Col3NroInventario
             // 
-            this.Col3NroInventario.HeaderText = "NroInventario";
+            this.Col3NroInventario.DataPropertyName = "nroInventario";
+            this.Col3NroInventario.FillWeight = 17.07051F;
+            this.Col3NroInventario.HeaderText = "Numero";
+            this.Col3NroInventario.MinimumWidth = 60;
             this.Col3NroInventario.Name = "Col3NroInventario";
-            // 
-            // col4Marca
-            // 
-            this.col4Marca.HeaderText = "Marca";
-            this.col4Marca.Name = "col4Marca";
-            // 
-            // col5Modelo
-            // 
-            this.col5Modelo.HeaderText = "Modelo";
-            this.col5Modelo.Name = "col5Modelo";
+            this.Col3NroInventario.ReadOnly = true;
             // 
             // col6Estado
             // 
+            this.col6Estado.DataPropertyName = "estado";
+            this.col6Estado.FillWeight = 9.119678F;
             this.col6Estado.HeaderText = "Estado";
+            this.col6Estado.MinimumWidth = 60;
             this.col6Estado.Name = "col6Estado";
+            this.col6Estado.ReadOnly = true;
+            // 
+            // Col1CI
+            // 
+            this.Col1CI.DataPropertyName = "ci";
+            this.Col1CI.FillWeight = 167.2346F;
+            this.Col1CI.HeaderText = "CI";
+            this.Col1CI.MinimumWidth = 200;
+            this.Col1CI.Name = "Col1CI";
+            this.Col1CI.ReadOnly = true;
+            // 
+            // col4Marca
+            // 
+            this.col4Marca.DataPropertyName = "marca";
+            this.col4Marca.FillWeight = 76.53896F;
+            this.col4Marca.HeaderText = "Marca";
+            this.col4Marca.MinimumWidth = 40;
+            this.col4Marca.Name = "col4Marca";
+            this.col4Marca.ReadOnly = true;
+            // 
+            // col5Modelo
+            // 
+            this.col5Modelo.DataPropertyName = "modelo";
+            this.col5Modelo.FillWeight = 106.9906F;
+            this.col5Modelo.HeaderText = "Modelo";
+            this.col5Modelo.MinimumWidth = 60;
+            this.col5Modelo.Name = "col5Modelo";
+            this.col5Modelo.ReadOnly = true;
+            // 
+            // Recurso
+            // 
+            this.Recurso.DataPropertyName = "rt";
+            this.Recurso.HeaderText = "Recurso";
+            this.Recurso.Name = "Recurso";
+            this.Recurso.ReadOnly = true;
+            this.Recurso.Visible = false;
             // 
             // btnCancelar
             // 
@@ -177,9 +205,9 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.tablaRT);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbTipoRT);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -192,7 +220,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaRT)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,15 +232,15 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
-        private ComboBox comboBox1;
+        private ComboBox cmbTipoRT;
         private Label label1;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Col1CI;
-        private DataGridViewTextBoxColumn col2NombreRecurso;
+        private DataGridView tablaRT;
+        private Button btnCancelar;
         private DataGridViewTextBoxColumn Col3NroInventario;
+        private DataGridViewTextBoxColumn col6Estado;
+        private DataGridViewTextBoxColumn Col1CI;
         private DataGridViewTextBoxColumn col4Marca;
         private DataGridViewTextBoxColumn col5Modelo;
-        private DataGridViewTextBoxColumn col6Estado;
-        private Button btnCancelar;
+        private DataGridViewTextBoxColumn Recurso;
     }
 }

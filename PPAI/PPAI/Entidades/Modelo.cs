@@ -7,7 +7,7 @@ using PPAI.Entidades;
 
 namespace PPAI.Entidades
 {
-    internal class Modelo
+    public class Modelo
     {
         private string nombre;
         private Marca? marca;
@@ -15,11 +15,16 @@ namespace PPAI.Entidades
         {
             nombre = nom;
         }
+        public Modelo(string nom, Marca mar)
+        {
+            nombre = nom;
+            marca = mar;
+        }
         public string MostrarModelo()
         {
             return nombre;
         }
-        public List<string> mostrarMarcaYModelo()
+        public List<string> MostrarMarcaYModelo()
         {
             List<string> marcaModelo = new List<string>();
             marcaModelo.Add(MostrarModelo());

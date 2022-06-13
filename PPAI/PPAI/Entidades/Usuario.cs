@@ -8,11 +8,22 @@ namespace PPAI.Entidades
 {
     public class Usuario
     {
-        private string clave;
+        private string? clave;
         private string nombreUsuario;
-        private bool habilitado;
-        private PersonalCientifico personalCientifico;
+        private bool? habilitado;
+        private PersonalCientifico? personalCientifico;
         
+        public Usuario(string nom)
+        {
+            nombreUsuario = nom;
+            habilitado = true;
+        }
+        
+        public string getNombre()
+        {
+            return nombreUsuario;
+        }
+
         public PersonalCientifico obtenerCientifico()
         {
             return personalCientifico;

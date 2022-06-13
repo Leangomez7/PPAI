@@ -6,61 +6,123 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class RecursoTecnologico
+    public struct DatosRT
+    {
+        public int nroInventario;
+        public string estado;
+        public string ci;
+        public string marca;
+        public string modelo;
+        public RecursoTecnologico rt;
+
+        public DatosRT(int nro, string est, string cenIn, string marc, string mod, RecursoTecnologico rec)
+        {
+            nroInventario = nro;
+            estado = est;
+            ci = cenIn;
+            marca = marc;
+            modelo = mod;
+            rt = rec;
+        }
+    }
+    public class RecursoTecnologico
     {
         private int numeroRT;
         private DateTime fechaAlta;
         private List<string> imagenes;
         private int periodicidadMantenimientoPrev;
         private int duracionMantenimientoPrev;
-        private int FraccionHorarioTurnos;
+        private int fraccionHorarioTurnos;
         private List<CambioEstadoRT> cambioEstadoRT;
         private List<Turno> turnos;
         private TipoRT tipoRT;
         private Modelo modelo;
         private CentroInvestigacion? centroInvestigacion;
-        public bool esActivo()
+
+        public RecursoTecnologico(int num, DateTime dat, int per, int dur, int fra, TipoRT tip, Modelo mod, CentroInvestigacion cen)
         {
-            foreach (CambioEstadoRT cambioEstado in cambioEstadoRT)
-            {
-                if (cambioEstado.esActual())
-                {
-                    if (cambioEstado.enEstadoActualReservable())
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            numeroRT = num;
+            fechaAlta = dat;
+            imagenes = new List<string>();
+            periodicidadMantenimientoPrev = per;
+            duracionMantenimientoPrev = dur;
+            fraccionHorarioTurnos = fra;
+            cambioEstadoRT = new List<CambioEstadoRT>();
+            turnos = new List<Turno>();
+            tipoRT = tip;
+            modelo = mod;
+            centroInvestigacion = cen;
+            cambioEstadoRT.Add(new CambioEstadoRT(Estado.RTActivo));
         }
-        public List<object> mostrarRT(CambioEstadoRT cambioEstadoRecurso)
+
+        public bool EsDeTipoRT(TipoRT? tipoRecTec)
         {
-            List<object> listaAtributosRT = new List<object>();
-            listaAtributosRT.Add(mostrarNroInventario());
-            listaAtributosRT.Add(cambioEstadoRecurso.mostrarEstado());
-            listaAtributosRT.Add(mostrarCentroInvestigacion());
-            listaAtributosRT.Add(mostrarMarcaYModelo());
-        }
-        public string mostrarCentroInvestigacion()
-        {
-            return centroInvestigacion.getNombre();
-        }
-        public List<string> mostrarMarcaYModelo()
-        {
-            return modelo.mostrarMarcaYModelo();
-        }
-        public bool esDeTipoRT(TipoRT tipoRecTec)
-        {
-            if (tipoRecTec == tipoRT)
+            if (tipoRecTec == tipoRT || tipoRecTec is null)
             {
                 return true;
             }
             return false;
         } 
-        public int mostrarNroInventario()
+        public bool EsActivo()
+        {
+            CambioEstadoRT? actual = getEstadoActual();
+            if (actual is not null && actual.enEstadoActualReservable())
+            {
+                return true;
+            }
+            return false;
+        }
+        public DatosRT MostrarRT()
+        {
+            int nro = MostrarNroInventario();
+            string est = getEstadoActual().mostrarEstado();
+            string cenIn = MostrarCentroInvestigacion();
+            string marc = MostrarMarcaYModelo()[1];
+            string mod = MostrarMarcaYModelo()[0];
+            RecursoTecnologico rt = this;
+            DatosRT datos = new (nro, est, cenIn, marc, mod, rt);
+            return datos;
+        }
+        public string MostrarCentroInvestigacion()
+        {
+            return centroInvestigacion.getNombre();
+        }
+        public List<string> MostrarMarcaYModelo()
+        {
+            return modelo.MostrarMarcaYModelo();
+        }
+        public int MostrarNroInventario()
         {
             return numeroRT;
         } 
-        } 
+        /*
+        public bool EsDeMiCentroInvestigacion(PersonalCientifico cientifico)
+        {
+            return centroInvestigacion.EsTuCientificoActivo(cientifico);
+        }
+        */
+        public CambioEstadoRT? getEstadoActual()
+        {
+            foreach (CambioEstadoRT cambioEstado in cambioEstadoRT)
+            {
+                if (cambioEstado.esActual())
+                {
+                    return cambioEstado;
+                }
+            }
+            return null;
+        }
+        /*
+        public List<Turno> MostrarTurnos()
+        {
+            foreach (Turno cadaTurno in turnos)
+            {
+                if (cadaTurno.esPosteriorAFecha())
+                {
+                    cadaTurno.buscarEstadoActual();
+                }
+            }
+        }
+        */
     }
 }

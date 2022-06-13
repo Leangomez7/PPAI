@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class CentroInvestigacion
+    public class CentroInvestigacion
     {
         private string nombre;
         private string sigla;
-        private string direccion;
+        /*private string direccion;
         private string edificio;
         private string piso;
         private float[] coordenadas;
@@ -28,11 +28,19 @@ namespace PPAI.Entidades
         private List<AsignacionCientificoCI> cientificos;
         private List<RecursoTecnologico> recursosTecnologicos;       
 
+        */
+
+        public CentroInvestigacion(string nom, string sig)
+        {
+            nombre = nom;
+            sigla = sig;
+        }
         public string getNombre()
         {
             return nombre;
         }
-        public bool esTuCientificoActivo(PersonalCientifico cientifico)
+        /*
+        public bool EsTuCientificoActivo(PersonalCientifico cientifico)
         {
             foreach (AsignacionCientificoCI asignacionCientifico in cientificos)
             {
@@ -43,5 +51,6 @@ namespace PPAI.Entidades
             }
             return false;
         }
+        */
     }
 }

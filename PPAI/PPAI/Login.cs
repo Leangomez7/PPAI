@@ -1,4 +1,6 @@
 using PPAI.Menu;
+using PPAI.Entidades;
+
 namespace PPAI
 {
     public partial class Login : Form
@@ -13,7 +15,8 @@ namespace PPAI
             {
                 if (validarUsuario())
                 {
-                    MenuPrincipal menu = new MenuPrincipal(txtUsuario.Text);
+                    Sesion sesionActual = new Sesion(new Usuario(txtUsuario.Text.Trim()));
+                    MenuPrincipal menu = new MenuPrincipal(sesionActual);
                     menu.Show();
                     this.Hide();
                 }

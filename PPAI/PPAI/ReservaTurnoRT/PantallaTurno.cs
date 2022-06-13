@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PPAI.Entidades;
 
 namespace PPAI.ReservaTurnoRT
 {
     public partial class PantallaTurno : Form
     {
-        public PantallaTurno()
+        public PantallaTurno(List<DatosTurno> turnos, GestorReservaTurnoRT gestor, Sesion sesion)
         {
             InitializeComponent();
         }

@@ -14,13 +14,15 @@ namespace PPAI.ReservaTurnoRT
     public partial class PantallaReservaTurnoRT : Form
     {
         private GestorReservaTurnoRT? gestor;
-        public PantallaReservaTurnoRT(Sesion actual)
+        private Sesion? actual;
+        public PantallaReservaTurnoRT(Sesion sesion)
         {
             InitializeComponent();
-            HabilitarPantallaReservaRT(actual);
+            HabilitarPantallaReservaRT();
+            actual = sesion;
             gestor.NewReservaRT();
         }
-        public void HabilitarPantallaReservaRT(Sesion actual)
+        public void HabilitarPantallaReservaRT()
         {
             lblUsuario.Text = actual.getNombreUsuario();
             gestor = new GestorReservaTurnoRT(this, actual);
@@ -68,6 +70,12 @@ namespace PPAI.ReservaTurnoRT
             catch
             {
             }
+        }
+
+        public void PedirSeleccionDeTurno(List<DatosTurno> turnos)
+        {
+            PantallaTurno pt = new PantallaTurno(turnos, gestor, actual);
+            pt.Show();
         }
     }
 }

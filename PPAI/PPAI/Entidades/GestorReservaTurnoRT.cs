@@ -8,7 +8,7 @@ using System.Data;
 
 namespace PPAI.Entidades
 {
-    internal class GestorReservaTurnoRT
+    public class GestorReservaTurnoRT
     {
         private List<TipoRT> tiposRT;
         private List<RecursoTecnologico> recursos;
@@ -198,7 +198,7 @@ namespace PPAI.Entidades
         {
             bool ver = VerificarCIdeCientificoLoggeado(rt);
             List<DatosTurno> turnos = obtenerTurnosReservablesRTSeleccionado(rt);
-
+            pantalla.PedirSeleccionDeTurno(turnos);
         }
 
         public bool VerificarCIdeCientificoLoggeado(RecursoTecnologico rt)
@@ -219,12 +219,16 @@ namespace PPAI.Entidades
             List<DatosTurno> turnos = new List<DatosTurno>();
             DateTime fecha = DateTime.Now;
             turnos = rt.MostrarTurnos(fecha);
+            turnos = AgruparYOrdenarTurnosPorFecha(turnos);
             return turnos;
         }
 
         public List<DatosTurno> AgruparYOrdenarTurnosPorFecha(List<DatosTurno> turnos)
         {
-
+            turnos.Sort((s1, s2) => s1.fechaHoraInicio.CompareTo(s2.fechaHoraInicio));
+            return turnos;
         }
+
+
     }
 }

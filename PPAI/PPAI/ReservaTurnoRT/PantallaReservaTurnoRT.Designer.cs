@@ -36,12 +36,12 @@
             this.cmbTipoRT = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tablaRT = new System.Windows.Forms.DataGridView();
-            this.Col1CI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col2NombreRecurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col3NroInventario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col6Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col1CI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col4Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col5Modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col6Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Recurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -99,7 +99,7 @@
             this.cmbTipoRT.Name = "cmbTipoRT";
             this.cmbTipoRT.Size = new System.Drawing.Size(121, 23);
             this.cmbTipoRT.TabIndex = 8;
-            this.cmbTipoRT.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cmbTipoRT.SelectedIndexChanged += new System.EventHandler(this.TomarSeleccionTipoRT);
             // 
             // label1
             // 
@@ -114,50 +114,79 @@
             // 
             // tablaRT
             // 
+            this.tablaRT.AllowUserToAddRows = false;
+            this.tablaRT.AllowUserToDeleteRows = false;
+            this.tablaRT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tablaRT.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tablaRT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaRT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Col1CI,
-            this.col2NombreRecurso,
             this.Col3NroInventario,
+            this.col6Estado,
+            this.Col1CI,
             this.col4Marca,
             this.col5Modelo,
-            this.col6Estado});
+            this.Recurso});
             this.tablaRT.Location = new System.Drawing.Point(12, 168);
             this.tablaRT.Name = "tablaRT";
+            this.tablaRT.ReadOnly = true;
             this.tablaRT.RowTemplate.Height = 25;
+            this.tablaRT.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tablaRT.Size = new System.Drawing.Size(638, 251);
             this.tablaRT.TabIndex = 10;
-            // 
-            // Col1CI
-            // 
-            this.Col1CI.HeaderText = "CI";
-            this.Col1CI.Name = "Col1CI";
-            // 
-            // col2NombreRecurso
-            // 
-            this.col2NombreRecurso.HeaderText = "Nombre";
-            this.col2NombreRecurso.Name = "col2NombreRecurso";
+            this.tablaRT.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TomarSeleccionRT);
             // 
             // Col3NroInventario
             // 
-            this.Col3NroInventario.HeaderText = "NroInventario";
+            this.Col3NroInventario.DataPropertyName = "nroInventario";
+            this.Col3NroInventario.FillWeight = 17.07051F;
+            this.Col3NroInventario.HeaderText = "Numero";
+            this.Col3NroInventario.MinimumWidth = 60;
             this.Col3NroInventario.Name = "Col3NroInventario";
-            // 
-            // col4Marca
-            // 
-            this.col4Marca.HeaderText = "Marca";
-            this.col4Marca.Name = "col4Marca";
-            // 
-            // col5Modelo
-            // 
-            this.col5Modelo.HeaderText = "Modelo";
-            this.col5Modelo.Name = "col5Modelo";
+            this.Col3NroInventario.ReadOnly = true;
             // 
             // col6Estado
             // 
+            this.col6Estado.DataPropertyName = "estado";
+            this.col6Estado.FillWeight = 9.119678F;
             this.col6Estado.HeaderText = "Estado";
+            this.col6Estado.MinimumWidth = 60;
             this.col6Estado.Name = "col6Estado";
+            this.col6Estado.ReadOnly = true;
+            // 
+            // Col1CI
+            // 
+            this.Col1CI.DataPropertyName = "ci";
+            this.Col1CI.FillWeight = 167.2346F;
+            this.Col1CI.HeaderText = "CI";
+            this.Col1CI.MinimumWidth = 200;
+            this.Col1CI.Name = "Col1CI";
+            this.Col1CI.ReadOnly = true;
+            // 
+            // col4Marca
+            // 
+            this.col4Marca.DataPropertyName = "marca";
+            this.col4Marca.FillWeight = 76.53896F;
+            this.col4Marca.HeaderText = "Marca";
+            this.col4Marca.MinimumWidth = 40;
+            this.col4Marca.Name = "col4Marca";
+            this.col4Marca.ReadOnly = true;
+            // 
+            // col5Modelo
+            // 
+            this.col5Modelo.DataPropertyName = "modelo";
+            this.col5Modelo.FillWeight = 106.9906F;
+            this.col5Modelo.HeaderText = "Modelo";
+            this.col5Modelo.MinimumWidth = 60;
+            this.col5Modelo.Name = "col5Modelo";
+            this.col5Modelo.ReadOnly = true;
+            // 
+            // Recurso
+            // 
+            this.Recurso.DataPropertyName = "rt";
+            this.Recurso.HeaderText = "Recurso";
+            this.Recurso.Name = "Recurso";
+            this.Recurso.ReadOnly = true;
+            this.Recurso.Visible = false;
             // 
             // btnCancelar
             // 
@@ -206,12 +235,12 @@
         private ComboBox cmbTipoRT;
         private Label label1;
         private DataGridView tablaRT;
-        private DataGridViewTextBoxColumn Col1CI;
-        private DataGridViewTextBoxColumn col2NombreRecurso;
+        private Button btnCancelar;
         private DataGridViewTextBoxColumn Col3NroInventario;
+        private DataGridViewTextBoxColumn col6Estado;
+        private DataGridViewTextBoxColumn Col1CI;
         private DataGridViewTextBoxColumn col4Marca;
         private DataGridViewTextBoxColumn col5Modelo;
-        private DataGridViewTextBoxColumn col6Estado;
-        private Button btnCancelar;
+        private DataGridViewTextBoxColumn Recurso;
     }
 }

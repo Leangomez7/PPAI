@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class Marca
+    public class Marca
     {
         private string nombre;
         private List<Modelo> modelos;

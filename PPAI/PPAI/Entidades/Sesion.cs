@@ -9,8 +9,18 @@ namespace PPAI.Entidades
     public class Sesion
     {
         private DateTime fechaDesde = DateTime.Now;
-        private DateTime fechaHasta;
+        private DateTime? fechaHasta;
         private Usuario usuario;
+
+        public Sesion(Usuario user)
+        {
+            usuario = user;
+        }
+
+        public string getNombreUsuario()
+        {
+            return usuario.getNombre();
+        }
 
         public Sesion mostrarSesion()
         {

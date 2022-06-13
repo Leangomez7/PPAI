@@ -70,7 +70,7 @@ namespace PPAI.Entidades
         }
         public void GenerarRT()
         {
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 40; i++)
             {
                 Random rd = new Random();
                 bool existe = true;
@@ -119,6 +119,10 @@ namespace PPAI.Entidades
             GenerarCentros();
             GenerarRT();
             DataTable dt = ObtenerTipoRT();
+            DataRow row = dt.NewRow();
+            row["TipoRT"] = null;
+            row["NombreTipo"] = "Todos";
+            dt.Rows.InsertAt(row, 0);
             pantalla.PedirSeleccionTipoRT(dt);
         }
         public GestorReservaTurnoRT(PantallaReservaTurnoRT pantallaReservaTurnoRT)
@@ -181,6 +185,12 @@ namespace PPAI.Entidades
             }
             return datos;
         }
+
+        public void TomarSeleccionRT(RecursoTecnologico rt)
+        {
+            MessageBox.Show(rt.MostrarNroInventario().ToString());
+        }
+
         public List<DatosRT> OrdenarYAgruparPorCI(List<DatosRT> datos)
         {
             datos.Sort((s1, s2) => s1.ci.CompareTo(s2.ci));

@@ -15,11 +15,15 @@ namespace PPAI.Entidades
         {
             nombre = nom;
         }
+        public Modelo(Marca nombre)
+        {
+            marca = nombre;
+        }
         public string MostrarModelo()
         {
             return nombre;
         }
-        public List<string> mostrarMarcaYModelo()
+        public List<string> MostrarMarcaYModelo()
         {
             List<string> marcaModelo = new List<string>();
             marcaModelo.Add(MostrarModelo());

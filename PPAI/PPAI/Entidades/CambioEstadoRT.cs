@@ -9,7 +9,7 @@ namespace PPAI.Entidades
     internal class CambioEstadoRT
     {
         private DateTime fechaHoraDesde;
-        private DateTime fechaHoraHasta;
+        private DateTime? fechaHoraHasta;
         private Estado estado;
 
         public CambioEstadoRT(Estado est)
@@ -19,7 +19,7 @@ namespace PPAI.Entidades
         }
         public bool esActual()
         {
-            if (DateTime.Now < fechaHoraHasta)
+            if (fechaHoraHasta is null)
             {
                 return true;
             }
@@ -27,11 +27,7 @@ namespace PPAI.Entidades
         }
         public bool enEstadoActualReservable()
         {
-            if (estado.getReservable())
-            {
-                return true;
-            }
-            return false;
+            return estado.getReservable();
         }
         public string mostrarEstado()
         {

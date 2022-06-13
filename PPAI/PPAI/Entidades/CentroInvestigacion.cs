@@ -32,7 +32,7 @@ namespace PPAI.Entidades
         {
             return nombre;
         }
-        public bool esTuCientificoActivo(PersonalCientifico cientifico)
+        public bool EsTuCientificoActivo(PersonalCientifico cientifico)
         {
             foreach (AsignacionCientificoCI asignacionCientifico in cientificos)
             {

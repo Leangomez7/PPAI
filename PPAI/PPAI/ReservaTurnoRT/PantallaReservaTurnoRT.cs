@@ -65,5 +65,10 @@ namespace PPAI.ReservaTurnoRT
         {
 
         }
+
+        private void tablaRT_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

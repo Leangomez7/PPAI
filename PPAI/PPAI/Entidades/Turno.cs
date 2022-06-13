@@ -26,9 +26,6 @@ namespace PPAI.Entidades
         {
             return this;
         }
-        public void estoyDisponible()
-        {
-        }
         public bool esPosteriorAFecha()
         {
             if (DateTime.Now < fechaHoraInicio)
@@ -37,20 +34,16 @@ namespace PPAI.Entidades
             }
             return false;
         }
-        public Estado? buscarEstadoActual()
+        public string? buscarEstadoActual()
         {
-            foreach (CambioEstadoTurno cambioEstado in cambioEstadoTurno)
+            foreach(CambioEstadoTurno cambioEstado in cambioEstadoTurno)
             {
-                if (cambioEstado.getFechaHoraDesde() < DateTime.Now && cambioEstado.getFechaHoraHasta() > DateTime.Now)
+                if (cambioEstado.esActual())
                 {
                     return cambioEstado.mostrarEstado();
                 }
             }
             return null;
-        }
-        public void reservar()
-        {
-
         }
     }
 }

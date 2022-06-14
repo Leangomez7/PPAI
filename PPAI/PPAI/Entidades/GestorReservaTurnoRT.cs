@@ -26,6 +26,11 @@ namespace PPAI.Entidades
             marcas = new List<Marca>();
             modelos = new List<Modelo>();
             actual = sesion;
+            GenerarMarcas();
+            GenerarModelos();
+            GenerarTiposRT();
+            GenerarCentros();
+            GenerarRT();
         }
         public void setPantalla(PantallaReservaTurnoRT pant)
         {
@@ -131,11 +136,6 @@ namespace PPAI.Entidades
 
         public void NewReservaRT()
         {
-            GenerarMarcas();
-            GenerarModelos();
-            GenerarTiposRT();
-            GenerarCentros();
-            GenerarRT();
             DataTable dt = ObtenerTipoRT();
             DataRow row = dt.NewRow();
             row["TipoRT"] = null;
@@ -168,12 +168,14 @@ namespace PPAI.Entidades
             }
             return dataTable;
         }
+
         public void TipoRTSeleccionado(TipoRT? tipoRT)
         {
             List<DatosRT> datos = ObtenerRTActivoDeTipoRT(tipoRT);
             datos = OrdenarYAgruparPorCI(datos);
             pantalla.PedirSeleccionRT(datos);
         }
+
         public List<DatosRT> ObtenerRTActivoDeTipoRT(TipoRT? tipoRT)
         {
             List<RecursoTecnologico> recursosActivos = new List<RecursoTecnologico>();

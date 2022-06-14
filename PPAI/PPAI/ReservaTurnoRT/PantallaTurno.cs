@@ -109,7 +109,6 @@ namespace PPAI.ReservaTurnoRT
             if (MessageBox.Show(mensaje, "Turno Reservado", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 gestor.ReservarTurnoRT(turno, rec);
-                Thread.Sleep(1000);
                 FinCU();
             }
         }
@@ -145,6 +144,7 @@ namespace PPAI.ReservaTurnoRT
         }
         private void FinCU()
         {
+            MessageBox.Show("Turno reservado exitosamente", "Turno Reservado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             menu.Show();
             this.Close();
             DialogResult = DialogResult.OK;

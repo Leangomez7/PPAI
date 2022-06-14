@@ -124,10 +124,16 @@
   <data name="fondo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fondo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="3586360_email_envelope_mail_send_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3586360_email_envelope_mail_send_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="userIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\userIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="userIconBlanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\userIconBlanco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warapIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warapIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

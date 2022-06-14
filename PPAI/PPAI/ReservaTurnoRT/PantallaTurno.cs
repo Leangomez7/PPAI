@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PPAI.Entidades;
+using PPAI.Menu;
 
 namespace PPAI.ReservaTurnoRT
 {
@@ -17,11 +18,13 @@ namespace PPAI.ReservaTurnoRT
         List<DatosTurno> turnos;
         GestorReservaTurnoRT gestor;
         DatosRT rec;
+        MenuPrincipal menu;
 
-        public PantallaTurno(List<DatosTurno> datos, GestorReservaTurnoRT gest, Sesion sesion, DatosRT rt)
+        public PantallaTurno(List<DatosTurno> datos, GestorReservaTurnoRT gest, Sesion sesion, DatosRT rt, MenuPrincipal men)
         {
             InitializeComponent();
             gestor = gest;
+            menu = men;
             turnos = datos;
             calendario.MinDate = fechaSeleccion;
             rec = rt;
@@ -30,11 +33,11 @@ namespace PPAI.ReservaTurnoRT
             lblMarca.Text += rt.marca;
             lblMod.Text += rt.modelo;
             lblUsuario.Text = sesion.getNombreUsuario();
+            lblFechaHora.Text = "Turnos posteriores a " + DateOnly.FromDateTime(DateTime.Now).ToString();
         }
 
         private void TomarSeleccionFecha(object sender, DateRangeEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(e.Start.ToString() + " " + e.End.ToString() + " " + e.Start.GetType());
             fechaSeleccion = e.Start;
             MostrarTurnosFecha(fechaSeleccion);
         }
@@ -54,8 +57,8 @@ namespace PPAI.ReservaTurnoRT
             }
             if (dta.Rows.Count > 0)
             {
-                cmbTurnos.DataSource = dta;
                 cmbTurnos.DisplayMember = "horario";
+                cmbTurnos.DataSource = dta;
                 cmbTurnos.ValueMember = "turno";
             }
             else
@@ -64,9 +67,9 @@ namespace PPAI.ReservaTurnoRT
                 fila["horario"] = "No existen turnos";
                 fila["turno"] = null;
                 dta.Rows.InsertAt(fila, 0);
-                cmbTurnos.DataSource = dta;
                 cmbTurnos.DisplayMember = "horario";
                 cmbTurnos.ValueMember = "turno";
+                cmbTurnos.DataSource = dta;
             }
         }
 
@@ -82,7 +85,7 @@ namespace PPAI.ReservaTurnoRT
                 lblFechaGen.Text = "Fecha: ".PadRight(10) + DateOnly.FromDateTime(datos.fechaHoraInicio).ToString();
                 lblInicio.Text = "Inicio: ".PadRight(10) + datos.fechaHoraInicio.TimeOfDay.ToString();
                 lblFin.Text = "Fin: ".PadRight(10) + datos.fechaHoraFin.TimeOfDay.ToString();
-                btnConfirmar.Enabled = true;
+                btnConfirmar.Enabled = verificarCampos();
             }
             catch
             {
@@ -97,13 +100,54 @@ namespace PPAI.ReservaTurnoRT
         private void ConfirmarReserva(object sender, EventArgs e)
         {
             Turno turno = (Turno)cmbTurnos.SelectedValue;
-            gestor.ReservarTurnoRT(turno, rec);
             DatosTurno datostur = turno.MostrarTurno();
             string mensaje = "Recurso:\n" + rec.ci + "\nNumero: " + rec.nroInventario.ToString() + "\nMarca: " + rec.marca + "\nModelo: " + rec.modelo;
             var culture = new System.Globalization.CultureInfo("es-ES");
             string dia = culture.DateTimeFormat.GetDayName(datostur.fechaHoraInicio.DayOfWeek);
             mensaje += "\n\nTurno:\n" + "Fecha: " + DateOnly.FromDateTime(datostur.fechaHoraInicio).ToString() + "\nDía: " + dia[0].ToString().ToUpper() + dia.Substring(1, dia.Length - 1) + "\nInicio: " + datostur.fechaHoraInicio.TimeOfDay.ToString() + "\nFin: " + datostur.fechaHoraInicio.TimeOfDay.ToString();
-            MessageBox.Show(mensaje, "Turno Reservado");
+            
+            if (MessageBox.Show(mensaje, "Turno Reservado", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                gestor.ReservarTurnoRT(turno, rec);
+                Thread.Sleep(1000);
+                FinCU();
+            }
+        }
+        public bool verificarCampos()
+        {
+            if (chMail.Checked == true || chWhatsApp.Checked == true)
+            {
+                try
+                {
+                    Turno xd = (Turno)cmbTurnos.SelectedValue;
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void chMail_CheckedChanged(object sender, EventArgs e)
+        {
+            btnConfirmar.Enabled = verificarCampos();
+        }
+
+        private void chWhatsApp_CheckedChanged(object sender, EventArgs e)
+        {
+            btnConfirmar.Enabled = verificarCampos();
+        }
+        private void FinCU()
+        {
+            menu.Show();
+            this.Close();
+            DialogResult = DialogResult.OK;
         }
     }
 }

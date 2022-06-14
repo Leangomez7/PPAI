@@ -16,11 +16,10 @@ namespace PPAI.Entidades
         private List<Marca> marcas;
         private List<Modelo> modelos;
         private Sesion actual;
-        PantallaReservaTurnoRT pantalla;
+        PantallaReservaTurnoRT? pantalla;
         
-        public GestorReservaTurnoRT(PantallaReservaTurnoRT pantallaReservaTurnoRT, Sesion sesion)
+        public GestorReservaTurnoRT(Sesion sesion)
         {
-            pantalla = pantallaReservaTurnoRT;
             tiposRT = new List<TipoRT>();
             recursos = new List<RecursoTecnologico>();
             investigaciones = new List<CentroInvestigacion>();
@@ -28,7 +27,10 @@ namespace PPAI.Entidades
             modelos = new List<Modelo>();
             actual = sesion;
         }
-
+        public void setPantalla(PantallaReservaTurnoRT pant)
+        {
+            pantalla = pant;
+        }
         public void GenerarCentros()
         {
             Random rnd = new Random();
@@ -237,7 +239,6 @@ namespace PPAI.Entidades
             loggeado.SetTurno(tur);
             string correo = loggeado.tomarCorreoInstitucional();
         }
-
         public Estado? ObtenerEstadoReservado()
         {
             var est = Enum.GetValues(typeof(Estado));

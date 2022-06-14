@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PPAI.Entidades;
+using PPAI.Menu;
 
 namespace PPAI.ReservaTurnoRT
 {
@@ -15,17 +16,20 @@ namespace PPAI.ReservaTurnoRT
     {
         private GestorReservaTurnoRT? gestor;
         private Sesion? actual;
-        public PantallaReservaTurnoRT(Sesion sesion)
+        private MenuPrincipal principal;
+        public PantallaReservaTurnoRT(Sesion sesion, MenuPrincipal menu, GestorReservaTurnoRT ges)
         {
+            principal = menu;
+            gestor = ges;
             actual = sesion;
             InitializeComponent();
             HabilitarPantallaReservaRT();
+            gestor.setPantalla(this);
             gestor.NewReservaRT();
         }
         public void HabilitarPantallaReservaRT()
         {
             lblUsuario.Text = actual.getNombreUsuario();
-            gestor = new GestorReservaTurnoRT(this, actual);
         }
         public void PedirSeleccionTipoRT(DataTable dt)
         {
@@ -71,11 +75,20 @@ namespace PPAI.ReservaTurnoRT
             {
             }
         }
-
         public void PedirSeleccionDeTurno(List<DatosTurno> turnos, DatosRT rt)
         {
-            PantallaTurno pt = new PantallaTurno(turnos, gestor, actual, rt);
-            pt.Show();
+            PantallaTurno pt = new PantallaTurno(turnos, gestor, actual, rt, principal);
+            this.Hide();
+            var result = pt.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                this.Show();
+            }
+        }
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            principal.Show();
+            this.Close();
         }
     }
 }

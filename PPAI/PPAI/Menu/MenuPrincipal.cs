@@ -15,17 +15,19 @@ namespace PPAI.Menu
     public partial class MenuPrincipal : Form
     {
         private Sesion actual;
+        private GestorReservaTurnoRT gestor;
 
         public MenuPrincipal(Sesion iniciar)
         {
             actual = iniciar;
             InitializeComponent();
             lblUsuario.Text = actual.getNombreUsuario();
+            gestor = new GestorReservaTurnoRT(actual);
         }
 
         private void opcionReservarTurnoRT(object sender, EventArgs e)
         {
-            PantallaReservaTurnoRT pantallaReservaTurnoRT = new PantallaReservaTurnoRT(actual);
+            PantallaReservaTurnoRT pantallaReservaTurnoRT = new PantallaReservaTurnoRT(actual, this, gestor);
             pantallaReservaTurnoRT.Show();
             this.Hide();
         }

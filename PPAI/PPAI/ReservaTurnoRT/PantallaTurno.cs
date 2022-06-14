@@ -15,17 +15,21 @@ namespace PPAI.ReservaTurnoRT
     {
         DateTime fechaSeleccion = DateTime.Today;
         List<DatosTurno> turnos;
+        GestorReservaTurnoRT gestor;
+        DatosRT rec;
 
-        public PantallaTurno(List<DatosTurno> datos, GestorReservaTurnoRT gestor, Sesion sesion)
+        public PantallaTurno(List<DatosTurno> datos, GestorReservaTurnoRT gest, Sesion sesion, DatosRT rt)
         {
             InitializeComponent();
+            gestor = gest;
             turnos = datos;
             calendario.MinDate = fechaSeleccion;
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            rec = rt;
+            lblNroInv.Text += rt.nroInventario.ToString();
+            lblCentro.Text = rt.ci;
+            lblMarca.Text += rt.marca;
+            lblMod.Text += rt.modelo;
+            lblUsuario.Text = sesion.getNombreUsuario();
         }
 
         private void TomarSeleccionFecha(object sender, DateRangeEventArgs e)
@@ -78,6 +82,7 @@ namespace PPAI.ReservaTurnoRT
                 lblFechaGen.Text = "Fecha: ".PadRight(10) + DateOnly.FromDateTime(datos.fechaHoraInicio).ToString();
                 lblInicio.Text = "Inicio: ".PadRight(10) + datos.fechaHoraInicio.TimeOfDay.ToString();
                 lblFin.Text = "Fin: ".PadRight(10) + datos.fechaHoraFin.TimeOfDay.ToString();
+                btnConfirmar.Enabled = true;
             }
             catch
             {
@@ -85,7 +90,20 @@ namespace PPAI.ReservaTurnoRT
                 lblFechaGen.Text = "Fecha: ".PadRight(10);
                 lblInicio.Text = "Inicio: ".PadRight(10);
                 lblFin.Text = "Fin: ".PadRight(10);
+                btnConfirmar.Enabled = false;
             }
+        }
+
+        private void ConfirmarReserva(object sender, EventArgs e)
+        {
+            Turno turno = (Turno)cmbTurnos.SelectedValue;
+            gestor.ReservarTurnoRT(turno, rec);
+            DatosTurno datostur = turno.MostrarTurno();
+            string mensaje = "Recurso:\n" + rec.ci + "\nNumero: " + rec.nroInventario.ToString() + "\nMarca: " + rec.marca + "\nModelo: " + rec.modelo;
+            var culture = new System.Globalization.CultureInfo("es-ES");
+            string dia = culture.DateTimeFormat.GetDayName(datostur.fechaHoraInicio.DayOfWeek);
+            mensaje += "\n\nTurno:\n" + "Fecha: " + DateOnly.FromDateTime(datostur.fechaHoraInicio).ToString() + "\nDía: " + dia[0].ToString().ToUpper() + dia.Substring(1, dia.Length - 1) + "\nInicio: " + datostur.fechaHoraInicio.TimeOfDay.ToString() + "\nFin: " + datostur.fechaHoraInicio.TimeOfDay.ToString();
+            MessageBox.Show(mensaje, "Turno Reservado");
         }
     }
 }

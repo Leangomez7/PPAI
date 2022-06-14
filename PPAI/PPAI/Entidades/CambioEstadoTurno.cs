@@ -10,11 +10,16 @@ namespace PPAI.Entidades
     {
         private DateTime fechaHoraDesde = DateTime.Now;
         private DateTime? fechaHoraHasta;
-        private Estado estado;
+        private Estado? estado;
 
-        public CambioEstadoTurno(Estado est)
+        public CambioEstadoTurno(Estado? est)
         {
             estado = est;
+        }
+
+        public void SetFechaHoraHasta(DateTime fecha)
+        {
+            fechaHoraHasta = fecha;
         }
 
         public bool esActual()

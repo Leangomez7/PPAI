@@ -40,6 +40,19 @@ namespace PPAI.Entidades
             fechaHoraFin = fin;
             cambioEstadoTurno.Add(new CambioEstadoTurno(Estado.TurnoDisponible));
         }
+
+        public void Reservar(Estado? res)
+        {
+            foreach (CambioEstadoTurno cambioEstado in cambioEstadoTurno)
+            {
+                if (cambioEstado.esActual())
+                {
+                    cambioEstado.SetFechaHoraHasta(DateTime.Now);
+                }
+            }
+            cambioEstadoTurno.Add(new CambioEstadoTurno(res));
+        }
+
         public DatosTurno MostrarTurno()
         {
             DatosTurno datos = new DatosTurno(fechaHoraInicio, fechaHoraFin, fechaGeneracion, buscarEstadoActual(), this);

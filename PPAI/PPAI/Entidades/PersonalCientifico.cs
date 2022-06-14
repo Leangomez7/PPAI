@@ -15,6 +15,7 @@ namespace PPAI.Entidades
         private string correoInstitucional;
         private string correoPersonal;
         private string telefono;
+        private List<Turno> turnos = new List<Turno>();
         //private Usuario usuario;
 
         public PersonalCientifico(int leg, string nom, string ape, int doc, string mins, string mper, string tel)
@@ -27,6 +28,12 @@ namespace PPAI.Entidades
             correoPersonal = mper;
             telefono = tel;
         }
+
+        public void SetTurno(Turno tur)
+        {
+            turnos.Add(tur);
+        }
+
         public string tomarCorreoPersonal()
         {
             return correoPersonal;

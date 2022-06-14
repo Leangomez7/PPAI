@@ -54,6 +54,12 @@ namespace PPAI.Entidades
             GenerarTurnos();
         }
 
+        public void ReservarTurno(Turno tur, Estado? res)
+        {
+            tur.Reservar(res);
+
+        }
+
         public void GenerarTurnos()
         {
             horarioRT.Add(new HorarioRT(DayOfWeek.Monday));

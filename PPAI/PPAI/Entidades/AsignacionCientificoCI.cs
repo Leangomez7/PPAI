@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class AsignacionCientificoCI
+    public class AsignacionCientificoCI
     {
         private DateTime fechaDesde = DateTime.Now;
         private DateTime? fechaHasta;

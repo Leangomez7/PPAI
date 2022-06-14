@@ -72,9 +72,9 @@ namespace PPAI.ReservaTurnoRT
             }
         }
 
-        public void PedirSeleccionDeTurno(List<DatosTurno> turnos)
+        public void PedirSeleccionDeTurno(List<DatosTurno> turnos, DatosRT rt)
         {
-            PantallaTurno pt = new PantallaTurno(turnos, gestor, actual);
+            PantallaTurno pt = new PantallaTurno(turnos, gestor, actual, rt);
             pt.Show();
         }
     }

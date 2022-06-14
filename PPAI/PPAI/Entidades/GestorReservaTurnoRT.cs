@@ -118,8 +118,8 @@ namespace PPAI.Entidades
         }
         public void GenerarTiposRT()
         {
-            string[] nombres = new string[5] {"Microscopio", "Balanza", "Resonador", "Cómputo", "emsu" };
-            string[] desc = new string[5] {"Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "xd" };
+            string[] nombres = new string[5] {"Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] {"Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
             for (int i = 0; i < nombres.Length; i++)
             {
                 TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
@@ -198,7 +198,7 @@ namespace PPAI.Entidades
         {
             bool ver = VerificarCIdeCientificoLoggeado(rt);
             List<DatosTurno> turnos = obtenerTurnosReservablesRTSeleccionado(rt);
-            pantalla.PedirSeleccionDeTurno(turnos);
+            pantalla.PedirSeleccionDeTurno(turnos, rt.MostrarRT());
         }
 
         public bool VerificarCIdeCientificoLoggeado(RecursoTecnologico rt)
@@ -227,6 +227,28 @@ namespace PPAI.Entidades
         {
             turnos.Sort((s1, s2) => s1.fechaHoraInicio.CompareTo(s2.fechaHoraInicio));
             return turnos;
+        }
+
+        public void ReservarTurnoRT(Turno tur, DatosRT rt)
+        {
+            Estado? res = ObtenerEstadoReservado();
+            rt.rt.ReservarTurno(tur, res);
+            PersonalCientifico loggeado = actual.ObtenerCientificoLoggeado();
+            loggeado.SetTurno(tur);
+            string correo = loggeado.tomarCorreoInstitucional();
+        }
+
+        public Estado? ObtenerEstadoReservado()
+        {
+            var est = Enum.GetValues(typeof(Estado));
+            foreach (Estado estado in est)
+            {
+                if (estado.esAmbitoTurno() && estado.esReservado())
+                {
+                    return estado;
+                }
+            }
+            return null;
         }
     }
 }

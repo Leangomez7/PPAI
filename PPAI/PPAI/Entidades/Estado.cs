@@ -46,6 +46,14 @@ namespace PPAI.Entidades
             return attribute.EsCancelable;
             //return attribute == null ? value.ToString() : attribute.EsCancelable;
         }
+        public static bool esAmbitoTurno(this Enum value)
+        {
+            return value.getAmbito() == "Turno";
+        }
+        public static bool esReservado(this Enum value)
+        {
+            return value.getNombre() == "Reservado";
+        }
     }
 
     public class AmbitoAttribute : Attribute
@@ -109,6 +117,8 @@ namespace PPAI.Entidades
         TurnoDisponible,
         [Ambito("Turno"), Nombre("Reservado"), Descripcion("Turno Reservado"), EsReservable(false), EsCancelable(true)]
         TurnoReservado,
+        [Ambito("Turno"), Nombre("Reserva Pendiente"), Descripcion("Turno con Reserva Pendiente"), EsReservable(false), EsCancelable(true)]
+        TurnoReservaPendiente,
         [Ambito("RT"), Nombre("Activo"), Descripcion("RT Activo"), EsReservable(true), EsCancelable(false)]
         RTActivo
     }

@@ -119,7 +119,10 @@ namespace PPAI.ReservaTurnoRT
                 try
                 {
                     Turno xd = (Turno)cmbTurnos.SelectedValue;
-                    return true;
+                    if (xd is not null)
+                    {
+                        return true;
+                    }
                 }
                 catch
                 {

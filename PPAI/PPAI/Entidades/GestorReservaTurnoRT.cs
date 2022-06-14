@@ -228,7 +228,5 @@ namespace PPAI.Entidades
             turnos.Sort((s1, s2) => s1.fechaHoraInicio.CompareTo(s2.fechaHoraInicio));
             return turnos;
         }
-
-
     }
 }

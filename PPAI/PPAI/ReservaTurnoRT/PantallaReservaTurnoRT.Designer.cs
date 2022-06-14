@@ -94,6 +94,7 @@
             // 
             // cmbTipoRT
             // 
+            this.cmbTipoRT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoRT.FormattingEnabled = true;
             this.cmbTipoRT.Location = new System.Drawing.Point(12, 139);
             this.cmbTipoRT.Name = "cmbTipoRT";

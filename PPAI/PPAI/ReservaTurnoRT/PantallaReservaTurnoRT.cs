@@ -17,9 +17,9 @@ namespace PPAI.ReservaTurnoRT
         private Sesion? actual;
         public PantallaReservaTurnoRT(Sesion sesion)
         {
+            actual = sesion;
             InitializeComponent();
             HabilitarPantallaReservaRT();
-            actual = sesion;
             gestor.NewReservaRT();
         }
         public void HabilitarPantallaReservaRT()

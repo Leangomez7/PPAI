@@ -37,16 +37,17 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.calendario = new System.Windows.Forms.MonthCalendar();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblFechaGen = new System.Windows.Forms.Label();
+            this.lblInicio = new System.Windows.Forms.Label();
+            this.lblFin = new System.Windows.Forms.Label();
+            this.lblDia = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.cmbTurnos = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -145,11 +146,14 @@
             this.pictureBox4.TabIndex = 17;
             this.pictureBox4.TabStop = false;
             // 
-            // monthCalendar1
+            // calendario
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(480, 203);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 14;
+            this.calendario.Location = new System.Drawing.Point(480, 203);
+            this.calendario.MaxSelectionCount = 1;
+            this.calendario.MinDate = new System.DateTime(1790, 3, 4, 0, 0, 0, 0);
+            this.calendario.Name = "calendario";
+            this.calendario.TabIndex = 14;
+            this.calendario.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.TomarSeleccionFecha);
             // 
             // label2
             // 
@@ -163,7 +167,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(21, 176);
             this.label3.Name = "label3";
@@ -171,45 +176,49 @@
             this.label3.TabIndex = 19;
             this.label3.Text = "Datos del turno:";
             // 
-            // label4
+            // lblFechaGen
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(21, 210);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(182, 21);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "\"Fecha de generación\"";
+            this.lblFechaGen.AutoSize = true;
+            this.lblFechaGen.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.lblFechaGen.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblFechaGen.Location = new System.Drawing.Point(21, 210);
+            this.lblFechaGen.Name = "lblFechaGen";
+            this.lblFechaGen.Size = new System.Drawing.Size(58, 21);
+            this.lblFechaGen.TabIndex = 20;
+            this.lblFechaGen.Text = "Fecha:";
             // 
-            // label5
+            // lblInicio
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(21, 271);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(168, 21);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "\"Fecha y hora inicio\"";
+            this.lblInicio.AutoSize = true;
+            this.lblInicio.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.lblInicio.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblInicio.Location = new System.Drawing.Point(21, 271);
+            this.lblInicio.Name = "lblInicio";
+            this.lblInicio.Size = new System.Drawing.Size(57, 21);
+            this.lblInicio.TabIndex = 21;
+            this.lblInicio.Text = "Inicio:";
             // 
-            // label6
+            // lblFin
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(21, 301);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(146, 21);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "\"Fecha y hora fin\"";
+            this.lblFin.AutoSize = true;
+            this.lblFin.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.lblFin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblFin.Location = new System.Drawing.Point(21, 301);
+            this.lblFin.Name = "lblFin";
+            this.lblFin.Size = new System.Drawing.Size(37, 21);
+            this.lblFin.TabIndex = 22;
+            this.lblFin.Text = "Fin:";
             // 
-            // label7
+            // lblDia
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(21, 241);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 21);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "\"Día\"";
+            this.lblDia.AutoSize = true;
+            this.lblDia.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.lblDia.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblDia.Location = new System.Drawing.Point(21, 241);
+            this.lblDia.Name = "lblDia";
+            this.lblDia.Size = new System.Drawing.Size(40, 21);
+            this.lblDia.TabIndex = 23;
+            this.lblDia.Text = "Día:";
             // 
             // groupBox1
             // 
@@ -243,23 +252,34 @@
             this.checkedListBox1.Size = new System.Drawing.Size(155, 64);
             this.checkedListBox1.TabIndex = 26;
             // 
+            // cmbTurnos
+            // 
+            this.cmbTurnos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTurnos.FormattingEnabled = true;
+            this.cmbTurnos.Location = new System.Drawing.Point(250, 159);
+            this.cmbTurnos.Name = "cmbTurnos";
+            this.cmbTurnos.Size = new System.Drawing.Size(121, 23);
+            this.cmbTurnos.TabIndex = 27;
+            this.cmbTurnos.SelectedValueChanged += new System.EventHandler(this.TomarSeleccionTurno);
+            // 
             // PantallaTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cmbTurnos);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblDia);
+            this.Controls.Add(this.lblFin);
+            this.Controls.Add(this.lblInicio);
+            this.Controls.Add(this.lblFechaGen);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.calendario);
             this.Controls.Add(this.lblFechaHora);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblUsuario);
@@ -290,15 +310,16 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox4;
-        private MonthCalendar monthCalendar1;
+        private MonthCalendar calendario;
         private Label label2;
         private Label label3;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private Label label7;
+        private Label lblFechaGen;
+        private Label lblInicio;
+        private Label lblFin;
+        private Label lblDia;
         private GroupBox groupBox1;
         private Button button1;
         private CheckedListBox checkedListBox1;
+        private ComboBox cmbTurnos;
     }
 }

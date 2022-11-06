@@ -14,6 +14,13 @@ namespace PPAI.Entidades
         private DateOnly vigenciaDesde;
         private DateOnly? vigenciaHasta;
 
+        /// <summary>
+        /// Crea el objeto horarioRT asginandole un diaSemana, una horaDesde, una horaHasta y una vigenciaDese desde parametro
+        /// </summary>
+        /// <param name="dia"></param>
+        /// <param name="hrd"></param>
+        /// <param name="hrh"></param>
+        /// <param name="ini"></param>
         public HorarioRT(DayOfWeek dia, TimeOnly hrd, TimeOnly hrh, DateOnly ini)
         {
             diaSemana = dia;

@@ -13,6 +13,11 @@ namespace PPAI.Entidades
         private bool? habilitado;
         private PersonalCientifico? personalCientifico;
         
+        /// <summary>
+        /// Crea un Usuario con todos sus datos
+        /// </summary>
+        /// <param name="nom">Nombre del usuario</param>
+        /// <param name="cien">Personal científico al que pertenece el Usuario</param>
         public Usuario(string nom, PersonalCientifico cien)
         {
             nombreUsuario = nom;
@@ -20,11 +25,19 @@ namespace PPAI.Entidades
             personalCientifico = cien;
         }
         
+        /// <summary>
+        /// Devuelve el Nombre de Usuario
+        /// </summary>
+        /// <returns>string, nombre del usuario</returns>
         public string getNombre()
         {
             return nombreUsuario;
         }
 
+        /// <summary>
+        /// Devuelve el PersonalCientifico al que pertenece el Usuario
+        /// </summary>
+        /// <returns>PersonalCientifico al que pertenece</returns>
         public PersonalCientifico obtenerCientifico()
         {
             return personalCientifico;

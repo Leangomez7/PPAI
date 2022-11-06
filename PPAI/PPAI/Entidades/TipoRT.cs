@@ -11,11 +11,21 @@ namespace PPAI.Entidades
         private string nombre;
         private string descripcion;
 
+        /// <summary>
+        /// Crea un nuevo Tipo de Recurso Tecnológico
+        /// </summary>
+        /// <param name="nom">Nombre del Tipo</param>
+        /// <param name="des">Descripción del Tipo</param>
         public TipoRT(string nom, string des)
         {
             nombre = nom;
             descripcion = des;
         }
+
+        /// <summary>
+        /// Devuelve una string con el nombre del tipo
+        /// </summary>
+        /// <returns>Nombre del tipo</returns>
         public string MostrarTipoRecurso()
         {
             return nombre;

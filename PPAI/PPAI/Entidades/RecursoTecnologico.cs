@@ -40,6 +40,17 @@ namespace PPAI.Entidades
         private CentroInvestigacion? centroInvestigacion;
         private List<HorarioRT> horarioRT = new List<HorarioRT>();
 
+        /// <summary>
+        /// Crea un Recurso Tecnológico con todos sus datos
+        /// </summary>
+        /// <param name="num">Número del Recurso</param>
+        /// <param name="dat">Fecha de alta del Recurso</param>
+        /// <param name="per">Periodicidad de Mantenimiento Preventivo</param>
+        /// <param name="dur">Duración de Mantenimiento Preventivo</param>
+        /// <param name="fra">Fracción de Horario de los Turnos</param>
+        /// <param name="tip">Tipo de Recurso Tecnológico</param>
+        /// <param name="mod">Modelo de Recurso</param>
+        /// <param name="cen">Centro de Investigación al que pertenece</param>
         public RecursoTecnologico(int num, DateTime dat, int per, int dur, int fra, TipoRT tip, Modelo mod, CentroInvestigacion cen)
         {
             numeroRT = num;
@@ -54,12 +65,19 @@ namespace PPAI.Entidades
             GenerarTurnos();
         }
 
+        /// <summary>
+        /// Reserva un turno del recurso tecnológico
+        /// </summary>
+        /// <param name="tur">Turno a reservar</param>
+        /// <param name="res">Estado reservado</param>
         public void ReservarTurno(Turno tur, Estado? res)
         {
             tur.Reservar(res);
-
         }
 
+        /// <summary>
+        /// Genera los turnos para un recurso tecnológico para los próximos 30 días
+        /// </summary>
         public void GenerarTurnos()
         {
             horarioRT.Add(new HorarioRT(DayOfWeek.Monday));
@@ -98,6 +116,11 @@ namespace PPAI.Entidades
             }
         }
 
+        /// <summary>
+        /// Comprueba si el RT es de un determinado tipo, pasado como parámetro
+        /// </summary>
+        /// <param name="tipoRecTec">TipoRT a comprobar</param>
+        /// <returns>true si es del tipo, false si no</returns>
         public bool EsDeTipoRT(TipoRT? tipoRecTec)
         {
             if (tipoRecTec == tipoRT || tipoRecTec is null)
@@ -106,6 +129,11 @@ namespace PPAI.Entidades
             }
             return false;
         } 
+
+        /// <summary>
+        /// Devuelve si el RT se encuentra activo
+        /// </summary>
+        /// <returns>true si es Activo, false si no</returns>
         public bool EsActivo()
         {
             CambioEstadoRT? actual = getEstadoActual();
@@ -115,6 +143,11 @@ namespace PPAI.Entidades
             }
             return false;
         }
+
+        /// <summary>
+        /// Devuelve un struct DatosRT con los datos del Recurso
+        /// </summary>
+        /// <returns>Datos del Recurso</returns>
         public DatosRT MostrarRT()
         {
             int nro = MostrarNroInventario();
@@ -126,14 +159,28 @@ namespace PPAI.Entidades
             DatosRT datos = new (nro, est, cenIn, marc, mod, rt);
             return datos;
         }
+
+        /// <summary>
+        /// Devuelve el Centro de Investigación al que pertenece el RT
+        /// </summary>
+        /// <returns>string con el nombre del CI al que pertenece</returns>
         public string MostrarCentroInvestigacion()
         {
             return centroInvestigacion.getNombre();
         }
+        /// <summary>
+        /// Devuelve la marca y modelo del recurso como Lista de string
+        /// </summary>
+        /// <returns>Lista de strings, marca y modelo</returns>
         public List<string> MostrarMarcaYModelo()
         {
             return modelo.MostrarMarcaYModelo();
         }
+
+        /// <summary>
+        /// Devuelve el número de Inventario del RT
+        /// </summary>
+        /// <returns>ínt, Número de inventario del RT</returns>
         public int MostrarNroInventario()
         {
             return numeroRT;
@@ -144,6 +191,11 @@ namespace PPAI.Entidades
             return centroInvestigacion.EsTuCientificoActivo(cientifico);
         }
         */
+
+        /// <summary>
+        /// Devuelve el cambio de estado actual
+        /// </summary>
+        /// <returns>Cambio de Estado actual</returns>
         public CambioEstadoRT? getEstadoActual()
         {
             foreach (CambioEstadoRT cambioEstado in cambioEstadoRT)
@@ -156,11 +208,21 @@ namespace PPAI.Entidades
             return null;
         }
 
+        /// <summary>
+        /// Devuelve si un PersonalCientifico pertenece al centro de investigación del RT
+        /// </summary>
+        /// <param name="cien">PersonalCientifico a comprobar</param>
+        /// <returns>true si el Cientifico pertenece al CI, false si no</returns>
         public bool EsDeMiCentroInvestigacion(PersonalCientifico cien)
         {
             return centroInvestigacion.EsTuCientificoActivo(cien);
         }
         
+        /// <summary>
+        /// Devuelve una lista de Datos de Turno, de todos los turnos del RT para un día
+        /// </summary>
+        /// <param name="fec">Día a buscar</param>
+        /// <returns>Lista de Datos de Turnos del día a buscar</returns>
         public List<DatosTurno> MostrarTurnos(DateTime fec)
         {
             List<DatosTurno> datos = new List<DatosTurno>();

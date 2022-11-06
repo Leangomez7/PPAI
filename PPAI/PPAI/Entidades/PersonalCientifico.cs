@@ -18,6 +18,16 @@ namespace PPAI.Entidades
         private List<Turno> turnos = new List<Turno>();
         //private Usuario usuario;
 
+        /// <summary>
+        /// Crea un Personal Científico nuevo
+        /// </summary>
+        /// <param name="leg">Legajo</param>
+        /// <param name="nom">Nombre</param>
+        /// <param name="ape">Apellido</param>
+        /// <param name="doc">Número de Documento</param>
+        /// <param name="mins">Correo institucional</param>
+        /// <param name="mper">Correo personal</param>
+        /// <param name="tel">Número de teléfono</param>
         public PersonalCientifico(int leg, string nom, string ape, int doc, string mins, string mper, string tel)
         {
             legajo = leg;
@@ -29,15 +39,27 @@ namespace PPAI.Entidades
             telefono = tel;
         }
 
+        /// <summary>
+        /// Agrega un turno a la lista de Turnos del científico
+        /// </summary>
+        /// <param name="tur">Turno a agregar</param>
         public void SetTurno(Turno tur)
         {
             turnos.Add(tur);
         }
 
+        /// <summary>
+        /// Devuelve el correo personal del científico
+        /// </summary>
+        /// <returns>Correo personal</returns>
         public string tomarCorreoPersonal()
         {
             return correoPersonal;
         }
+        /// <summary>
+        /// Devuelve el correo institucional del científico
+        /// </summary>
+        /// <returns>Correo institucional</returns>
         public string tomarCorreoInstitucional()
         {
             return correoInstitucional;

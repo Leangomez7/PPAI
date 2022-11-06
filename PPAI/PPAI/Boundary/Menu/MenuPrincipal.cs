@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PPAI.ReservaTurnoRT;
 using PPAI.Entidades;
+using PPAI.Control;
 
 namespace PPAI.Menu
 {

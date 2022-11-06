@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using PPAI.ReservaTurnoRT;
 using System.Data;
+using PPAI.Entidades;
 
-namespace PPAI.Entidades
+namespace PPAI.Control
 {
     public class GestorReservaTurnoRT
     {
@@ -17,7 +18,7 @@ namespace PPAI.Entidades
         private List<Modelo> modelos;
         private Sesion actual;
         PantallaReservaTurnoRT? pantalla;
-        
+
         public GestorReservaTurnoRT(Sesion sesion)
         {
             tiposRT = new List<TipoRT>();
@@ -42,7 +43,7 @@ namespace PPAI.Entidades
             for (int i = 0; i < 10; i++)
             {
                 string nombre = "Centro de ";
-                string[] campos = new string[] {"Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
                 string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
                 int camp = rnd.Next(0, campos.Count());
                 nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
@@ -74,13 +75,13 @@ namespace PPAI.Entidades
                 for (int j = 0; j < len; j++)
                 {
                     int ind = 0;
-                    if (j != 0 && j != len-1)
+                    if (j != 0 && j != len - 1)
                     {
                         ind = rnd.Next(0, weas.Length);
                     }
                     else
                     {
-                        ind = rnd.Next(0, weas.Length-1);
+                        ind = rnd.Next(0, weas.Length - 1);
                     }
                     nom += weas[ind];
                 }
@@ -109,7 +110,7 @@ namespace PPAI.Entidades
                             break;
                         }
                     }
-                }                
+                }
                 DateTime start = new DateTime(1995, 1, 1);
                 int range = (DateTime.Today - start).Days;
                 DateTime fec = start.AddDays(rd.Next(range));
@@ -125,8 +126,8 @@ namespace PPAI.Entidades
         }
         public void GenerarTiposRT()
         {
-            string[] nombres = new string[5] {"Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
-            string[] desc = new string[5] {"Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
             for (int i = 0; i < nombres.Length; i++)
             {
                 TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
@@ -143,7 +144,7 @@ namespace PPAI.Entidades
             dt.Rows.InsertAt(row, 0);
             pantalla.PedirSeleccionTipoRT(dt);
         }
-        
+
         public DataTable ObtenerTipoRT()
         {
             DataTable dataTable = new DataTable();
@@ -217,7 +218,7 @@ namespace PPAI.Entidades
             datos.Sort((s1, s2) => s1.ci.CompareTo(s2.ci));
             return datos;
         }
-        
+
         public List<DatosTurno> obtenerTurnosReservablesRTSeleccionado(RecursoTecnologico rt)
         {
             List<DatosTurno> turnos = new List<DatosTurno>();

@@ -15,9 +15,16 @@ namespace PPAI.ReservaTurnoRT
 {
     public partial class PantallaReservaTurnoRT : Form
     {
+        // Objeto gestor encargado de delegar la funcionalidad
         private GestorReservaTurnoRT? gestor;
+
+        // Sesion actual
         private Sesion? actual;
-        private MenuPrincipal principal;
+
+        // Menu principal
+        private MenuPrincipal principal; 
+
+
         public PantallaReservaTurnoRT(Sesion sesion, MenuPrincipal menu, GestorReservaTurnoRT ges)
         {
             principal = menu;
@@ -30,7 +37,7 @@ namespace PPAI.ReservaTurnoRT
         }
 
         /// <summary>
-        /// 
+        /// Asigna el nombre del usuario de la sesión actual al lblUsuario
         /// </summary>
         public void HabilitarPantallaReservaRT()
         {
@@ -38,15 +45,21 @@ namespace PPAI.ReservaTurnoRT
         }
 
         /// <summary>
-        /// 
+        /// A partir de una DataTable dada muestra los tipos de recurso tecnológico
         /// </summary>
-        /// <param name="dt"></param>
+        /// <param name="dt"> DataTable con los tipos de recurso tecnológico </param>
         public void PedirSeleccionTipoRT(DataTable dt)
         {
             cmbTipoRT.DataSource = dt;
             cmbTipoRT.DisplayMember = "NombreTipo";
             cmbTipoRT.ValueMember = "TipoRT";
         }
+
+        /// <summary>
+        /// Toma el tipo de recurso tecnológico seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void TomarSeleccionTipoRT(object sender, EventArgs e)
         {
             try
@@ -58,6 +71,11 @@ namespace PPAI.ReservaTurnoRT
                 gestor.TipoRTSeleccionado(null);
             }
         }
+
+        /// <summary>
+        /// A partir de una lista de DatosRT crea una DataTable con la información de los RT
+        /// </summary>
+        /// <param name="datos"> Lista de DatosRT con los datos de los recursos tecnológicos </param>
         public void PedirSeleccionRT(List<DatosRT> datos)
         {
             DataTable dta = new DataTable();
@@ -74,6 +92,11 @@ namespace PPAI.ReservaTurnoRT
             tablaRT.DataSource = dta;
         }
 
+        /// <summary>
+        /// Toma la selección de Recursos Tecnológicos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TomarSeleccionRT(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -85,6 +108,7 @@ namespace PPAI.ReservaTurnoRT
             {
             }
         }
+
         public void PedirSeleccionDeTurno(List<DatosTurno> turnos, DatosRT rt)
         {
             PantallaTurno pt = new PantallaTurno(turnos, gestor, actual, rt, principal);
@@ -95,6 +119,7 @@ namespace PPAI.ReservaTurnoRT
                 this.Show();
             }
         }
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             principal.Show();

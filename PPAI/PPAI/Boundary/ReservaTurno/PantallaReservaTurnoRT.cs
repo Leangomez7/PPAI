@@ -28,10 +28,19 @@ namespace PPAI.ReservaTurnoRT
             gestor.setPantalla(this);
             gestor.NewReservaRT();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void HabilitarPantallaReservaRT()
         {
             lblUsuario.Text = actual.getNombreUsuario();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dt"></param>
         public void PedirSeleccionTipoRT(DataTable dt)
         {
             cmbTipoRT.DataSource = dt;

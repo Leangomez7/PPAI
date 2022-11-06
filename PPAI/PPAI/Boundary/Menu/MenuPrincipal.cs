@@ -26,6 +26,11 @@ namespace PPAI.Menu
             gestor = new GestorReservaTurnoRT(actual);
         }
 
+        /// <summary>
+        /// Permite dar comienzo al caso de uso Reservar turno
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void opcionReservarTurnoRT(object sender, EventArgs e)
         {
             PantallaReservaTurnoRT pantallaReservaTurnoRT = new PantallaReservaTurnoRT(actual, this, gestor);

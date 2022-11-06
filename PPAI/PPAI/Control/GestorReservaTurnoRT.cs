@@ -19,6 +19,7 @@ namespace PPAI.Control
         private Sesion actual;
         PantallaReservaTurnoRT? pantalla;
 
+
         public GestorReservaTurnoRT(Sesion sesion)
         {
             tiposRT = new List<TipoRT>();
@@ -33,10 +34,27 @@ namespace PPAI.Control
             GenerarCentros();
             GenerarRT();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void NewReservaRT()
+        {
+            DataTable dt = ObtenerTipoRT();
+            DataRow row = dt.NewRow();
+            row["TipoRT"] = null;
+            row["NombreTipo"] = "Todos";
+            dt.Rows.InsertAt(row, 0);
+            pantalla.PedirSeleccionTipoRT(dt);
+        }
+
+
         public void setPantalla(PantallaReservaTurnoRT pant)
         {
             pantalla = pant;
         }
+
+
         public void GenerarCentros()
         {
             Random rnd = new Random();
@@ -52,6 +70,8 @@ namespace PPAI.Control
                 investigaciones.Add(cen);
             }
         }
+
+
         public void GenerarMarcas()
         {
             marcas.Add(new Marca("Shidmazu"));
@@ -63,6 +83,8 @@ namespace PPAI.Control
             marcas.Add(new Marca("Motic"));
             marcas.Add(new Marca("GE"));
         }
+
+
         public void GenerarModelos()
         {
             string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
@@ -135,15 +157,6 @@ namespace PPAI.Control
             }
         }
 
-        public void NewReservaRT()
-        {
-            DataTable dt = ObtenerTipoRT();
-            DataRow row = dt.NewRow();
-            row["TipoRT"] = null;
-            row["NombreTipo"] = "Todos";
-            dt.Rows.InsertAt(row, 0);
-            pantalla.PedirSeleccionTipoRT(dt);
-        }
 
         public DataTable ObtenerTipoRT()
         {

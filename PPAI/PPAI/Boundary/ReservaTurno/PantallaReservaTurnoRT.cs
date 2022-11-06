@@ -7,24 +7,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PPAI.Control;
 using PPAI.Entidades;
+using PPAI.Menu;
 
 namespace PPAI.ReservaTurnoRT
 {
     public partial class PantallaReservaTurnoRT : Form
     {
         private GestorReservaTurnoRT? gestor;
-        public PantallaReservaTurnoRT(Sesion actual)
+        private Sesion? actual;
+        private MenuPrincipal principal;
+        public PantallaReservaTurnoRT(Sesion sesion, MenuPrincipal menu, GestorReservaTurnoRT ges)
         {
+            principal = menu;
+            gestor = ges;
+            actual = sesion;
             InitializeComponent();
-            HabilitarPantallaReservaRT(actual);
+            HabilitarPantallaReservaRT();
+            gestor.setPantalla(this);
             gestor.NewReservaRT();
         }
-        public void HabilitarPantallaReservaRT(Sesion actual)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void HabilitarPantallaReservaRT()
         {
             lblUsuario.Text = actual.getNombreUsuario();
-            gestor = new GestorReservaTurnoRT(this);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dt"></param>
         public void PedirSeleccionTipoRT(DataTable dt)
         {
             cmbTipoRT.DataSource = dt;
@@ -67,8 +83,22 @@ namespace PPAI.ReservaTurnoRT
             }
             catch
             {
-
             }
+        }
+        public void PedirSeleccionDeTurno(List<DatosTurno> turnos, DatosRT rt)
+        {
+            PantallaTurno pt = new PantallaTurno(turnos, gestor, actual, rt, principal);
+            this.Hide();
+            var result = pt.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                this.Show();
+            }
+        }
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            principal.Show();
+            this.Close();
         }
     }
 }

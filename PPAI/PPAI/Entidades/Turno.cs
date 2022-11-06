@@ -6,33 +6,71 @@ using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
+    public struct DatosTurno
+    {
+        public DateTime fechaHoraInicio;
+        public DateTime fechaHoraFin;
+        public DateTime fechaGeneracion;
+        public string estado;
+        public Turno turno;
+
+        public DatosTurno(DateTime fecini, DateTime fecfin, DateTime fecgen, string est, Turno tur)
+        {
+            fechaHoraInicio = fecini;
+            fechaHoraFin = fecfin;
+            fechaGeneracion = fecgen;
+            estado = est;
+            turno = tur;
+        }
+    }
     public class Turno
     {
         private DateTime fechaGeneracion;
-        private Dia diaSemana;
+        private DayOfWeek diaSemana;
         private DateTime fechaHoraInicio;
         private DateTime fechaHoraFin;
-        private List<CambioEstadoTurno> cambioEstadoTurno;
+        private List<CambioEstadoTurno> cambioEstadoTurno = new List<CambioEstadoTurno>();
 
 
-        public Turno(Dia dia, DateTime ini, DateTime fin)
+        public Turno(DayOfWeek dia, DateTime ini, DateTime fin)
         {
             fechaGeneracion = DateTime.Now;
             diaSemana = dia;
             fechaHoraInicio = ini;
             fechaHoraFin = fin;
+            cambioEstadoTurno.Add(new CambioEstadoTurno(Estado.TurnoDisponible));
         }
-        public Turno mostrarTurno()
+
+        public void Reservar(Estado? res)
         {
-            return this;
+            foreach (CambioEstadoTurno cambioEstado in cambioEstadoTurno)
+            {
+                if (cambioEstado.esActual())
+                {
+                    cambioEstado.SetFechaHoraHasta(DateTime.Now);
+                }
+            }
+            cambioEstadoTurno.Add(new CambioEstadoTurno(res));
         }
-        public bool esPosteriorAFecha()
+
+        public DatosTurno MostrarTurno()
         {
-            if (DateTime.Now < fechaHoraInicio)
+            DatosTurno datos = new DatosTurno(fechaHoraInicio, fechaHoraFin, fechaGeneracion, buscarEstadoActual(), this);
+            return datos;
+        }
+        public bool esPosteriorAFecha(DateTime fec)
+        {
+            if (fec < fechaHoraInicio)
             {
                 return true;
             }
             return false;
+        }
+        public string TurnoToString()
+        {
+            string str = "";
+            str += diaSemana.ToString() + " " + fechaHoraInicio.ToString() + " - " + fechaHoraFin.ToString();
+            return str;
         }
         public string? buscarEstadoActual()
         {
@@ -44,6 +82,17 @@ namespace PPAI.Entidades
                 }
             }
             return null;
+        }
+        public bool esReservable()
+        {
+            foreach(CambioEstadoTurno cambioEstado in cambioEstadoTurno)
+            {
+                if (cambioEstado.esActual())
+                {
+                    return cambioEstado.EsReservable();
+                }
+            }
+            return false;
         }
     }
 }

@@ -29,30 +29,73 @@ namespace PPAI.Entidades
     {
         private int numeroRT;
         private DateTime fechaAlta;
-        private List<string> imagenes;
+        private List<string> imagenes = new List<string>();
         private int periodicidadMantenimientoPrev;
         private int duracionMantenimientoPrev;
         private int fraccionHorarioTurnos;
-        private List<CambioEstadoRT> cambioEstadoRT;
-        private List<Turno> turnos;
+        private List<CambioEstadoRT> cambioEstadoRT = new List<CambioEstadoRT>();
+        private List<Turno> turnos = new List<Turno>();
         private TipoRT tipoRT;
         private Modelo modelo;
         private CentroInvestigacion? centroInvestigacion;
+        private List<HorarioRT> horarioRT = new List<HorarioRT>();
 
         public RecursoTecnologico(int num, DateTime dat, int per, int dur, int fra, TipoRT tip, Modelo mod, CentroInvestigacion cen)
         {
             numeroRT = num;
             fechaAlta = dat;
-            imagenes = new List<string>();
             periodicidadMantenimientoPrev = per;
             duracionMantenimientoPrev = dur;
             fraccionHorarioTurnos = fra;
-            cambioEstadoRT = new List<CambioEstadoRT>();
-            turnos = new List<Turno>();
             tipoRT = tip;
             modelo = mod;
             centroInvestigacion = cen;
             cambioEstadoRT.Add(new CambioEstadoRT(Estado.RTActivo));
+            GenerarTurnos();
+        }
+
+        public void ReservarTurno(Turno tur, Estado? res)
+        {
+            tur.Reservar(res);
+
+        }
+
+        public void GenerarTurnos()
+        {
+            horarioRT.Add(new HorarioRT(DayOfWeek.Monday));
+            horarioRT.Add(new HorarioRT(DayOfWeek.Tuesday));
+            horarioRT.Add(new HorarioRT(DayOfWeek.Wednesday));
+            horarioRT.Add(new HorarioRT(DayOfWeek.Thursday));
+            horarioRT.Add(new HorarioRT(DayOfWeek.Friday));
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            DateOnly limit = DateOnly.FromDateTime(DateTime.Now).AddDays(30);
+            for (DateOnly i = today; i < limit; i = i.AddDays(1))
+            {
+                DateTime idt = i.ToDateTime(new TimeOnly(0, 0));
+                foreach (HorarioRT horario in horarioRT)
+                {
+                    // Comparar dia del horario con dia para el que se genera
+                    if (horario.GetDia() == idt.DayOfWeek)
+                    {
+                        TimeOnly acrear = horario.GetHoraDesde();
+                        TimeOnly limittime = horario.GetHoraHasta();
+                        while (acrear <= limittime)
+                        {
+                            DateTime dtinicio = i.ToDateTime(acrear);
+                            DateTime dtfin = dtinicio.AddMinutes(fraccionHorarioTurnos);
+                            turnos.Add(new Turno(idt.DayOfWeek, dtinicio, dtfin));
+                            if (acrear.AddMinutes(fraccionHorarioTurnos) > acrear)
+                            {
+                                acrear = acrear.AddMinutes(fraccionHorarioTurnos);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public bool EsDeTipoRT(TipoRT? tipoRecTec)
@@ -112,17 +155,25 @@ namespace PPAI.Entidades
             }
             return null;
         }
-        /*
-        public List<Turno> MostrarTurnos()
+
+        public bool EsDeMiCentroInvestigacion(PersonalCientifico cien)
         {
+            return centroInvestigacion.EsTuCientificoActivo(cien);
+        }
+        
+        public List<DatosTurno> MostrarTurnos(DateTime fec)
+        {
+            List<DatosTurno> datos = new List<DatosTurno>();
             foreach (Turno cadaTurno in turnos)
             {
-                if (cadaTurno.esPosteriorAFecha())
+                if (cadaTurno.esPosteriorAFecha(fec) && cadaTurno.esReservable())
                 {
-                    cadaTurno.buscarEstadoActual();
+                    DatosTurno tur = cadaTurno.MostrarTurno();
+                    datos.Add(tur);
+                    System.Diagnostics.Debug.WriteLine(cadaTurno.TurnoToString());
                 }
             }
+            return datos;
         }
-        */
     }
 }

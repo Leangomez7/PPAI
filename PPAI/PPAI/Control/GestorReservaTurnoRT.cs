@@ -5,17 +5,55 @@ using System.Text;
 using System.Threading.Tasks;
 using PPAI.ReservaTurnoRT;
 using System.Data;
+using PPAI.Entidades;
 
-namespace PPAI.Entidades
+namespace PPAI.Control
 {
-    internal class GestorReservaTurnoRT
+    public class GestorReservaTurnoRT
     {
         private List<TipoRT> tiposRT;
         private List<RecursoTecnologico> recursos;
         private List<CentroInvestigacion> investigaciones;
         private List<Marca> marcas;
         private List<Modelo> modelos;
-        PantallaReservaTurnoRT pantalla;
+        private Sesion actual;
+        PantallaReservaTurnoRT? pantalla;
+
+
+        public GestorReservaTurnoRT(Sesion sesion)
+        {
+            tiposRT = new List<TipoRT>();
+            recursos = new List<RecursoTecnologico>();
+            investigaciones = new List<CentroInvestigacion>();
+            marcas = new List<Marca>();
+            modelos = new List<Modelo>();
+            actual = sesion;
+            GenerarMarcas();
+            GenerarModelos();
+            GenerarTiposRT();
+            GenerarCentros();
+            GenerarRT();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void NewReservaRT()
+        {
+            DataTable dt = ObtenerTipoRT();
+            DataRow row = dt.NewRow();
+            row["TipoRT"] = null;
+            row["NombreTipo"] = "Todos";
+            dt.Rows.InsertAt(row, 0);
+            pantalla.PedirSeleccionTipoRT(dt);
+        }
+
+
+        public void setPantalla(PantallaReservaTurnoRT pant)
+        {
+            pantalla = pant;
+        }
+
 
         public void GenerarCentros()
         {
@@ -23,13 +61,17 @@ namespace PPAI.Entidades
             for (int i = 0; i < 10; i++)
             {
                 string nombre = "Centro de ";
-                string[] campos = new string[] {"Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
                 string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
                 int camp = rnd.Next(0, campos.Count());
                 nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
-                investigaciones.Add(new CentroInvestigacion(nombre, campos[camp].Substring(0, 3)));
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
             }
         }
+
+
         public void GenerarMarcas()
         {
             marcas.Add(new Marca("Shidmazu"));
@@ -41,6 +83,8 @@ namespace PPAI.Entidades
             marcas.Add(new Marca("Motic"));
             marcas.Add(new Marca("GE"));
         }
+
+
         public void GenerarModelos()
         {
             string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
@@ -53,13 +97,13 @@ namespace PPAI.Entidades
                 for (int j = 0; j < len; j++)
                 {
                     int ind = 0;
-                    if (j != 0 && j != len-1)
+                    if (j != 0 && j != len - 1)
                     {
                         ind = rnd.Next(0, weas.Length);
                     }
                     else
                     {
-                        ind = rnd.Next(0, weas.Length-1);
+                        ind = rnd.Next(0, weas.Length - 1);
                     }
                     nom += weas[ind];
                 }
@@ -70,6 +114,7 @@ namespace PPAI.Entidades
         }
         public void GenerarRT()
         {
+            //TODO: volver fraccionamiento a random? Cambiar
             for (int i = 0; i < 40; i++)
             {
                 Random rd = new Random();
@@ -87,13 +132,14 @@ namespace PPAI.Entidades
                             break;
                         }
                     }
-                }                
+                }
                 DateTime start = new DateTime(1995, 1, 1);
                 int range = (DateTime.Today - start).Days;
                 DateTime fec = start.AddDays(rd.Next(range));
                 int per = rd.Next(10, 20);
                 int dur = rd.Next(10, 20);
-                int fra = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
                 int indtip = rd.Next(0, tiposRT.Count());
                 Modelo mod = modelos[rd.Next(0, modelos.Count())];
                 int cen = rd.Next(0, investigaciones.Count());
@@ -102,8 +148,8 @@ namespace PPAI.Entidades
         }
         public void GenerarTiposRT()
         {
-            string[] nombres = new string[5] {"Microscopio", "Balanza", "Resonador", "Cómputo", "emsu" };
-            string[] desc = new string[5] {"Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "xd" };
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
             for (int i = 0; i < nombres.Length; i++)
             {
                 TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
@@ -111,29 +157,7 @@ namespace PPAI.Entidades
             }
         }
 
-        public void NewReservaRT()
-        {
-            GenerarMarcas();
-            GenerarModelos();
-            GenerarTiposRT();
-            GenerarCentros();
-            GenerarRT();
-            DataTable dt = ObtenerTipoRT();
-            DataRow row = dt.NewRow();
-            row["TipoRT"] = null;
-            row["NombreTipo"] = "Todos";
-            dt.Rows.InsertAt(row, 0);
-            pantalla.PedirSeleccionTipoRT(dt);
-        }
-        public GestorReservaTurnoRT(PantallaReservaTurnoRT pantallaReservaTurnoRT)
-        {
-            pantalla = pantallaReservaTurnoRT;
-            tiposRT = new List<TipoRT>();
-            recursos = new List<RecursoTecnologico>();
-            investigaciones = new List<CentroInvestigacion>();
-            marcas = new List<Marca>();
-            modelos = new List<Modelo>();
-        }
+
         public DataTable ObtenerTipoRT()
         {
             DataTable dataTable = new DataTable();
@@ -158,12 +182,14 @@ namespace PPAI.Entidades
             }
             return dataTable;
         }
+
         public void TipoRTSeleccionado(TipoRT? tipoRT)
         {
             List<DatosRT> datos = ObtenerRTActivoDeTipoRT(tipoRT);
             datos = OrdenarYAgruparPorCI(datos);
             pantalla.PedirSeleccionRT(datos);
         }
+
         public List<DatosRT> ObtenerRTActivoDeTipoRT(TipoRT? tipoRT)
         {
             List<RecursoTecnologico> recursosActivos = new List<RecursoTecnologico>();
@@ -188,13 +214,58 @@ namespace PPAI.Entidades
 
         public void TomarSeleccionRT(RecursoTecnologico rt)
         {
-            MessageBox.Show(rt.MostrarNroInventario().ToString());
+            bool ver = VerificarCIdeCientificoLoggeado(rt);
+            List<DatosTurno> turnos = obtenerTurnosReservablesRTSeleccionado(rt);
+            pantalla.PedirSeleccionDeTurno(turnos, rt.MostrarRT());
+        }
+
+        public bool VerificarCIdeCientificoLoggeado(RecursoTecnologico rt)
+        {
+            PersonalCientifico cientifico = actual.ObtenerCientificoLoggeado();
+            bool pertenece = rt.EsDeMiCentroInvestigacion(cientifico);
+            return pertenece;
         }
 
         public List<DatosRT> OrdenarYAgruparPorCI(List<DatosRT> datos)
         {
             datos.Sort((s1, s2) => s1.ci.CompareTo(s2.ci));
             return datos;
+        }
+
+        public List<DatosTurno> obtenerTurnosReservablesRTSeleccionado(RecursoTecnologico rt)
+        {
+            List<DatosTurno> turnos = new List<DatosTurno>();
+            DateTime fecha = DateTime.Now;
+            turnos = rt.MostrarTurnos(fecha);
+            turnos = AgruparYOrdenarTurnosPorFecha(turnos);
+            return turnos;
+        }
+
+        public List<DatosTurno> AgruparYOrdenarTurnosPorFecha(List<DatosTurno> turnos)
+        {
+            turnos.Sort((s1, s2) => s1.fechaHoraInicio.CompareTo(s2.fechaHoraInicio));
+            return turnos;
+        }
+
+        public void ReservarTurnoRT(Turno tur, DatosRT rt)
+        {
+            Estado? res = ObtenerEstadoReservado();
+            rt.rt.ReservarTurno(tur, res);
+            PersonalCientifico loggeado = actual.ObtenerCientificoLoggeado();
+            loggeado.SetTurno(tur);
+            string correo = loggeado.tomarCorreoInstitucional();
+        }
+        public Estado? ObtenerEstadoReservado()
+        {
+            var est = Enum.GetValues(typeof(Estado));
+            foreach (Estado estado in est)
+            {
+                if (estado.esAmbitoTurno() && estado.esReservado())
+                {
+                    return estado;
+                }
+            }
+            return null;
         }
     }
 }

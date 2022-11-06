@@ -63,6 +63,16 @@ namespace PPAI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3586360_email_envelope_mail_send_icon {
+            get {
+                object obj = ResourceManager.GetObject("3586360_email_envelope_mail_send_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fondo {
             get {
                 object obj = ResourceManager.GetObject("fondo", resourceCulture);
@@ -96,6 +106,16 @@ namespace PPAI.Properties {
         internal static System.Drawing.Bitmap userIconBlanco {
             get {
                 object obj = ResourceManager.GetObject("userIconBlanco", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warapIcon {
+            get {
+                object obj = ResourceManager.GetObject("warapIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

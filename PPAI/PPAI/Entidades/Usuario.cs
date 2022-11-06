@@ -13,10 +13,11 @@ namespace PPAI.Entidades
         private bool? habilitado;
         private PersonalCientifico? personalCientifico;
         
-        public Usuario(string nom)
+        public Usuario(string nom, PersonalCientifico cien)
         {
             nombreUsuario = nom;
             habilitado = true;
+            personalCientifico = cien;
         }
         
         public string getNombre()

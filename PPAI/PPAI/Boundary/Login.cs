@@ -9,6 +9,12 @@ namespace PPAI
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Inicia la sesión de un usuario válido
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnInciarSesion_Click(object sender, EventArgs e)
         {
             if (validarCampos())
@@ -31,6 +37,13 @@ namespace PPAI
                 MessageBox.Show("Complete los campos", "Error");
             }
         }
+
+        /// <summary>
+        /// Valida que los campos nombre y contraseña no estén vacíos
+        /// </summary>
+        /// <returns>
+        /// true si los campos no están vacíos
+        /// </returns>
         private bool validarCampos()
         {
             if (txtContrasenia.Text.Equals("") || txtUsuario.Text.Equals(""))
@@ -39,6 +52,13 @@ namespace PPAI
             }
             return true;
         }
+
+        /// <summary>
+        /// Valida si el usuario es válido
+        /// </summary>
+        /// <returns>
+        /// true si el usuario es válido
+        /// </returns>
         private bool validarUsuario()
         {
             if (txtUsuario.Text.Equals("GuilleFarre5") && txtContrasenia.Text.Equals("Pou777"))
@@ -48,6 +68,11 @@ namespace PPAI
             return false;
         }
 
+        /// <summary>
+        /// Cierra la aplicación
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();

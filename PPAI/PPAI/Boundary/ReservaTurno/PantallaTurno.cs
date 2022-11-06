@@ -15,10 +15,19 @@ namespace PPAI.ReservaTurnoRT
 {
     public partial class PantallaTurno : Form
     {
+        // Fecha actual
         DateTime fechaSeleccion = DateTime.Today;
+
+        // Lista de datos de los turnos
         List<DatosTurno> turnos;
+
+        // Gestor Reserva Turno
         GestorReservaTurnoRT gestor;
+
+        // Datos de los turnos
         DatosRT rec;
+
+        // Objeto menu
         MenuPrincipal menu;
 
         public PantallaTurno(List<DatosTurno> datos, GestorReservaTurnoRT gest, Sesion sesion, DatosRT rt, MenuPrincipal men)
@@ -37,12 +46,21 @@ namespace PPAI.ReservaTurnoRT
             lblFechaHora.Text = "Turnos posteriores a " + DateOnly.FromDateTime(DateTime.Now).ToString();
         }
 
+        /// <summary>
+        /// Seleccion de una fecha del calendario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TomarSeleccionFecha(object sender, DateRangeEventArgs e)
         {
             fechaSeleccion = e.Start;
             MostrarTurnosFecha(fechaSeleccion);
         }
 
+        /// <summary>
+        /// Muestra los turnos existentes para una fecha dada
+        /// </summary>
+        /// <param name="fechaSeleccion"> Una fecha seleccionada por el usuario </param>
         public void MostrarTurnosFecha(DateTime fechaSeleccion)
         {
             DataTable dta = new DataTable();
@@ -74,19 +92,27 @@ namespace PPAI.ReservaTurnoRT
             }
         }
 
+        /// <summary>
+        /// Muestra los datos del turno seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TomarSeleccionTurno(object sender, EventArgs e)
         {
             try
             {
                 var culture = new System.Globalization.CultureInfo("es-ES");
-                Turno tur = (Turno)cmbTurnos.SelectedValue;
-                DatosTurno datos = tur.MostrarTurno();
-                string dia = culture.DateTimeFormat.GetDayName(datos.fechaHoraInicio.DayOfWeek);
-                lblDia.Text = "Día: ".PadRight(10) + dia[0].ToString().ToUpper()+dia.Substring(1,dia.Length-1);
-                lblFechaGen.Text = "Fecha: ".PadRight(10) + DateOnly.FromDateTime(datos.fechaHoraInicio).ToString();
-                lblInicio.Text = "Inicio: ".PadRight(10) + datos.fechaHoraInicio.TimeOfDay.ToString();
-                lblFin.Text = "Fin: ".PadRight(10) + datos.fechaHoraFin.TimeOfDay.ToString();
-                btnConfirmar.Enabled = verificarCampos();
+                if (cmbTurnos.SelectedValue != null)
+                {
+                    Turno tur = (Turno)cmbTurnos.SelectedValue;
+                    DatosTurno datos = tur.MostrarTurno();
+                    string dia = culture.DateTimeFormat.GetDayName(datos.fechaHoraInicio.DayOfWeek);
+                    lblDia.Text = "Día: ".PadRight(10) + dia[0].ToString().ToUpper() + dia.Substring(1, dia.Length - 1);
+                    lblFechaGen.Text = "Fecha: ".PadRight(10) + DateOnly.FromDateTime(datos.fechaHoraInicio).ToString();
+                    lblInicio.Text = "Inicio: ".PadRight(10) + datos.fechaHoraInicio.TimeOfDay.ToString();
+                    lblFin.Text = "Fin: ".PadRight(10) + datos.fechaHoraFin.TimeOfDay.ToString();
+                    btnConfirmar.Enabled = verificarCampos();
+                }
             }
             catch
             {
@@ -98,6 +124,11 @@ namespace PPAI.ReservaTurnoRT
             }
         }
 
+        /// <summary>
+        /// Solicita la confirmación de la reserva del turno
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmarReserva(object sender, EventArgs e)
         {
             Turno turno = (Turno)cmbTurnos.SelectedValue;
@@ -113,6 +144,13 @@ namespace PPAI.ReservaTurnoRT
                 FinCU();
             }
         }
+
+        /// <summary>
+        /// Verifica que se haya seleccionado al menos un tipo de notificación y algún turno
+        /// </summary>
+        /// <returns>
+        /// true si se seleccionó algún tipo de notificación y algún turno
+        /// </returns>
         public bool verificarCampos()
         {
             if (chMail.Checked == true || chWhatsApp.Checked == true)
@@ -132,20 +170,40 @@ namespace PPAI.ReservaTurnoRT
             }
             return false;
         }
+
+        /// <summary>
+        /// Cancela la reserva del turno
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Activa o desactiva el botón confirmar de acuerdo al método verificarCampos()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chMail_CheckedChanged(object sender, EventArgs e)
         {
             btnConfirmar.Enabled = verificarCampos();
         }
 
+        /// <summary>
+        /// Activa o desactiva el botón confirmar de acuerdo al método verificarCampos()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chWhatsApp_CheckedChanged(object sender, EventArgs e)
         {
             btnConfirmar.Enabled = verificarCampos();
         }
+
+        /// <summary>
+        /// Informa al usuario que el turno se reservó exitosamente
+        /// </summary>
         private void FinCU()
         {
             MessageBox.Show("Turno reservado exitosamente", "Turno Reservado", MessageBoxButtons.OK, MessageBoxIcon.Information);

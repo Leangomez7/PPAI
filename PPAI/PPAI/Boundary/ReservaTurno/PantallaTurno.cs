@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PPAI.Boundary.ReservaTurno;
 using PPAI.Control;
 using PPAI.Entidades;
 using PPAI.Menu;
@@ -140,7 +141,16 @@ namespace PPAI.ReservaTurnoRT
             
             if (MessageBox.Show(mensaje, "Turno Reservado", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                gestor.ReservarTurnoRT(turno, rec);
+                List<int> medios = new List<int>();
+                if (chWhatsApp.Checked)
+                {
+                    medios.Add((int)Medio.WhatsApp);
+                }
+                if (chMail.Checked)
+                {
+                    medios.Add((int)Medio.Mail);
+                }
+                gestor.ReservarTurnoRT(turno, rec, medios);
                 FinCU();
             }
         }

@@ -64,5 +64,10 @@ namespace PPAI.Entidades
         {
             return correoInstitucional;
         }
+
+        public string tomarTelefono()
+        {
+            return telefono;
+        }
     }
 }

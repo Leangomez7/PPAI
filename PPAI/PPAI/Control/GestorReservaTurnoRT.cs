@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PPAI.ReservaTurnoRT;
 using System.Data;
 using PPAI.Entidades;
+using PPAI.Boundary.ReservaTurno;
 
 namespace PPAI.Control
 {
@@ -14,11 +15,34 @@ namespace PPAI.Control
         private List<TipoRT> tiposRT;
         private List<RecursoTecnologico> recursos;
         private List<CentroInvestigacion> investigaciones;
+        private List<IObserverTurno> observadores;
         private List<Marca> marcas;
         private List<Modelo> modelos;
         private Sesion actual;
         PantallaReservaTurnoRT? pantalla;
+        private string rtstring;
+        private string turnostring;
+        private RecursoTecnologico seleccionado;
+        private Turno turno;
+        private PersonalCientifico loggeado;
 
+        public void suscribir(IObserverTurno o)
+        {
+            observadores.Add(o);
+        }
+
+        public void quitar(IObserverTurno o)
+        {
+            observadores.Remove(o);
+        }
+
+        public void notificar()
+        {
+            foreach (IObserverTurno o in observadores)
+            {
+                o.notificar(this.loggeado, this.rtstring, this.turnostring);
+            }
+        }
 
         public GestorReservaTurnoRT(Sesion sesion)
         {
@@ -247,13 +271,20 @@ namespace PPAI.Control
             return turnos;
         }
 
-        public void ReservarTurnoRT(Turno tur, DatosRT rt)
+        public void ReservarTurnoRT(Turno tur, DatosRT rt, List<int> medios)
         {
             Estado? res = ObtenerEstadoReservado();
             rt.rt.ReservarTurno(tur, res);
             PersonalCientifico loggeado = actual.ObtenerCientificoLoggeado();
             loggeado.SetTurno(tur);
             string correo = loggeado.tomarCorreoInstitucional();
+            foreach (int med in medios)
+            {
+                IObserverTurno obs = IObserverTurno.crear((Medio)med);
+                this.suscribir(obs);
+            }
+            turno = tur;
+            this.notificar();
         }
         public Estado? ObtenerEstadoReservado()
         {

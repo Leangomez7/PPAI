@@ -71,7 +71,7 @@ namespace PPAI.ReservaTurnoRT
             {
                 if (datosTurno.fechaHoraInicio.Date == fechaSeleccion.Date)
                 {
-                    string horarios = datosTurno.fechaHoraInicio.TimeOfDay.ToString() + " - " + datosTurno.fechaHoraFin.TimeOfDay.ToString();
+                    string horarios = datosTurno.fechaHoraInicio.ToString("HH:mm") + " - " + datosTurno.fechaHoraFin.ToString("HH:mm");
                     dta.Rows.Add(horarios, datosTurno.turno);
                 }
             }
@@ -110,8 +110,8 @@ namespace PPAI.ReservaTurnoRT
                     string dia = culture.DateTimeFormat.GetDayName(datos.fechaHoraInicio.DayOfWeek);
                     lblDia.Text = "Día: ".PadRight(10) + dia[0].ToString().ToUpper() + dia.Substring(1, dia.Length - 1);
                     lblFechaGen.Text = "Fecha: ".PadRight(10) + DateOnly.FromDateTime(datos.fechaHoraInicio).ToString();
-                    lblInicio.Text = "Inicio: ".PadRight(10) + datos.fechaHoraInicio.TimeOfDay.ToString();
-                    lblFin.Text = "Fin: ".PadRight(10) + datos.fechaHoraFin.TimeOfDay.ToString();
+                    lblInicio.Text = "Inicio: ".PadRight(10) + datos.fechaHoraInicio.ToString("HH:mm");
+                    lblFin.Text = "Fin: ".PadRight(10) + datos.fechaHoraFin.ToString("HH:mm");
                     btnConfirmar.Enabled = verificarCampos();
                 }
             }

@@ -90,10 +90,22 @@ namespace PPAI.Entidades
         /// Devuelve una representación como string del Turno, con dia de la semana, fecha y hora de inicio y fin
         /// </summary>
         /// <returns>String con datos del Turno</returns>
-        public string TurnoToString()
+        override public string ToString()
         {
             string str = "";
-            str += diaSemana.ToString() + " " + fechaHoraInicio.ToString() + " - " + fechaHoraFin.ToString();
+            var culture = new System.Globalization.CultureInfo("es-ES");
+            string diasem = culture.DateTimeFormat.GetDayName(diaSemana);
+            string inicio, fin;
+            if (fechaHoraInicio.DayOfYear == fechaHoraFin.DayOfYear) {
+                inicio = fechaHoraInicio.ToString("dd/MM/yyyy") + " " + fechaHoraInicio.ToString("HH:mm");
+                fin = fechaHoraFin.ToString("HH:mm");
+            }
+            else
+            {
+                inicio = fechaHoraInicio.ToString("dd/MM/yyyy") + " " + fechaHoraInicio.ToString("HH:mm");
+                fin = fechaHoraFin.ToString("dd/MM/yyyy") + " " + fechaHoraFin.ToString("HH:mm");
+            }
+            str += diasem + " " + inicio + " - " + fin;
             return str;
         }
 

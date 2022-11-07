@@ -22,9 +22,10 @@ namespace PPAI.Boundary.ReservaTurno
             string args = "chat_id=" + medio + "&text=" + text + "&parse_mode=HTML";
             string full = apistr + args;
             var client = new HttpClient();
-            System.Console.WriteLine(full);
+            System.Diagnostics.Debug.WriteLine(full);
             var resp = client.GetAsync(full);
-            resp.WaitAsync(TimeSpan.FromSeconds(5));
+            resp.Wait();
+            System.Diagnostics.Debug.WriteLine(resp.Result.ToString());
         }
     }
 }

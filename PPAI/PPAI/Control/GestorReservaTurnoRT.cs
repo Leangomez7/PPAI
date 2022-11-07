@@ -28,6 +28,10 @@ namespace PPAI.Control
 
         public void suscribir(IObserverTurno o)
         {
+            foreach (IObserverTurno obs in observadores)
+            {
+                if (o.GetType() == obs.GetType()) return;
+            }
             observadores.Add(o);
         }
 
@@ -281,7 +285,7 @@ namespace PPAI.Control
             loggeado.SetTurno(tur);
             string correo = loggeado.tomarCorreoInstitucional();
             turno = tur;
-            turnostring = turno.TurnoToString();
+            turnostring = turno.ToString();
             rtstring = seleccionado.ToString();
             foreach (int med in medios)
             {

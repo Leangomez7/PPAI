@@ -51,6 +51,7 @@ namespace PPAI.Control
             investigaciones = new List<CentroInvestigacion>();
             marcas = new List<Marca>();
             modelos = new List<Modelo>();
+            observadores = new List<IObserverTurno>();
             actual = sesion;
             GenerarMarcas();
             GenerarModelos();
@@ -239,6 +240,7 @@ namespace PPAI.Control
         public void TomarSeleccionRT(RecursoTecnologico rt)
         {
             bool ver = VerificarCIdeCientificoLoggeado(rt);
+            seleccionado = rt;
             List<DatosTurno> turnos = obtenerTurnosReservablesRTSeleccionado(rt);
             pantalla.PedirSeleccionDeTurno(turnos, rt.MostrarRT());
         }
@@ -275,15 +277,17 @@ namespace PPAI.Control
         {
             Estado? res = ObtenerEstadoReservado();
             rt.rt.ReservarTurno(tur, res);
-            PersonalCientifico loggeado = actual.ObtenerCientificoLoggeado();
+            loggeado = actual.ObtenerCientificoLoggeado();
             loggeado.SetTurno(tur);
             string correo = loggeado.tomarCorreoInstitucional();
+            turno = tur;
+            turnostring = turno.TurnoToString();
+            rtstring = seleccionado.ToString();
             foreach (int med in medios)
             {
                 IObserverTurno obs = IObserverTurno.crear((Medio)med);
                 this.suscribir(obs);
             }
-            turno = tur;
             this.notificar();
         }
         public Estado? ObtenerEstadoReservado()

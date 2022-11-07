@@ -21,7 +21,7 @@ namespace PPAI
             {
                 if (validarUsuario())
                 {
-                    PersonalCientifico cientifico = new PersonalCientifico(5, "Guillermo", "Farré", 28499689, "guillefarre@belgrano.com", "guillermofarre@gmail.com", "+5493514267548");
+                    PersonalCientifico cientifico = new PersonalCientifico(5, "Guillermo", "Farré", 28499689, "raviolofranco@gmail.com", "guillermofarre@gmail.com", /*"+5493514267548"*/ "5627220746");
                     Sesion sesionActual = new Sesion(new Usuario(txtUsuario.Text.Trim(), cientifico));
                     MenuPrincipal menu = new MenuPrincipal(sesionActual);
                     menu.Show();

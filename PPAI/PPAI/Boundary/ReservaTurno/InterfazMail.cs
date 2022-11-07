@@ -22,8 +22,9 @@ namespace PPAI.Boundary.ReservaTurno
             string args = "Value1=" + medio + "&Value2=" + subject + "&Value3=" + body;
             string full = apistr + args;
             var client = new HttpClient();
-            System.Console.WriteLine(full);
+            Console.WriteLine(full);
             var resp = client.GetAsync(full);
+            Console.WriteLine(resp.WaitAsync(TimeSpan.FromSeconds(10)).Result.Content.ToString());
         }
     }
 }

@@ -13,11 +13,10 @@ namespace PPAI.Entidades
         private PersonalCientifico cientifico;
         private List<Turno> turnos;
 
-      /// <summary>
-      /// Constructor de objeto asignación cientifico que asigna el cientifico al atributo cientifico y crea un nuevo array de turnos
-      /// </summary>
-      /// <param name="cient"></param>
-
+        /// <summary>
+        /// Constructor de objeto asignación cientifico que asigna el cientifico al atributo cientifico y crea un nuevo array de turnos
+        /// </summary>
+        /// <param name="cient"></param>
         public AsignacionCientificoCI(PersonalCientifico cient)
         {
             cientifico = cient;

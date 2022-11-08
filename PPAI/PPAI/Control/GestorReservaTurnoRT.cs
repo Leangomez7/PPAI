@@ -28,6 +28,10 @@ namespace PPAI.Control
         private Turno turno;
         private PersonalCientifico loggeado;
 
+        /// <summary>
+        /// Agrega a un suscriptor a la lista de suscriptores
+        /// </summary>
+        /// <param name="o">observador a agregar</param>
         public void suscribir(IObserverTurno o)
         {
             foreach (IObserverTurno obs in observadores)
@@ -37,11 +41,18 @@ namespace PPAI.Control
             observadores.Add(o);
         }
 
+        /// <summary>
+        /// Elimina a un suscriptor de la lista
+        /// </summary>
+        /// <param name="o">suscriptor a eliminar</param>
         public void quitar(IObserverTurno o)
         {
             observadores.Remove(o);
         }
 
+        /// <summary>
+        /// Notifica a todos los sucriptores que están en la lista
+        /// </summary>
         public void notificar()
         {
             foreach (IObserverTurno o in observadores)
@@ -50,8 +61,13 @@ namespace PPAI.Control
             }
         }
 
+        /// <summary>
+        /// Constructor por defecto, toma una Sesion que será la sesión usada
+        /// </summary>
+        /// <param name="sesion">sesion a ser usada</param>
         public GestorReservaTurnoRT(Sesion sesion)
         {
+            // Inicializar listas
             tiposRT = new List<TipoRT>();
             recursos = new List<RecursoTecnologico>();
             investigaciones = new List<CentroInvestigacion>();
@@ -67,7 +83,7 @@ namespace PPAI.Control
         }
 
         /// <summary>
-        /// 
+        /// Pedirle a la pantalla la selección de Tipo RT 
         /// </summary>
         public void NewReservaRT()
         {
@@ -79,12 +95,207 @@ namespace PPAI.Control
             pantalla.PedirSeleccionTipoRT(dt);
         }
 
-
+        /// <summary>
+        /// Guardar la pantalla en un atributo, para poder utilizar sus métodos
+        /// </summary>
+        /// <param name="pant"></param>
         public void setPantalla(PantallaReservaTurnoRT pant)
         {
             pantalla = pant;
         }
 
+        /// <summary>
+        /// Obtiene una tabla con todos los Tipos de RT, para usarse al mostrar en pantalla
+        /// </summary>
+        /// <returns>DataTable de TiposRT</returns>
+        public DataTable ObtenerTipoRT()
+        {
+            DataTable dataTable = new DataTable();
+            DataColumn column = new DataColumn();
+
+            column.DataType = typeof(TipoRT);
+            column.ColumnName = "TipoRT";
+            dataTable.Columns.Add(column);
+
+            column = new DataColumn();
+
+            column.DataType = typeof(string);
+            column.ColumnName = "NombreTipo";
+            dataTable.Columns.Add(column);
+
+            foreach (TipoRT tipoRT in tiposRT)
+            {
+                DataRow row = dataTable.NewRow();
+                row["TipoRT"] = tipoRT;
+                row["NombreTipo"] = tipoRT.MostrarTipoRecurso();
+                dataTable.Rows.Add(row);
+            }
+            return dataTable;
+        }
+
+        /// <summary>
+        /// Toma selección de TipoRT, y pide selección de un recurso a la pantalla
+        /// </summary>
+        /// <param name="tipoRT">Tipo RT seleccionado</param>
+        public void TipoRTSeleccionado(TipoRT? tipoRT)
+        {
+            List<DatosRT> datos = ObtenerRTActivoDeTipoRT(tipoRT);
+            datos = OrdenarYAgruparPorCI(datos);
+            pantalla.PedirSeleccionRT(datos);
+        }
+
+        /// <summary>
+        /// Devuelve una Lista de Datos de Recurso Tecnológico de los recursos de un Tipo
+        /// </summary>
+        /// <param name="tipoRT">Tipo de recurso a buscar</param>
+        /// <returns>Lista de DatosRT</returns>
+        public List<DatosRT> ObtenerRTActivoDeTipoRT(TipoRT? tipoRT)
+        {
+            List<RecursoTecnologico> recursosActivos = new List<RecursoTecnologico>();
+            List<DatosRT> datos = new List<DatosRT>();
+            foreach (RecursoTecnologico RT in recursos)
+            {
+                if (RT.EsDeTipoRT(tipoRT))
+                {
+                    if (RT.EsActivo())
+                    {
+                        recursosActivos.Add(RT);
+                    }
+                }
+            }
+            foreach (RecursoTecnologico recAc in recursosActivos)
+            {
+                DatosRT datosRT = recAc.MostrarRT();
+                datos.Add(datosRT);
+            }
+            return datos;
+        }
+
+        /// <summary>
+        /// Toma la selección de un RT, verifica si el científico pertenece a su CI y pide la selección del turno a la pantalla
+        /// </summary>
+        /// <param name="rt">Recurso Tecnológico seleccionado</param>
+        public void TomarSeleccionRT(RecursoTecnologico rt)
+        {
+            bool ver = VerificarCIdeCientificoLoggeado(rt);
+            seleccionado = rt;
+            List<DatosTurno> turnos = obtenerTurnosReservablesRTSeleccionado(rt);
+            pantalla.PedirSeleccionDeTurno(turnos, rt.MostrarRT());
+        }
+
+        /// <summary>
+        /// Verifica si el Científico loggeado pertenece al CI de un Recurso pasado como parámetro
+        /// </summary>
+        /// <param name="rt">Recurso a comprobar</param>
+        /// <returns>true si pertenece, false si no</returns>
+        public bool VerificarCIdeCientificoLoggeado(RecursoTecnologico rt)
+        {
+            PersonalCientifico cientifico = actual.ObtenerCientificoLoggeado();
+            bool pertenece = rt.EsDeMiCentroInvestigacion(cientifico);
+            return pertenece;
+        }
+
+        /// <summary>
+        /// Ordena una lista de DatosRT según su Centro de Investigación
+        /// </summary>
+        /// <param name="datos">Lista a ordenar</param>
+        /// <returns>Lista ordenada</returns>
+        public List<DatosRT> OrdenarYAgruparPorCI(List<DatosRT> datos)
+        {
+            datos.Sort((s1, s2) => s1.ci.CompareTo(s2.ci));
+            return datos;
+        }
+
+        /// <summary>
+        /// Obtiene los turnos reservables de un RT seleccionado
+        /// </summary>
+        /// <param name="rt">RT seleccionado</param>
+        /// <returns>Lista de DatosTurno de los turnos reservables</returns>
+        public List<DatosTurno> obtenerTurnosReservablesRTSeleccionado(RecursoTecnologico rt)
+        {
+            List<DatosTurno> turnos = new List<DatosTurno>();
+            DateTime fecha = DateTime.Now;
+            turnos = rt.MostrarTurnos(fecha);
+            turnos = AgruparYOrdenarTurnosPorFecha(turnos);
+            return turnos;
+        }
+
+        /// <summary>
+        /// Ordena una lista de turnos por fecha
+        /// </summary>
+        /// <param name="turnos">Lista a ordenar</param>
+        /// <returns>Lista ordenada</returns>
+        public List<DatosTurno> AgruparYOrdenarTurnosPorFecha(List<DatosTurno> turnos)
+        {
+            turnos.Sort((s1, s2) => s1.fechaHoraInicio.CompareTo(s2.fechaHoraInicio));
+            return turnos;
+        }
+
+        /// <summary>
+        /// Obtiene datos del turno para después usarlos en la notificación de reserva
+        /// </summary>
+        private void ObtenerDatosTurno()
+        {
+            rtstring = seleccionado.getNombre();
+            turnostring = turno.getStringHorarios();
+        }
+
+        /// <summary>
+        /// Obtiene el correo del científico loggeado al que mandar el mail
+        /// </summary>
+        private void ObtenerCorreoCientifico()
+        {
+            mail = loggeado.tomarCorreoInstitucional();
+        }
+
+        /// <summary>
+        /// Obtiene el número de teléfono del científico loggeado al que mandar el mensaje
+        /// </summary>
+        private void ObtenerNumeroCientifico()
+        {
+            num = loggeado.tomarTelefono();
+        }
+
+        /// <summary>
+        /// Reserva un Turno y notifica a los observadores necesarios
+        /// </summary>
+        /// <param name="tur">turno a reservar</param>
+        /// <param name="rt">recurso tecnológico para el cual reservar</param>
+        /// <param name="medios">lista de medios de notificación por los cuales notificar</param>
+        public void ReservarTurnoRT(Turno tur, DatosRT rt, List<int> medios)
+        {
+            Estado? res = ObtenerEstadoReservado();
+            rt.rt.ReservarTurno(tur, res);
+            loggeado = actual.ObtenerCientificoLoggeado();
+            loggeado.SetTurno(tur);
+            turno = tur;
+            foreach (int med in medios)
+            {
+                IObserverTurno obs = IObserverTurno.crear((Medio)med);
+                this.suscribir(obs);
+            }
+            ObtenerDatosTurno();
+            ObtenerCorreoCientifico();
+            ObtenerNumeroCientifico();
+            this.notificar();
+        }
+
+        /// <summary>
+        /// Obtiene el Estado Reservado para después setearlo al Turno
+        /// </summary>
+        /// <returns>Estado reservado</returns>
+        public Estado? ObtenerEstadoReservado()
+        {
+            var est = Enum.GetValues(typeof(Estado));
+            foreach (Estado estado in est)
+            {
+                if (estado.esAmbitoTurno() && estado.esReservado())
+                {
+                    return estado;
+                }
+            }
+            return null;
+        }
 
         public void GenerarCentros()
         {
@@ -101,8 +312,6 @@ namespace PPAI.Control
                 investigaciones.Add(cen);
             }
         }
-
-
         public void GenerarMarcas()
         {
             marcas.Add(new Marca("Shidmazu"));
@@ -114,8 +323,6 @@ namespace PPAI.Control
             marcas.Add(new Marca("Motic"));
             marcas.Add(new Marca("GE"));
         }
-
-
         public void GenerarModelos()
         {
             string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
@@ -186,142 +393,6 @@ namespace PPAI.Control
                 TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
                 tiposRT.Add(tipoc);
             }
-        }
-
-
-        public DataTable ObtenerTipoRT()
-        {
-            DataTable dataTable = new DataTable();
-            DataColumn column = new DataColumn();
-
-            column.DataType = typeof(TipoRT);
-            column.ColumnName = "TipoRT";
-            dataTable.Columns.Add(column);
-
-            column = new DataColumn();
-
-            column.DataType = typeof(string);
-            column.ColumnName = "NombreTipo";
-            dataTable.Columns.Add(column);
-
-            foreach (TipoRT tipoRT in tiposRT)
-            {
-                DataRow row = dataTable.NewRow();
-                row["TipoRT"] = tipoRT;
-                row["NombreTipo"] = tipoRT.MostrarTipoRecurso();
-                dataTable.Rows.Add(row);
-            }
-            return dataTable;
-        }
-
-        public void TipoRTSeleccionado(TipoRT? tipoRT)
-        {
-            List<DatosRT> datos = ObtenerRTActivoDeTipoRT(tipoRT);
-            datos = OrdenarYAgruparPorCI(datos);
-            pantalla.PedirSeleccionRT(datos);
-        }
-
-        public List<DatosRT> ObtenerRTActivoDeTipoRT(TipoRT? tipoRT)
-        {
-            List<RecursoTecnologico> recursosActivos = new List<RecursoTecnologico>();
-            List<DatosRT> datos = new List<DatosRT>();
-            foreach (RecursoTecnologico RT in recursos)
-            {
-                if (RT.EsDeTipoRT(tipoRT))
-                {
-                    if (RT.EsActivo())
-                    {
-                        recursosActivos.Add(RT);
-                    }
-                }
-            }
-            foreach (RecursoTecnologico recAc in recursosActivos)
-            {
-                DatosRT datosRT = recAc.MostrarRT();
-                datos.Add(datosRT);
-            }
-            return datos;
-        }
-
-        public void TomarSeleccionRT(RecursoTecnologico rt)
-        {
-            bool ver = VerificarCIdeCientificoLoggeado(rt);
-            seleccionado = rt;
-            List<DatosTurno> turnos = obtenerTurnosReservablesRTSeleccionado(rt);
-            pantalla.PedirSeleccionDeTurno(turnos, rt.MostrarRT());
-        }
-
-        public bool VerificarCIdeCientificoLoggeado(RecursoTecnologico rt)
-        {
-            PersonalCientifico cientifico = actual.ObtenerCientificoLoggeado();
-            bool pertenece = rt.EsDeMiCentroInvestigacion(cientifico);
-            return pertenece;
-        }
-
-        public List<DatosRT> OrdenarYAgruparPorCI(List<DatosRT> datos)
-        {
-            datos.Sort((s1, s2) => s1.ci.CompareTo(s2.ci));
-            return datos;
-        }
-
-        public List<DatosTurno> obtenerTurnosReservablesRTSeleccionado(RecursoTecnologico rt)
-        {
-            List<DatosTurno> turnos = new List<DatosTurno>();
-            DateTime fecha = DateTime.Now;
-            turnos = rt.MostrarTurnos(fecha);
-            turnos = AgruparYOrdenarTurnosPorFecha(turnos);
-            return turnos;
-        }
-
-        public List<DatosTurno> AgruparYOrdenarTurnosPorFecha(List<DatosTurno> turnos)
-        {
-            turnos.Sort((s1, s2) => s1.fechaHoraInicio.CompareTo(s2.fechaHoraInicio));
-            return turnos;
-        }
-
-        private void ObtenerDatosTurno()
-        {
-            rtstring = seleccionado.getNombre();
-            turnostring = turno.getStringHorarios();
-        }
-
-        private void ObtenerCorreoCientifico()
-        {
-            mail = loggeado.tomarCorreoInstitucional();
-        }
-
-        private void ObtenerNumeroCientifico()
-        {
-            num = loggeado.tomarTelefono();
-        }
-
-        public void ReservarTurnoRT(Turno tur, DatosRT rt, List<int> medios)
-        {
-            Estado? res = ObtenerEstadoReservado();
-            rt.rt.ReservarTurno(tur, res);
-            loggeado = actual.ObtenerCientificoLoggeado();
-            loggeado.SetTurno(tur);
-            turno = tur;
-            foreach (int med in medios)
-            {
-                IObserverTurno obs = IObserverTurno.crear((Medio)med);
-                this.suscribir(obs);
-            }
-            ObtenerDatosTurno();
-            ObtenerMediosNotificacion();
-            this.notificar();
-        }
-        public Estado? ObtenerEstadoReservado()
-        {
-            var est = Enum.GetValues(typeof(Estado));
-            foreach (Estado estado in est)
-            {
-                if (estado.esAmbitoTurno() && estado.esReservado())
-                {
-                    return estado;
-                }
-            }
-            return null;
         }
     }
 }

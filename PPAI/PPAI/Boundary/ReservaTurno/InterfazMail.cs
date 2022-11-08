@@ -11,21 +11,18 @@ namespace PPAI.Boundary.ReservaTurno
     {
         private string apistr = "https://maker.ifttt.com/trigger/turno_mail/with/key/itmBisW0tDS4fwc2viUCwaE4wiaQbbhxUC0mc1SCuE_?";
 
-        public void notificar(PersonalCientifico medio, string recurso, string turno)
+        public void notificar(string numero, string mail, string recurso, string turno)
         {
-            generarNotificacion(medio.tomarCorreoInstitucional(), recurso, turno);
+            generarMail(mail, recurso, turno);
         }
-        private void generarNotificacion(string medio, string recurso, string turno)
+        private void generarMail(string medio, string recurso, string turno)
         {
             string subject = "Turno para " + recurso + " confirmado";
             string body = "Su turno fue reservado exitosamente.<br><b>Recurso:</b> " + recurso + "<br><b>Turno:</b> " + turno;
             string args = "value1=" + medio + "&value2=" + subject + "&value3=" + body;
             string full = apistr + args;
             var client = new HttpClient();
-            System.Diagnostics.Debug.WriteLine(full);
             var resp = client.GetAsync(full);
-            resp.Wait();
-            System.Diagnostics.Debug.WriteLine(resp.Result.ToString());
         }
     }
 }

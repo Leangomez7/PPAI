@@ -137,7 +137,8 @@ namespace PPAI.ReservaTurnoRT
             string mensaje = "Recurso:\n" + rec.ci + "\nNumero: " + rec.nroInventario.ToString() + "\nMarca: " + rec.marca + "\nModelo: " + rec.modelo;
             var culture = new System.Globalization.CultureInfo("es-ES");
             string dia = culture.DateTimeFormat.GetDayName(datostur.fechaHoraInicio.DayOfWeek);
-            mensaje += "\n\nTurno:\n" + "Fecha: " + DateOnly.FromDateTime(datostur.fechaHoraInicio).ToString() + "\nDía: " + dia[0].ToString().ToUpper() + dia.Substring(1, dia.Length - 1) + "\nInicio: " + datostur.fechaHoraInicio.TimeOfDay.ToString() + "\nFin: " + datostur.fechaHoraInicio.TimeOfDay.ToString();
+            mensaje += "\n\nTurno:\n" + "Fecha: " + datostur.fechaHoraInicio.ToString("dd/MM/yyyy") + "\nDía: " + dia[0].ToString().ToUpper() + dia.Substring(1, dia.Length - 1) + 
+                "\nInicio: " + datostur.fechaHoraInicio.ToString("HH:mm") + "\nFin: " + datostur.fechaHoraFin.ToString("HH:mm");
             
             if (MessageBox.Show(mensaje, "Turno Reservado", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {

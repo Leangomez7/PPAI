@@ -232,13 +232,13 @@ namespace PPAI.Entidades
                 {
                     DatosTurno tur = cadaTurno.MostrarTurno();
                     datos.Add(tur);
-                    System.Diagnostics.Debug.WriteLine(cadaTurno.ToString());
+                    System.Diagnostics.Debug.WriteLine(cadaTurno.getStringHorarios());
                 }
             }
             return datos;
         }
 
-        public string ToString()
+        public string getNombre()
         {
             return this.MostrarMarcaYModelo()[1] + " " + this.MostrarMarcaYModelo()[0] + " - Inventario " + this.MostrarNroInventario();
         }

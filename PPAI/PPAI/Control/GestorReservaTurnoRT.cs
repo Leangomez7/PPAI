@@ -22,6 +22,8 @@ namespace PPAI.Control
         PantallaReservaTurnoRT? pantalla;
         private string rtstring;
         private string turnostring;
+        private string mail;
+        private string num;
         private RecursoTecnologico seleccionado;
         private Turno turno;
         private PersonalCientifico loggeado;
@@ -44,7 +46,7 @@ namespace PPAI.Control
         {
             foreach (IObserverTurno o in observadores)
             {
-                o.notificar(this.loggeado, this.rtstring, this.turnostring);
+                o.notificar(this.num, this.mail, this.rtstring, this.turnostring);
             }
         }
 
@@ -277,21 +279,36 @@ namespace PPAI.Control
             return turnos;
         }
 
+        private void ObtenerDatosTurno()
+        {
+            rtstring = seleccionado.getNombre();
+            turnostring = turno.getStringHorarios();
+        }
+
+        private void ObtenerCorreoCientifico()
+        {
+            mail = loggeado.tomarCorreoInstitucional();
+        }
+
+        private void ObtenerNumeroCientifico()
+        {
+            num = loggeado.tomarTelefono();
+        }
+
         public void ReservarTurnoRT(Turno tur, DatosRT rt, List<int> medios)
         {
             Estado? res = ObtenerEstadoReservado();
             rt.rt.ReservarTurno(tur, res);
             loggeado = actual.ObtenerCientificoLoggeado();
             loggeado.SetTurno(tur);
-            string correo = loggeado.tomarCorreoInstitucional();
             turno = tur;
-            turnostring = turno.ToString();
-            rtstring = seleccionado.ToString();
             foreach (int med in medios)
             {
                 IObserverTurno obs = IObserverTurno.crear((Medio)med);
                 this.suscribir(obs);
             }
+            ObtenerDatosTurno();
+            ObtenerMediosNotificacion();
             this.notificar();
         }
         public Estado? ObtenerEstadoReservado()

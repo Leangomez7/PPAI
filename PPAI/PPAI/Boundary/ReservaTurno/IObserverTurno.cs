@@ -9,7 +9,7 @@ namespace PPAI.Boundary.ReservaTurno
 {
     public interface IObserverTurno
     {
-        public void notificar(PersonalCientifico cient, string rt, string turno);
+        public void notificar(string numero, string mail, string rt, string turno);
 
         public static IObserverTurno crear(Medio medio)
         {

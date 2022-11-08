@@ -90,7 +90,7 @@ namespace PPAI.Entidades
         /// Devuelve una representación como string del Turno, con dia de la semana, fecha y hora de inicio y fin
         /// </summary>
         /// <returns>String con datos del Turno</returns>
-        override public string ToString()
+        public string getStringHorarios()
         {
             string str = "";
             var culture = new System.Globalization.CultureInfo("es-ES");

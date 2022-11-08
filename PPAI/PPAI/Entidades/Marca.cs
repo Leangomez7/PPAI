@@ -19,6 +19,12 @@ namespace PPAI.Entidades
         /// Crea una Marca de Recurso Tecnológico nueva
         /// </summary>
         /// <param name="nom">Nombre de la marca a crear</param>
+        
+        public Marca()
+        {
+
+        }
+
         public Marca(string nom)
         {
             nombre = nom;

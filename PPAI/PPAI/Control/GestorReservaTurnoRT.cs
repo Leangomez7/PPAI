@@ -13,10 +13,10 @@ namespace PPAI.Control
 {
     public class GestorReservaTurnoRT
     {
+        private List<IObserverTurno> observadores;
         private List<TipoRT> tiposRT;
         private List<RecursoTecnologico> recursos;
         private List<CentroInvestigacion> investigaciones;
-        private List<IObserverTurno> observadores;
         private List<Marca> marcas;
         private List<Modelo> modelos;
         private Sesion actual;
@@ -69,25 +69,34 @@ namespace PPAI.Control
         public GestorReservaTurnoRT(Sesion sesion)
         {
             // Inicializar listas
-            tiposRT = new List<TipoRT>();
+            /*tiposRT = new List<TipoRT>();
             recursos = new List<RecursoTecnologico>();
             investigaciones = new List<CentroInvestigacion>();
             marcas = new List<Marca>();
             modelos = new List<Modelo>();
-            observadores = new List<IObserverTurno>();
-            actual = sesion;
             GenerarMarcas();
             GenerarModelos();
             GenerarTiposRT();
             GenerarCentros();
-            GenerarRT();
+            GenerarRT();*/
+            observadores = new List<IObserverTurno>();
+            actual = sesion;
             using (var db = new PersistenciaContext())
-            {
-                foreach (Marca marca in marcas) db.marca.Add(marca);
+            {/*
+                var query = from b in db.recursoTecnologico select b;
+
+                foreach (var item in query) recursos.Add(item);*/
+                
+                tiposRT = new List<TipoRT>(db.tipoRT);
+                recursos = new List<RecursoTecnologico>(db.recursoTecnologico);
+                investigaciones = new List<CentroInvestigacion>(db.centroInvestigacion);
+                marcas = new List<Marca>(db.marca);
+                modelos = new List<Modelo>(db.modelo);
+                /*foreach (Marca marca in marcas) db.marca.Add(marca);
                 foreach (Modelo modelo in modelos) db.modelo.Add(modelo);
                 foreach (TipoRT tipo in tiposRT) db.tipoRT.Add(tipo);
                 foreach (CentroInvestigacion ci in investigaciones) db.centroInvestigacion.Add(ci);
-                foreach (RecursoTecnologico rt in recursos) db.recursoTecnologico.Add(rt);
+                foreach (RecursoTecnologico rt in recursos) db.recursoTecnologico.Add(rt);*/
                 db.SaveChanges();
             }
         }

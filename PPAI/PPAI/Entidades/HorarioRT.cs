@@ -13,8 +13,8 @@ namespace PPAI.Entidades
         [Key]
         public int id { get; set; }
         public DayOfWeek diaSemana { get; set; }
-        public DateTime horaDesde { get; set; } = new DateTime(new TimeOnly(7, 30).Ticks);
-        public DateTime horaHasta { get; set; } = new DateTime(new TimeOnly(20, 30).Ticks);
+        public DateTime horaDesde { get; set; } = new DateTime(new TimeOnly(7, 30).Ticks).AddDays(2000 * 365);
+        public DateTime horaHasta { get; set; } = new DateTime(new TimeOnly(20, 30).Ticks).AddDays(2000*365);
         public DateTime vigenciaDesde { get; set; } = DateTime.Now;
         public DateTime vigenciaHasta { get; set; } = System.Data.SqlTypes.SqlDateTime.MaxValue.Value;
         
@@ -28,17 +28,18 @@ namespace PPAI.Entidades
         public HorarioRT(DayOfWeek dia, TimeOnly hrd, TimeOnly hrh, DateOnly ini)
         {
             diaSemana = dia;
-            horaDesde = new DateTime(hrd.Ticks);
-            horaHasta = new DateTime(hrh.Ticks);
+            horaDesde = new DateTime(hrd.Ticks).AddDays(2000 * 365);
+            horaHasta = new DateTime(hrh.Ticks).AddDays(2000 * 365);
             vigenciaDesde = ini.ToDateTime(TimeOnly.MinValue);
         }
 
         public HorarioRT(DayOfWeek dia)
         {
             diaSemana = dia;
-            horaDesde = new DateTime(new TimeOnly(7, 30).Ticks);
-            horaHasta = new DateTime(new TimeOnly(20, 30).Ticks);
+            horaDesde = new DateTime(new TimeOnly(7, 30).Ticks).AddDays(2000 * 365);
+            horaHasta = new DateTime(new TimeOnly(20, 30).Ticks).AddDays(2000 * 365);
             vigenciaDesde = DateTime.Now;
+            System.Diagnostics.Debug.WriteLine(horaDesde);
         }
 
         public DayOfWeek GetDia()
@@ -48,12 +49,12 @@ namespace PPAI.Entidades
 
         public TimeOnly GetHoraDesde()
         {
-            return new TimeOnly(horaDesde.Ticks);
+            return new TimeOnly(horaDesde.AddDays(-2000 * 365).Ticks);
         }
 
         public TimeOnly GetHoraHasta()
         {
-            return new TimeOnly(horaHasta.Ticks);
+            return new TimeOnly(horaHasta.AddDays(-2000 * 365).Ticks);
         }
 
         public DateOnly GetVigDesde()

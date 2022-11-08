@@ -20,6 +20,12 @@ namespace PPAI.Entidades
         /// Crea un Modelo de Recurso Tecnológico nuevo
         /// </summary>
         /// <param name="nom">Nombre del modelo</param>
+        
+        public Modelo()
+        {
+
+        }
+
         public Modelo(string nom)
         {
             nombre = nom;

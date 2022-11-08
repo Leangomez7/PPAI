@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static PPAI.Program;
 
 namespace PPAI.Entidades
 {
@@ -41,6 +42,11 @@ namespace PPAI.Entidades
         /// <param name="dia">Dia de la semana del Turno</param>
         /// <param name="ini">Fecha y hora de Inicio del Turno</param>
         /// <param name="fin">Fecha y hora de Fin del Turno</param>
+        public Turno()
+        {
+
+        }
+
         public Turno(DayOfWeek dia, DateTime ini, DateTime fin)
         {
             fechaGeneracion = DateTime.Now;
@@ -64,6 +70,11 @@ namespace PPAI.Entidades
                 }
             }
             cambioEstadoTurno.Add(new CambioEstadoTurno(res));
+            using (var db = new PersistenciaContext())
+            {
+                db.turno.Add(this);
+                db.SaveChanges();
+            }
         }
 
         /// <summary>

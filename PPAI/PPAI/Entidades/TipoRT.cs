@@ -20,6 +20,11 @@ namespace PPAI.Entidades
         /// </summary>
         /// <param name="nom">Nombre del Tipo</param>
         /// <param name="des">Descripción del Tipo</param>
+        public TipoRT()
+        {
+
+        }
+
         public TipoRT(string nom, string des)
         {
             nombre = nom;

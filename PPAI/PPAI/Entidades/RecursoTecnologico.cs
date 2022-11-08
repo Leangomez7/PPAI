@@ -69,6 +69,11 @@ namespace PPAI.Entidades
             GenerarTurnos();
         }
 
+        public RecursoTecnologico()
+        {
+
+        }
+
         /// <summary>
         /// Reserva un turno del recurso tecnológico
         /// </summary>
@@ -240,6 +245,11 @@ namespace PPAI.Entidades
                 }
             }
             return datos;
+        }
+
+        public List<Turno> getTurnos()
+        {
+            return turnos;
         }
 
         public string getNombre()

@@ -34,6 +34,11 @@ namespace PPAI.Entidades
 
         */
 
+        public CentroInvestigacion()
+        {
+
+        }
+
         public CentroInvestigacion(string nom, string sig)
         {
             nombre = nom;

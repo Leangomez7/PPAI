@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
     public class Usuario
     {
-        private string? clave;
-        private string nombreUsuario;
-        private bool? habilitado;
-        private PersonalCientifico? personalCientifico;
-        
+        [Key]
+        public int id { get; set; }
+        public string? clave { get; set; }
+        public string nombreUsuario { get; set; }
+        public bool? habilitado { get; set; }
+        public PersonalCientifico? personalCientifico { get; set; }
+
         /// <summary>
         /// Crea un Usuario con todos sus datos
         /// </summary>

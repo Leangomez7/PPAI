@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PPAI.Entidades
 {
-    internal class CambioEstadoTurno
+    public class CambioEstadoTurno
     {
-        private DateTime fechaHoraDesde = DateTime.Now;
-        private DateTime? fechaHoraHasta;
-        private Estado? estado;
+        [Key]
+        public int id { get; set; }
+        public DateTime fechaHoraDesde { get; set; } = DateTime.Now;
+        public DateTime fechaHoraHasta { get; set; } = System.Data.SqlTypes.SqlDateTime.MaxValue.Value;
+        public Estado? estado { get; set; }
 
         /// <summary>
         /// Constructor de objeto CambioEstadoTurno asigna estado del turno pasado por parametro al atributo estado
@@ -37,7 +41,7 @@ namespace PPAI.Entidades
         /// </returns>
         public bool esActual()
         {
-            if (fechaHoraHasta is null)
+            if (fechaHoraHasta == DateTime.MaxValue)
             {
                 return true;
             }

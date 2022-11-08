@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
     public class PersonalCientifico
     {
-        private int legajo;
-        private string nombre;
-        private string apellido;
-        private int nroDocumento;
-        private string correoInstitucional;
-        private string correoPersonal;
-        private string telefono;
-        private List<Turno> turnos = new List<Turno>();
+        [Key]
+        public int id { get; set; }
+        public int legajo { get; set; }
+        public string nombre { get; set; }
+        public string apellido { get; set; }
+        public int nroDocumento { get; set; }
+        public string correoInstitucional { get; set; }
+        public string correoPersonal { get; set; }
+        public string telefono { get; set; }
+        public List<Turno> turnos { get; set; } = new List<Turno>();
         //private Usuario usuario;
 
         /// <summary>

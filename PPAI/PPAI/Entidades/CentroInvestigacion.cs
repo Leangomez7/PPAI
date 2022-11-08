@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
     public class CentroInvestigacion
     {
-        private string nombre;
-        private string sigla;
-        private List<AsignacionCientificoCI> cientificos = new List<AsignacionCientificoCI>();
+        [Key]
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public string sigla { get; set; }
+        public List<AsignacionCientificoCI> cientificos { get; set; } = new List<AsignacionCientificoCI>();
         /*private string direccion;
         private string edificio;
         private string piso;

@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PPAI.Entidades;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
     public class Modelo
     {
-        private string nombre;
-        private Marca? marca;
-        
+        [Key]
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public Marca? marca { get; set; }
+
         /// <summary>
         /// Crea un Modelo de Recurso Tecnológico nuevo
         /// </summary>

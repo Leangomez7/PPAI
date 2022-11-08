@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
     public class TipoRT
     {
-        private string nombre;
-        private string descripcion;
+        [Key]
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public string descripcion { get; set; }
 
         /// <summary>
         /// Crea un nuevo Tipo de Recurso Tecnológico

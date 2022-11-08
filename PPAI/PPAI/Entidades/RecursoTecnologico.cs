@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
@@ -27,18 +29,20 @@ namespace PPAI.Entidades
     }
     public class RecursoTecnologico
     {
-        private int numeroRT;
-        private DateTime fechaAlta;
-        private List<string> imagenes = new List<string>();
-        private int periodicidadMantenimientoPrev;
-        private int duracionMantenimientoPrev;
-        private int fraccionHorarioTurnos;
-        private List<CambioEstadoRT> cambioEstadoRT = new List<CambioEstadoRT>();
-        private List<Turno> turnos = new List<Turno>();
-        private TipoRT tipoRT;
-        private Modelo modelo;
-        private CentroInvestigacion? centroInvestigacion;
-        private List<HorarioRT> horarioRT = new List<HorarioRT>();
+        [Key]
+        public int id { get; set; }
+        public int numeroRT { get; set; }
+        public DateTime fechaAlta { get; set; }
+        public List<string> imagenes { get; set; } = new List<string>();
+        public int periodicidadMantenimientoPrev { get; set; }
+        public int duracionMantenimientoPrev { get; set; }
+        public int fraccionHorarioTurnos { get; set; }
+        public List<CambioEstadoRT> cambioEstadoRT { get; set; } = new List<CambioEstadoRT>();
+        public List<Turno> turnos { get; set; } = new List<Turno>();
+        public TipoRT tipoRT { get; set; }
+        public Modelo modelo { get; set; }
+        public CentroInvestigacion? centroInvestigacion { get; set; }
+        public List<HorarioRT> horarioRT { get; set; } = new List<HorarioRT>();
 
         /// <summary>
         /// Crea un Recurso Tecnológico con todos sus datos

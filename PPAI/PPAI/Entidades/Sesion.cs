@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
     public class Sesion
     {
-        private DateTime fechaDesde = DateTime.Now;
-        private DateTime? fechaHasta;
-        private Usuario usuario;
+        [Key]
+        public int id { get; set; }
+        public DateTime fechaDesde { get; set; } = DateTime.Now;
+        public DateTime fechaHasta { get; set; } = System.Data.SqlTypes.SqlDateTime.MaxValue.Value;
+        public Usuario usuario { get; set; }
 
         /// <summary>
         /// Crea una nueva Sesión con un Usuario

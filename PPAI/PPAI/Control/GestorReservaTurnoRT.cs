@@ -7,6 +7,7 @@ using PPAI.ReservaTurnoRT;
 using System.Data;
 using PPAI.Entidades;
 using PPAI.Boundary.ReservaTurno;
+using static PPAI.Program;
 
 namespace PPAI.Control
 {
@@ -80,6 +81,15 @@ namespace PPAI.Control
             GenerarTiposRT();
             GenerarCentros();
             GenerarRT();
+            using (var db = new PersistenciaContext())
+            {
+                foreach (Marca marca in marcas) db.marca.Add(marca);
+                foreach (Modelo modelo in modelos) db.modelo.Add(modelo);
+                foreach (TipoRT tipo in tiposRT) db.tipoRT.Add(tipo);
+                foreach (CentroInvestigacion ci in investigaciones) db.centroInvestigacion.Add(ci);
+                foreach (RecursoTecnologico rt in recursos) db.recursoTecnologico.Add(rt);
+                db.SaveChanges();
+            }
         }
 
         /// <summary>

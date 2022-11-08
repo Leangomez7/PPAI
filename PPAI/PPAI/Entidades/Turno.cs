@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
@@ -25,11 +27,13 @@ namespace PPAI.Entidades
     }
     public class Turno
     {
-        private DateTime fechaGeneracion;
-        private DayOfWeek diaSemana;
-        private DateTime fechaHoraInicio;
-        private DateTime fechaHoraFin;
-        private List<CambioEstadoTurno> cambioEstadoTurno = new List<CambioEstadoTurno>();
+        [Key]
+        public int id { get; set; }
+        public DateTime fechaGeneracion { get; set; } = DateTime.Now;
+        public DayOfWeek diaSemana { get; set; }
+        public DateTime fechaHoraInicio { get; set; } = DateTime.Now;
+        public DateTime fechaHoraFin { get; set; } = DateTime.Now;
+        public List<CambioEstadoTurno> cambioEstadoTurno = new List<CambioEstadoTurno>();
 
         /// <summary>
         /// Crea un turno con todos sus datos

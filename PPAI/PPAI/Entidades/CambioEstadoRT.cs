@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PPAI.Entidades
 {
     public class CambioEstadoRT
     {
-        private DateTime fechaHoraDesde;
-        private DateTime? fechaHoraHasta;
-        private Estado estado;
+        [Key]
+        public int id { get; set; }
+        public DateTime fechaHoraDesde { get; set; } = DateTime.Now;
+        public DateTime fechaHoraHasta { get; set; } = System.Data.SqlTypes.SqlDateTime.MaxValue.Value;
+        public Estado estado { get; set; }
 
         /// <summary>
         /// Constructor de objeto CambioEstadoRT que asigna la fecha y horario actual a fechaHoraDesde y el estado a guardar en la historia
@@ -29,7 +33,7 @@ namespace PPAI.Entidades
         /// </returns>
         public bool esActual()
         {
-            if (fechaHoraHasta is null)
+            if (fechaHoraHasta == System.Data.SqlTypes.SqlDateTime.MaxValue.Value)
             {
                 return true;
             }

@@ -25,6 +25,12 @@ namespace PPAI.Entidades
             fechaHoraDesde = DateTime.Now;
             estado = est;
         }
+
+        public CambioEstadoRT()
+        {
+
+        }
+
         /// <summary>
         /// Verifica si el estado del rt es actual 
         /// </summary>

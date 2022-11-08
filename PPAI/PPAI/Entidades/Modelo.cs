@@ -14,7 +14,7 @@ namespace PPAI.Entidades
         [Key]
         public int id { get; set; }
         public string nombre { get; set; }
-        public Marca? marca { get; set; }
+        public virtual Marca? marca { get; set; }
 
         /// <summary>
         /// Crea un Modelo de Recurso Tecnológico nuevo

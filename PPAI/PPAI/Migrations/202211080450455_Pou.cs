@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class Pou : DbMigration
     {
         public override void Up()
         {
@@ -60,6 +60,20 @@
                 .Index(t => t.RecursoTecnologico_id);
             
             CreateTable(
+                "dbo.CambioEstadoTurnoes",
+                c => new
+                    {
+                        id = c.Int(nullable: false, identity: true),
+                        fechaHoraDesde = c.DateTime(nullable: false),
+                        fechaHoraHasta = c.DateTime(nullable: false),
+                        estado = c.Int(nullable: false),
+                        Turno_id = c.Int(),
+                    })
+                .PrimaryKey(t => t.id)
+                .ForeignKey("dbo.Turnoes", t => t.Turno_id)
+                .Index(t => t.Turno_id);
+            
+            CreateTable(
                 "dbo.CambioEstadoRTs",
                 c => new
                     {
@@ -72,17 +86,6 @@
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.RecursoTecnologicoes", t => t.RecursoTecnologico_id)
                 .Index(t => t.RecursoTecnologico_id);
-            
-            CreateTable(
-                "dbo.CambioEstadoTurnoes",
-                c => new
-                    {
-                        id = c.Int(nullable: false, identity: true),
-                        fechaHoraDesde = c.DateTime(nullable: false),
-                        fechaHoraHasta = c.DateTime(nullable: false),
-                        estado = c.Int(),
-                    })
-                .PrimaryKey(t => t.id);
             
             CreateTable(
                 "dbo.CentroInvestigacions",
@@ -207,6 +210,7 @@
             DropForeignKey("dbo.Turnoes", "AsignacionCientificoCI_id", "dbo.AsignacionCientificoCIs");
             DropForeignKey("dbo.AsignacionCientificoCIs", "cientifico_id", "dbo.PersonalCientificoes");
             DropForeignKey("dbo.Turnoes", "PersonalCientifico_id", "dbo.PersonalCientificoes");
+            DropForeignKey("dbo.CambioEstadoTurnoes", "Turno_id", "dbo.Turnoes");
             DropIndex("dbo.Usuarios", new[] { "personalCientifico_id" });
             DropIndex("dbo.Sesions", new[] { "usuario_id" });
             DropIndex("dbo.RecursoTecnologicoes", new[] { "tipoRT_id" });
@@ -215,6 +219,7 @@
             DropIndex("dbo.Modeloes", new[] { "marca_id" });
             DropIndex("dbo.HorarioRTs", new[] { "RecursoTecnologico_id" });
             DropIndex("dbo.CambioEstadoRTs", new[] { "RecursoTecnologico_id" });
+            DropIndex("dbo.CambioEstadoTurnoes", new[] { "Turno_id" });
             DropIndex("dbo.Turnoes", new[] { "RecursoTecnologico_id" });
             DropIndex("dbo.Turnoes", new[] { "AsignacionCientificoCI_id" });
             DropIndex("dbo.Turnoes", new[] { "PersonalCientifico_id" });
@@ -228,8 +233,8 @@
             DropTable("dbo.Marcas");
             DropTable("dbo.HorarioRTs");
             DropTable("dbo.CentroInvestigacions");
-            DropTable("dbo.CambioEstadoTurnoes");
             DropTable("dbo.CambioEstadoRTs");
+            DropTable("dbo.CambioEstadoTurnoes");
             DropTable("dbo.Turnoes");
             DropTable("dbo.PersonalCientificoes");
             DropTable("dbo.AsignacionCientificoCIs");

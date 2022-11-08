@@ -7,13 +7,13 @@ namespace PPAI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class Pou : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Pou));
         
         string IMigrationMetadata.Id
         {
-            get { return "202211080257523_Init"; }
+            get { return "202211080450455_Pou"; }
         }
         
         string IMigrationMetadata.Source

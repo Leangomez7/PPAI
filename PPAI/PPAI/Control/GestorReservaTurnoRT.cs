@@ -8,17 +8,23 @@ using System.Data;
 using PPAI.Entidades;
 using PPAI.Boundary.ReservaTurno;
 using static PPAI.Program;
+using System.Data.Entity;
 
 namespace PPAI.Control
 {
     public class GestorReservaTurnoRT
     {
         private List<IObserverTurno> observadores;
-        private List<TipoRT> tiposRT;
+        private DbSet<TipoRT> tiposRT;
+        private DbSet<RecursoTecnologico> recursos;
+        private DbSet<CentroInvestigacion> investigaciones;
+        private DbSet<Marca> marcas;
+        private DbSet<Modelo> modelos;
+        /*private List<TipoRT> tiposRT;
         private List<RecursoTecnologico> recursos;
         private List<CentroInvestigacion> investigaciones;
         private List<Marca> marcas;
-        private List<Modelo> modelos;
+        private List<Modelo> modelos;*/
         private Sesion actual;
         PantallaReservaTurnoRT? pantalla;
         private string rtstring;
@@ -28,6 +34,7 @@ namespace PPAI.Control
         private RecursoTecnologico seleccionado;
         private Turno turno;
         private PersonalCientifico loggeado;
+        private PersistenciaContext db = new PersistenciaContext();
 
         /// <summary>
         /// Agrega a un suscriptor a la lista de suscriptores
@@ -81,24 +88,32 @@ namespace PPAI.Control
             GenerarRT();*/
             observadores = new List<IObserverTurno>();
             actual = sesion;
-            using (var db = new PersistenciaContext())
-            {/*
-                var query = from b in db.recursoTecnologico select b;
+            
+            tiposRT = db.tipoRT;
+            recursos = db.recursoTecnologico;
+            investigaciones = db.centroInvestigacion;
+            marcas = db.marca;
+            modelos = db.modelo;
 
-                foreach (var item in query) recursos.Add(item);*/
-                
-                tiposRT = new List<TipoRT>(db.tipoRT);
-                recursos = new List<RecursoTecnologico>(db.recursoTecnologico);
-                investigaciones = new List<CentroInvestigacion>(db.centroInvestigacion);
-                marcas = new List<Marca>(db.marca);
-                modelos = new List<Modelo>(db.modelo);
-                /*foreach (Marca marca in marcas) db.marca.Add(marca);
-                foreach (Modelo modelo in modelos) db.modelo.Add(modelo);
-                foreach (TipoRT tipo in tiposRT) db.tipoRT.Add(tipo);
-                foreach (CentroInvestigacion ci in investigaciones) db.centroInvestigacion.Add(ci);
-                foreach (RecursoTecnologico rt in recursos) db.recursoTecnologico.Add(rt);*/
-                db.SaveChanges();
-            }
+
+            /*
+            var query = from b in db.recursoTecnologico select b;
+
+            foreach (var item in query) recursos.Add(item);*/
+            
+            /*
+            tiposRT = new List<TipoRT>(db.tipoRT);
+            recursos = new List<RecursoTecnologico>(db.recursoTecnologico);
+            investigaciones = new List<CentroInvestigacion>(db.centroInvestigacion);
+            marcas = new List<Marca>(db.marca);
+            modelos = new List<Modelo>(db.modelo);*/
+
+            /*foreach (Marca marca in marcas) db.marca.Add(marca);
+            foreach (Modelo modelo in modelos) db.modelo.Add(modelo);
+            foreach (TipoRT tipo in tiposRT) db.tipoRT.Add(tipo);
+            foreach (CentroInvestigacion ci in investigaciones) db.centroInvestigacion.Add(ci);
+            foreach (RecursoTecnologico rt in recursos) db.recursoTecnologico.Add(rt);*/
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -283,7 +298,7 @@ namespace PPAI.Control
         /// <param name="medios">lista de medios de notificación por los cuales notificar</param>
         public void ReservarTurnoRT(Turno tur, DatosRT rt, List<int> medios)
         {
-            Estado? res = ObtenerEstadoReservado();
+            Estado res = ObtenerEstadoReservado();
             rt.rt.ReservarTurno(tur, res);
             loggeado = actual.ObtenerCientificoLoggeado();
             loggeado.SetTurno(tur);
@@ -303,19 +318,11 @@ namespace PPAI.Control
         /// Obtiene el Estado Reservado para después setearlo al Turno
         /// </summary>
         /// <returns>Estado reservado</returns>
-        public Estado? ObtenerEstadoReservado()
+        public Estado ObtenerEstadoReservado()
         {
-            var est = Enum.GetValues(typeof(Estado));
-            foreach (Estado estado in est)
-            {
-                if (estado.esAmbitoTurno() && estado.esReservado())
-                {
-                    return estado;
-                }
-            }
-            return null;
+            return Estado.TurnoReservado;
         }
-
+        /*
         public void GenerarCentros()
         {
             Random rnd = new Random();
@@ -342,6 +349,7 @@ namespace PPAI.Control
             marcas.Add(new Marca("Motic"));
             marcas.Add(new Marca("GE"));
         }
+        
         public void GenerarModelos()
         {
             string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
@@ -413,5 +421,6 @@ namespace PPAI.Control
                 tiposRT.Add(tipoc);
             }
         }
+        */
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static PPAI.Program;
 
 namespace PPAI.Entidades
 {
@@ -37,12 +38,12 @@ namespace PPAI.Entidades
         public int periodicidadMantenimientoPrev { get; set; }
         public int duracionMantenimientoPrev { get; set; }
         public int fraccionHorarioTurnos { get; set; }
-        public List<CambioEstadoRT> cambioEstadoRT { get; set; } = new List<CambioEstadoRT>();
-        public List<Turno> turnos { get; set; } = new List<Turno>();
-        public TipoRT tipoRT { get; set; }
-        public Modelo modelo { get; set; }
-        public CentroInvestigacion? centroInvestigacion { get; set; }
-        public List<HorarioRT> horarioRT { get; set; } = new List<HorarioRT>();
+        public virtual List<CambioEstadoRT> cambioEstadoRT { get; set; } = new List<CambioEstadoRT>();
+        public virtual List<Turno> turnos { get; set; } = new List<Turno>();
+        public virtual TipoRT tipoRT { get; set; }
+        public virtual Modelo modelo { get; set; }
+        public virtual CentroInvestigacion centroInvestigacion { get; set; }
+        public virtual List<HorarioRT> horarioRT { get; set; } = new List<HorarioRT>();
 
         /// <summary>
         /// Crea un Recurso Tecnológico con todos sus datos
@@ -79,9 +80,15 @@ namespace PPAI.Entidades
         /// </summary>
         /// <param name="tur">Turno a reservar</param>
         /// <param name="res">Estado reservado</param>
-        public void ReservarTurno(Turno tur, Estado? res)
+        public void ReservarTurno(Turno tur, Estado res)
         {
-            tur.Reservar(res);
+            using (var db = new PersistenciaContext())
+            {
+                var pou = db.recursoTecnologico.Single(r => r.id == id);
+                tur = pou.turnos.Find(t => t.id == tur.id);
+                tur.Reservar(res);
+                db.SaveChanges();
+            }
         }
 
         /// <summary>

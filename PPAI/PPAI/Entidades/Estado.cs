@@ -123,6 +123,41 @@ namespace PPAI.Entidades
         RTActivo
     }
     /*
+    public class Estado
+    {
+        private string Ambito { set; get; }
+        private string Nombre { set; get; }
+        private string Descripcion { set; get; }
+
+        private static Estado disp;
+        private static Estado res;
+        private static Estado resp;
+        private static Estado rtact;
+
+        public bool EsReservable()
+        {
+            return (this.Nombre == "Disponible" || this.Nombre == "Activo");
+        }
+
+        public bool EsCancelable()
+        {
+            return (this.Nombre == "Reservado" || this.Nombre == "Reserva Pendiente");
+        }
+        
+        public static Estado TurnoDisponible()
+        {
+            if (disp == null)
+            {
+                disp = new Estado();
+                disp.Ambito = "Turno";
+                disp.Nombre = "Disponible";
+                disp.Descripcion = "Turno Disponible";
+            }
+            return disp;
+        }
+    }
+    */
+    /*
     internal class Estado
     {
         private string nombre;

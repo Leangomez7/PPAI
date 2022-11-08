@@ -14,15 +14,20 @@ namespace PPAI.Entidades
         public int id { get; set; }
         public DateTime fechaHoraDesde { get; set; } = DateTime.Now;
         public DateTime fechaHoraHasta { get; set; } = System.Data.SqlTypes.SqlDateTime.MaxValue.Value;
-        public Estado? estado { get; set; }
+        public Estado estado { get; set; }
 
         /// <summary>
         /// Constructor de objeto CambioEstadoTurno asigna estado del turno pasado por parametro al atributo estado
         /// </summary>
         /// <param name="est"></param>
-        public CambioEstadoTurno(Estado? est)
+        public CambioEstadoTurno(Estado est)
         {
             estado = est;
+        }
+
+        public CambioEstadoTurno()
+        {
+
         }
         /// <summary>
         /// Asigna la fecha y hora final pasada por parametro al atributo fechaHoraHasta
@@ -41,7 +46,7 @@ namespace PPAI.Entidades
         /// </returns>
         public bool esActual()
         {
-            if (fechaHoraHasta == DateTime.MaxValue)
+            if (fechaHoraHasta == System.Data.SqlTypes.SqlDateTime.MaxValue.Value)
             {
                 return true;
             }

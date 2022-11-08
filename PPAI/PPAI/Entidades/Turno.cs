@@ -34,7 +34,7 @@ namespace PPAI.Entidades
         public DayOfWeek diaSemana { get; set; }
         public DateTime fechaHoraInicio { get; set; } = DateTime.Now;
         public DateTime fechaHoraFin { get; set; } = DateTime.Now;
-        public List<CambioEstadoTurno> cambioEstadoTurno = new List<CambioEstadoTurno>();
+        public virtual List<CambioEstadoTurno> cambioEstadoTurno { get; set; } = new List<CambioEstadoTurno>();
 
         /// <summary>
         /// Crea un turno con todos sus datos
@@ -60,7 +60,7 @@ namespace PPAI.Entidades
         /// Marca el Turno como reservado
         /// </summary>
         /// <param name="res">Estado reservado</param>
-        public void Reservar(Estado? res)
+        public void Reservar(Estado res)
         {
             foreach (CambioEstadoTurno cambioEstado in cambioEstadoTurno)
             {
@@ -70,11 +70,6 @@ namespace PPAI.Entidades
                 }
             }
             cambioEstadoTurno.Add(new CambioEstadoTurno(res));
-            using (var db = new PersistenciaContext())
-            {
-                db.turno.Add(this);
-                db.SaveChanges();
-            }
         }
 
         /// <summary>

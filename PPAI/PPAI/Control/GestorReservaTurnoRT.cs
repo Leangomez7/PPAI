@@ -312,6 +312,7 @@ namespace PPAI.Control
             ObtenerCorreoCientifico();
             ObtenerNumeroCientifico();
             this.notificar();
+            this.observadores.Clear();
         }
 
         /// <summary>

@@ -11,10 +11,24 @@ namespace PPAI.Boundary.ReservaTurno
     {
         private string apistr = "https://maker.ifttt.com/trigger/turno_mail/with/key/itmBisW0tDS4fwc2viUCwaE4wiaQbbhxUC0mc1SCuE_?";
 
+        /// <summary>
+        /// Enviar notificación a través de mail
+        /// </summary>
+        /// <param name="numero">Número de teléfono, cumple con la interfaz observer, no se ua en InterfazMail</param>
+        /// <param name="mail">Dirección de correo electrónico a la cual enviar</param>
+        /// <param name="recurso">Nombre y número de inventario del recurso</param>
+        /// <param name="turno">Fecha y horario de inicio y fin del turno</param>
         public void notificar(string numero, string mail, string recurso, string turno)
         {
             generarMail(mail, recurso, turno);
         }
+
+        /// <summary>
+        /// Genera el correo a ser enviado y lo envía
+        /// </summary>
+        /// <param name="medio">Número al cual enviar el mensaje</param>
+        /// <param name="recurso">Nombre y número de inventario del recurso</param>
+        /// <param name="turno">Fecha y horario de inicio y fin del turno</param>
         private void generarMail(string medio, string recurso, string turno)
         {
             string subject = "Turno para " + recurso + " confirmado";

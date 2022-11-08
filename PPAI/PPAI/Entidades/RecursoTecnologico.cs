@@ -82,6 +82,7 @@ namespace PPAI.Entidades
         /// <param name="res">Estado reservado</param>
         public void ReservarTurno(Turno tur, Estado res)
         {
+            tur.Reservar(res);
             using (var db = new PersistenciaContext())
             {
                 var pou = db.recursoTecnologico.Single(r => r.id == id);

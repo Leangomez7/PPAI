@@ -422,5 +422,4854 @@ namespace PPAI.Control
             }
         }
         */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
+        /*
+        public void GenerarCentros()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                string nombre = "Centro de ";
+                string[] campos = new string[] { "Astronomía", "Computación", "Redes", "Física", "Química", "Biología" };
+                string[] facultades = new string[] { "FAMAF", "FCEFYN", "FCYR", "FCN", "FCQ" };
+                int camp = rnd.Next(0, campos.Count());
+                nombre += campos[camp] + " - " + facultades[rnd.Next(0, facultades.Count())];
+                CentroInvestigacion cen = new CentroInvestigacion(nombre, campos[camp].Substring(0, 3));
+                //cen.AgregarCientifico(actual.ObtenerCientificoLoggeado());
+                investigaciones.Add(cen);
+            }
+        }
+        public void GenerarMarcas()
+        {
+            marcas.Add(new Marca("Shidmazu"));
+            marcas.Add(new Marca("Nikon"));
+            marcas.Add(new Marca("Zeis"));
+            marcas.Add(new Marca("Leica"));
+            marcas.Add(new Marca("Olympus"));
+            marcas.Add(new Marca("Meiji Techno"));
+            marcas.Add(new Marca("Motic"));
+            marcas.Add(new Marca("GE"));
+        }
+        
+        public void GenerarModelos()
+        {
+            string weas = "ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890-";
+            Random rnd = new Random();
+            int cant = rnd.Next(30, 60);
+            for (int i = 0; i < cant; i++)
+            {
+                string nom = "";
+                int len = rnd.Next(7, 13);
+                for (int j = 0; j < len; j++)
+                {
+                    int ind = 0;
+                    if (j != 0 && j != len - 1)
+                    {
+                        ind = rnd.Next(0, weas.Length);
+                    }
+                    else
+                    {
+                        ind = rnd.Next(0, weas.Length - 1);
+                    }
+                    nom += weas[ind];
+                }
+                int indmar = rnd.Next(0, marcas.Count());
+                Marca mar = marcas[indmar];
+                modelos.Add(new Modelo(nom, mar));
+            }
+        }
+        public void GenerarRT()
+        {
+            //TODO: volver fraccionamiento a random? Cambiar
+            for (int i = 0; i < 40; i++)
+            {
+                Random rd = new Random();
+                bool existe = true;
+                int nroInv = 0;
+                while (existe)
+                {
+                    existe = false;
+                    nroInv = rd.Next(1300, 21300);
+                    foreach (RecursoTecnologico rec in recursos)
+                    {
+                        if (rec.MostrarNroInventario() == nroInv)
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                }
+                DateTime start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+                DateTime fec = start.AddDays(rd.Next(range));
+                int per = rd.Next(10, 20);
+                int dur = rd.Next(10, 20);
+                int fra = 360;
+                //int fra = rd.Next(10, 20);
+                int indtip = rd.Next(0, tiposRT.Count());
+                Modelo mod = modelos[rd.Next(0, modelos.Count())];
+                int cen = rd.Next(0, investigaciones.Count());
+                recursos.Add(new RecursoTecnologico(nroInv, fec, per, dur, fra, tiposRT[indtip], mod, investigaciones[cen]));
+            }
+        }
+        public void GenerarTiposRT()
+        {
+            string[] nombres = new string[5] { "Microscopio", "Balanza", "Resonador", "Cómputo", "EMSU" };
+            string[] desc = new string[5] { "Microscopio", "Balanza de Precisión", "Resonador Magnético", "Equipamiento de Cómputo Datos de Alto Rendimiento", "Equipamiento Motor Sintético Universal" };
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                TipoRT tipoc = new TipoRT(nombres[i], desc[i]);
+                tiposRT.Add(tipoc);
+            }
+        }
+        */
+
     }
 }

@@ -61,7 +61,7 @@ namespace PPAI
         /// </returns>
         private bool validarUsuario()
         {
-            if (txtUsuario.Text.Equals("GuilleFarre5") && txtContrasenia.Text.Equals("Pou777"))
+            if (txtUsuario.Text.ToLower().Equals("guillefarre5") && txtContrasenia.Text.Equals("Pou777"))
             {
                 return true;
             }
